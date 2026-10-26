@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>منصة النمو المهني التفاعلية الشاملة (٢٤١ صفحة) - الرخصة المهنية</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,6 +38,10 @@
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
+        /* Status Bar Safe Area Spacing for Mobile Apps (iOS / Android APK) */
+        .status-bar-spacer {
+            padding-top: max(env(safe-area-inset-top, 28px), 28px);
+        }
         /* Custom Clean Scrollbar */
         ::-webkit-scrollbar {
             width: 5px;
@@ -53,13 +57,46 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #4f46e5;
         }
-        /* Smooth Entrance */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Creative Spring & 3D Transitions */
+        @keyframes creativeEntrance {
+            0% { opacity: 0; transform: translateY(14px) scale(0.96) perspective(600px) rotateX(4deg); }
+            60% { opacity: 1; transform: translateY(-2px) scale(1.01) perspective(600px) rotateX(0deg); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         .anim-fade {
-            animation: fadeIn 0.22s ease-out forwards;
+            animation: creativeEntrance 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 18px 4px rgba(99, 102, 241, 0.25); }
+        }
+        .interactive-card {
+            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .interactive-card:hover {
+            transform: translateY(-3px) scale(1.015);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.35);
+        }
+        .interactive-card:active {
+            transform: scale(0.96);
+        }
+        .active-Selection-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        /* Pyramid Tier Styling */
+        .maslow-tier {
+            transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+        .maslow-tier:hover {
+            transform: scale(1.04) translateY(-2px);
+            filter: brightness(1.15);
+        }
+        .maslow-tier:active {
+            transform: scale(0.97);
         }
         /* Range Scrubber */
         input[type=range].scrubber {
@@ -69,69 +106,78 @@
             cursor: pointer;
         }
         input[type=range].scrubber::-webkit-slider-runnable-track {
-            height: 4px;
+            height: 5px;
             border-radius: 999px;
             background: linear-gradient(90deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
         }
         input[type=range].scrubber::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background: #ffffff;
-            border: 2px solid #4f46e5;
-            margin-top: -5px;
-            box-shadow: 0 0 8px rgba(79, 70, 229, 0.8);
+            border: 3px solid #4f46e5;
+            margin-top: -5.5px;
+            box-shadow: 0 0 10px rgba(79, 70, 229, 0.9);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        input[type=range].scrubber::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-[#070d19] text-slate-100 antialiased selection:bg-indigo-600 selection:text-white">
 
     <!-- ============================================================== -->
-    <!-- ULTRA-CLEAN STREAMLINED TOP BAR: ONLY SEARCH & SLIM CONTROLS   -->
+    <!-- ULTRA-CLEAN STREAMLINED TOP BAR WITH STATUS BAR SAFE AREA      -->
     <!-- ============================================================== -->
-    <header id="appTopBar" class="sticky top-0 z-40 bg-[#070d19]/95 backdrop-blur-md border-b border-slate-800/80 px-3 py-2 shadow-lg">
+    <header id="appTopBar" class="sticky top-0 z-40 bg-[#070d19]/95 backdrop-blur-md border-b border-slate-800/80 px-3 pb-2 status-bar-spacer shadow-xl">
         <div class="max-w-4xl mx-auto flex flex-col gap-1.5">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5 sm:gap-2">
                 <!-- Station Badge Button (Opens drawer) -->
-                <button onclick="toggleDrawer()" title="عرض قائمة المحطات الـ ١٦" class="h-9 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-1.5 shrink-0 transition active:scale-95 shadow-sm">
+                <button onclick="playSound('open'); toggleDrawer()" title="عرض قائمة المحطات الـ ١٦" class="interactive-card h-9 px-3 rounded-xl bg-gradient-to-l from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-xs flex items-center gap-1.5 shrink-0 shadow-md">
                     <i class="fa-solid fa-layer-group text-xs"></i>
-                    <span id="topStationBadge" class="font-mono">محطة ٢/١٦</span>
-                    <i class="fa-solid fa-chevron-down text-[10px] opacity-75"></i>
+                    <span id="topStationBadge" class="font-mono">محطة ٣/١٦</span>
+                    <i class="fa-solid fa-chevron-down text-[10px] opacity-80"></i>
                 </button>
 
                 <!-- Interactive Live Search Box -->
                 <div class="relative flex-1">
                     <input id="fastSearchInput" type="text" autocomplete="off"
-                        placeholder="ابحث عن: بافلوف، سكنر، أريكسون، بلوم، إجازة، عصف ذهني..." 
-                        class="w-full h-9 bg-slate-900 border border-slate-700/80 rounded-xl pr-8 pl-8 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
-                    <i class="fa-solid fa-magnifying-glass absolute right-2.5 top-2.5 text-slate-400 text-xs"></i>
-                    <button id="searchClearBtn" onclick="clearSearch()" class="hidden absolute left-2.5 top-2 text-slate-400 hover:text-white text-xs">
+                        placeholder="ابحث عن: ماسلو، تحقيق الذات، ديل، بافلوف، سكنر، أريكسون، بلوم، جوهاري..." 
+                        class="w-full h-9 bg-slate-900/90 border border-slate-700/80 rounded-xl pr-8 pl-8 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40 transition">
+                    <i class="fa-solid fa-magnifying-glass absolute right-2.5 top-2.5 text-indigo-400 text-xs"></i>
+                    <button id="searchClearBtn" onclick="playSound('click'); clearSearch()" class="hidden absolute left-2.5 top-2 text-slate-400 hover:text-white text-xs">
                         <i class="fa-solid fa-circle-xmark"></i>
                     </button>
 
                     <!-- Instant Search Results Dropdown -->
-                    <div id="searchDropdown" class="hidden absolute right-0 left-0 mt-2 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl max-h-72 overflow-y-auto z-50 p-2 space-y-1 divide-y divide-slate-800">
+                    <div id="searchDropdown" class="hidden absolute right-0 left-0 mt-2 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-2xl max-h-72 overflow-y-auto z-50 p-2 space-y-1 divide-y divide-slate-800/80">
                     </div>
                 </div>
 
+                <!-- Sound Effects Mute/Unmute Toggle -->
+                <button id="soundToggleBtn" onclick="toggleSound()" title="تشغيل/كتم المؤثرات الصوتية" class="interactive-card w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-indigo-400 flex items-center justify-center shrink-0">
+                    <i id="soundToggleIcon" class="fa-solid fa-volume-high text-xs"></i>
+                </button>
+
                 <!-- Fast Prev/Next Station Arrows -->
                 <div class="flex items-center gap-1 shrink-0">
-                    <button onclick="navigateStation(-1)" title="المحطة السابقة" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition active:scale-95">
+                    <button onclick="navigateStation(-1)" title="المحطة السابقة" class="interactive-card w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white flex items-center justify-center">
                         <i class="fa-solid fa-chevron-right text-xs"></i>
                     </button>
-                    <button onclick="navigateStation(1)" title="المحطة التالية" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition active:scale-95">
+                    <button onclick="navigateStation(1)" title="المحطة التالية" class="interactive-card w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white flex items-center justify-center">
                         <i class="fa-solid fa-chevron-left text-xs"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Discrete Thin Scrubber Line (Takes zero screen estate) -->
+            <!-- Discrete Thin Scrubber Line -->
             <div class="flex items-center gap-2 px-1">
-                <input id="headerScrubber" type="range" min="0" max="15" value="1" step="1" 
-                    class="scrubber w-full" oninput="jumpToStation(parseInt(this.value, 10))">
-                <span id="scrubberPercent" class="text-[10px] text-slate-400 font-mono font-bold shrink-0">١٣٪</span>
+                <input id="headerScrubber" type="range" min="0" max="15" value="2" step="1" 
+                    class="scrubber w-full" oninput="playSound('pop'); jumpToStation(parseInt(this.value, 10))">
+                <span id="scrubberPercent" class="text-[10px] text-indigo-300 font-mono font-bold shrink-0">١٩٪</span>
             </div>
         </div>
     </header>
@@ -140,36 +186,36 @@
     <!-- SLIDE-OVER STATIONS DRAWER (16 STATIONS POPUP MENU)             -->
     <!-- ============================================================== -->
     <div id="drawerBackdrop" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeDrawer()"></div>
-    <aside id="stationsDrawer" class="fixed top-0 bottom-0 right-0 z-50 w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 shadow-2xl p-4 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out">
-        <div class="flex flex-col flex-1 overflow-hidden space-y-3">
+    <aside id="stationsDrawer" class="fixed top-0 bottom-0 right-0 z-50 w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 shadow-2xl p-4 status-bar-spacer flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex flex-col flex-1 overflow-hidden space-y-3 mt-2">
             <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
                 <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-xs">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-xs shadow-md">
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <div>
-                        <h2 class="text-xs font-bold text-white font-cairo">فهرس المحطات الـ ١٦</h2>
-                        <span class="text-[10px] text-slate-400">ملزمة أ. مخلد الروقي (٢٤١ ص)</span>
+                        <h2 class="text-xs font-bold text-white font-cairo">فهرس المحطات الـ ١٦ الشامل</h2>
+                        <span class="text-[10px] text-slate-400">ملزمة أ. مخلد الروقي (٢٤١ صفحة)</span>
                     </div>
                 </div>
-                <button onclick="closeDrawer()" class="w-7 h-7 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+                <button onclick="playSound('click'); closeDrawer()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark text-xs"></i>
                 </button>
             </div>
 
             <!-- Drawer List -->
-            <div id="drawerList" class="flex-1 overflow-y-auto space-y-1 pr-1 text-xs">
+            <div id="drawerList" class="flex-1 overflow-y-auto space-y-1.5 pr-1 text-xs">
             </div>
         </div>
 
         <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-            <button onclick="jumpToStation(15); closeDrawer();" class="text-amber-400 hover:underline font-bold flex items-center gap-1">
+            <button onclick="playSound('open'); jumpToStation(15); closeDrawer();" class="text-amber-400 hover:underline font-bold flex items-center gap-1">
                 <i class="fa-solid fa-table-list"></i>
-                <span>مصفوفة التتبع والتدقيق</span>
+                <span>مصفوفة التتبع (٢٤١ ص)</span>
             </button>
-            <button onclick="downloadSelfFile()" class="text-indigo-400 hover:underline font-bold flex items-center gap-1">
+            <button onclick="playSound('success'); downloadSelfFile()" class="text-indigo-400 hover:underline font-bold flex items-center gap-1">
                 <i class="fa-solid fa-download"></i>
-                <span>تحميل التطبيق</span>
+                <span>حفظ التطبيق</span>
             </button>
         </div>
     </aside>
@@ -179,59 +225,62 @@
     <!-- ============================================================== -->
     <main class="flex-1 max-w-4xl w-full mx-auto px-3 sm:px-4 py-4 space-y-5">
         
-        <!-- MAIN STATION HEADER CARD (Restored to Full Fidelity) -->
-        <section id="heroCard" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl relative overflow-hidden">
+        <!-- MAIN STATION HEADER CARD -->
+        <section id="heroCard" class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/40 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl relative overflow-hidden">
             <div class="flex items-start justify-between gap-3">
                 <div class="space-y-1.5 flex-1">
-                    <div class="flex items-center gap-2">
-                        <span id="heroStationBadge" class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-mono">
-                            المحطة ٢ من ١٦
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span id="heroStationBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-mono">
+                            المحطة ٣ من ١٦
                         </span>
-                        <span id="heroPagesBadge" class="text-[11px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md font-mono">
-                            صفحات ١٢ - ٣٠
+                        <span id="heroPagesBadge" class="text-[11px] text-slate-300 bg-slate-800/90 px-2.5 py-0.5 rounded-lg font-mono border border-slate-700">
+                            صفحات ٣١ - ٣٢
+                        </span>
+                        <span class="text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-lg font-bold">
+                            <i class="fa-solid fa-hand-pointer ml-1"></i>اضغط على أي عنصر لعرض تفاصيله الكاملة
                         </span>
                     </div>
-                    <h1 id="heroTitle" class="text-base sm:text-xl font-cairo font-black text-white leading-tight">
-                        الدرس الثاني: نظريات التعلم (السلوكية، المعرفية، البنائية، الاجتماعية، وأريكسون)
+                    <h1 id="heroTitle" class="text-base sm:text-xl font-cairo font-black text-white leading-tight pt-1">
+                        الدرس الثالث: هرم ماسلو للحاجات ومخروط الخبرة لإدجار ديل
                     </h1>
                     <p id="heroSubtitle" class="text-xs sm:text-sm text-slate-300 leading-relaxed pt-0.5">
-                        واطسون، بافلوف، سكنر، ثورندايك، التعلم المبرمج، برونر، أوزبل، الجشطالت، بياجيه، فيجوتسكي، ديوي، باندورا، ومراحل أريكسون الثمان.
+                        تدرج الدوافع والحاجات الإنسانية الخمس عند إبراهام ماسلو، وتصنيف الوسائل التعليمية في مخروط الخبرة لإدجار ديل.
                     </p>
-                    <div class="pt-2">
-                        <button onclick="scrollToQuiz()" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow-sm">
+                    <div class="pt-2 flex flex-wrap gap-2">
+                        <button onclick="playSound('open'); scrollToQuiz()" class="interactive-card px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-bold text-xs flex items-center gap-1.5 shadow-sm">
                             <i class="fa-solid fa-bolt text-amber-400"></i>
                             <span>انتقل لتحدي التجميعات</span>
                         </button>
                     </div>
                 </div>
-                <div id="heroIcon" class="w-12 h-12 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-2xl shrink-0">
-                    <i class="fa-solid fa-brain"></i>
+                <div id="heroIcon" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 flex items-center justify-center text-2xl shrink-0 shadow-inner">
+                    <i class="fa-solid fa-layer-group"></i>
                 </div>
             </div>
         </section>
 
-        <!-- DYNAMIC RICH STATION CONTENT & LABS (Fully Restored) -->
+        <!-- DYNAMIC RICH INTERACTIVE STATION CONTENT & LABS -->
         <section id="stationContentWrapper" class="anim-fade space-y-4">
-            <!-- Dynamically Rendered -->
+            <!-- Dynamically Rendered with Full Clickable Details -->
         </section>
 
         <!-- AUTHENTIC MULTIPLE-CHOICE EXAM QUIZZES -->
         <section id="quizSection" class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center text-sm">
                         <i class="fa-solid fa-clipboard-question"></i>
                     </div>
                     <div>
                         <h3 class="text-xs sm:text-sm font-cairo font-bold text-white">تحدي أسئلة التجميعات الرسمية للمحطة</h3>
-                        <p class="text-[10px] text-slate-400">أسئلة قياس واختبارات الرخصة السابقة مطابقة لنص الملزمة</p>
+                        <p class="text-[10px] text-slate-400">أسئلة قياس واختبارات الرخصة السابقة مطابقة لنص الملزمة مع تصحيح صوتي وفوري</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span id="quizScoreBadge" class="text-[11px] font-bold bg-slate-800 text-indigo-300 px-2.5 py-1 rounded-lg font-mono">
+                    <span id="quizScoreBadge" class="text-[11px] font-bold bg-slate-800 text-indigo-300 px-2.5 py-1 rounded-lg font-mono border border-slate-700">
                         ٠ / ٠
                     </span>
-                    <button onclick="resetCurrentQuiz()" class="text-[11px] text-slate-400 hover:text-white px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded-lg transition">
+                    <button onclick="playSound('click'); resetCurrentQuiz()" class="interactive-card text-[11px] text-slate-300 hover:text-white px-2.5 py-1 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700">
                         <i class="fa-solid fa-rotate-right ml-1"></i>إعادة
                     </button>
                 </div>
@@ -243,13 +292,13 @@
         </section>
 
         <!-- BOTTOM NAVIGATION -->
-        <nav class="flex items-center justify-between bg-slate-900/70 border border-slate-800 rounded-xl p-3 text-xs">
-            <button onclick="navigateStation(-1)" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-indigo-600 text-slate-200 transition font-bold">
+        <nav class="flex items-center justify-between bg-slate-900/80 border border-slate-800 rounded-2xl p-3 text-xs shadow-lg">
+            <button onclick="navigateStation(-1)" class="interactive-card flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-indigo-600 text-slate-200 font-bold">
                 <i class="fa-solid fa-arrow-right"></i>
                 <span>المحطة السابقة</span>
             </button>
-            <span id="bottomStationLabel" class="text-slate-400 font-mono text-[11px]">محطة ٢ من ١٦</span>
-            <button onclick="navigateStation(1)" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition font-bold">
+            <span id="bottomStationLabel" class="text-slate-400 font-mono text-[11px] font-bold">محطة ٣ من ١٦</span>
+            <button onclick="navigateStation(1)" class="interactive-card flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold shadow-md">
                 <span>المحطة التالية</span>
                 <i class="fa-solid fa-arrow-left"></i>
             </button>
@@ -257,23 +306,241 @@
     </main>
 
     <!-- ============================================================== -->
-    <!-- JAVASCRIPT LOGIC & COMPLETE CURRICULUM DATA                     -->
+    <!-- WEB AUDIO SYNTHESIZER & COMPLETE INTERACTIVE CURRICULUM DATA   -->
     <!-- ============================================================== -->
     <script>
-        // 1. MASTER STATIONS DATA WITH COMPLETE RESTORED EDUCATIONAL LABS
+        // 1. BUILT-IN WEB AUDIO SOUND EFFECTS ENGINE (Zero External Dependencies)
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) audioCtx = new AudioContextClass();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const now = ctx.currentTime;
+
+                if (type === 'click') {
+                    // Crisp UI Pop/Click
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(520, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.065);
+                    gain.gain.setValueAtTime(0.14, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.065);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.07);
+                } else if (type === 'pop') {
+                    // Soft Bubble Pop for Pyramid / Interactive Cards
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(340, now);
+                    osc.frequency.exponentialRampToValueAtTime(760, now + 0.09);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.095);
+                } else if (type === 'open') {
+                    // Pleasant Chime for Station / Tab Switch
+                    [440, 659.25].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.05);
+                        gain.gain.setValueAtTime(0.12, now + idx * 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 0.16);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + idx * 0.05);
+                        osc.stop(now + idx * 0.05 + 0.17);
+                    });
+                } else if (type === 'success') {
+                    // Victory Arpeggio for Correct Quiz Answer
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.065);
+                        gain.gain.setValueAtTime(0.16, now + idx * 0.065);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.065 + 0.22);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + idx * 0.065);
+                        osc.stop(now + idx * 0.065 + 0.23);
+                    });
+                } else if (type === 'error') {
+                    // Soft Low Buzz for Wrong Quiz Answer
+                    [220, 175].forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+                        gain.gain.setValueAtTime(0.1, now + idx * 0.09);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.18);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + idx * 0.09);
+                        osc.stop(now + idx * 0.09 + 0.19);
+                    });
+                }
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundToggleIcon');
+            const btn = document.getElementById('soundToggleBtn');
+            if (soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-xs';
+                btn.classList.replace('text-slate-500', 'text-indigo-400');
+                playSound('open');
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-xs';
+                btn.classList.replace('text-indigo-400', 'text-slate-500');
+            }
+        }
+
+        // 2. DETAILED INTERACTIVE DATA FOR PYRAMIDS, CONES, MATRICES & LABS
+        const MASLOW_LEVELS = [
+            {
+                id: 5,
+                title: "٥. الحاجة إلى تحقيق الذات (قمة الهرم - ص ٣١)",
+                badge: "قمة الهرم - المستوى الخامس",
+                color: "purple",
+                keywords: "الابتكار • حل المشكلات • تقبل الحقائق • الإنجاز • تحقيق الأحلام",
+                desc: "تمثل قمة هرم ماسلو للحاجات الإنسانية؛ فبعد أن يشبع الفرد حاجاته الفسيولوجية والأمنية والاجتماعية وحاجته للتقدير، يسعى إلى تحقيق ذاته عبر الابتكار، وحل المشكلات، وتقبل الحقائق، والإنجاز، وإحساس الفرد بذاته وتحقيق أحلامه وطموحاته العليا.",
+                examTip: "سؤال تجميعات متكرر: (الابتكار وحل المشكلات وتقبل الحقائق وإحساس الفرد بذاته) تقع في قمة هرم ماسلو وتسمى: الحاجة لتحقيق الذات."
+            },
+            {
+                id: 4,
+                title: "٤. الحاجة إلى التقدير (المستوى الرابع - ص ٣١)",
+                badge: "المستوى الرابع",
+                color: "indigo",
+                keywords: "تقدير الذات • الثقة • الإنجازات • احترام الآخرين • الاحترام من الآخرين",
+                desc: "بما أن الفرد يعيش في مجتمع، فهو يحتاج بعد إشباع حاجاته الاجتماعية إلى تقدير الآخرين له وتقديره لهم، ويشمل ذلك: تقدير الذات، الثقة بالنفس، الإنجازات، احترام الآخرين، وكسب الاحترام من الآخرين.",
+                examTip: "تأتي الحاجة إلى التقدير في المرتبة الرابعة مباشرة بعد الحاجات الاجتماعية (الحب والانتماء) وقبل قمة الهرم (تحقيق الذات)."
+            },
+            {
+                id: 3,
+                title: "٣. الحاجات الاجتماعية - الحب والانتماء (المستوى الثالث - ص ٣١)",
+                badge: "المستوى الثالث",
+                color: "cyan",
+                keywords: "الصداقة • العلاقات الأسرية • الألفة الجسدية • الانتماء للجماعة",
+                desc: "بعد أن يجد الفرد حاجته من المأكل والمشرب والأمان، يريد أن يكوّن صداقات وأسرة وعلاقات اجتماعية، فلا يستطيع الإنسان العيش بمفرده، وتشمل: الصداقة، الأسرة، العلاقات الاجتماعية، والألفة.",
+                examTip: "تسمى في اختبارات قياس: (الحاجات الاجتماعية) أو (الحاجة إلى الحب والانتماء)."
+            },
+            {
+                id: 2,
+                title: "٢. حاجات الأمن والأمان (المستوى الثاني - ص ٣١)",
+                badge: "المستوى الثاني (بعد الفسيولوجية مباشرة)",
+                color: "emerald",
+                keywords: "السلامة الجسدية • الأمن الوظيفي • أمن الموارد • الأمن الأسري والصحي • أمن الممتلكات",
+                desc: "تأتي مباشرة بعد الحاجات الفسيولوجية الأشد إلحاحاً؛ استدلالاً بقوله تعالى: ﴿وَأَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ﴾ حيث قدّم الطعام على الأمان لأن الحاجة للطعام أشد. وتشمل: السلامة الجسدية، وأمن الإنسان في الوظيفة، والصحة، وأمن الموارد، وحفظ النفس والمال والممتلكات في بيئته.",
+                examTip: "سؤال ورد في اختبار سابق (ص ٣٢): اهتم ماسلو في هرمه بعد الحاجات الفسيولوجية مباشرة بالحاجة إلى: (الأمن)."
+            },
+            {
+                id: 1,
+                title: "١. الحاجات الفسيولوجية (قاعدة الهرم - ص ٣١)",
+                badge: "قاعدة الهرم - الحاجات الأكثر إلحاحاً وأهمية",
+                color: "amber",
+                keywords: "التنفس • الطعام • الماء • النوم • التوازن • الإخراج",
+                desc: "تمثل قاعدة هرم ماسلو وأساسه؛ ومعنى (فسيولوجية) أي خاصة بعلم وظائف الأعضاء، وتشمل: الحاجة إلى التنفس، الماء، الطعام، النوم، التوازن، والإخراج؛ حيث لا يستطيع الفرد أن يعيش بدونها، وإذا أشبعت انتقل إلى حاجة الأمان.",
+                examTip: "تقع في قاعدة الهرم وهي نقطة الانطلاق الأولى في نظام ماسلو التصاعدي للأولويات."
+            }
+        ];
+
+        const DALE_LEVELS = [
+            {
+                id: 3,
+                title: "النوع الثالث: الوسائل المجردة = (خبرات مجردة) - قمة المخروط (ص ٣٢)",
+                badge: "قمة المخروط - الأكثر تجريداً",
+                color: "rose",
+                items: ["١. الرموز اللفظية (الكلمات المنطوقة والمكتوبة)", "٢. الرموز البصرية (الرسوم التخطيطية والبيانية والرموز)"],
+                desc: "تقع في قمة مخروط إدجار ديل، وتعتمد على الخيال أو خبرة سابقة لدى المتعلم وعلى صور ذهنية سابقة؛ وفي حال كانت تلك الصور غير واضحة لدى المتعلم تتكون لديه مفاهيم أقل دقة وصحة."
+            },
+            {
+                id: 2,
+                title: "النوع الثاني: الوسائل شبه المحسوسة = (خبرات ممثلة / مصورة) - وسط المخروط (ص ٣٢)",
+                badge: "وسط المخروط - خبرات ممثلة بالصور والملاحظة",
+                color: "indigo",
+                items: [
+                    "١. التسجيلات الصوتية والصور الثابتة",
+                    "٢. الأفلام المتحركة",
+                    "٣. التلفزيون التعليمي",
+                    "٤. المعارض والمتاحف",
+                    "٥. الدراسات والرحلات الميدانية",
+                    "٦. العروض العلمية التوضيحية"
+                ],
+                desc: "تمثل المنطقة الوسطى في مخروط الخبرة لإدجار ديل، وفيها يتعلم الطالب عبر المشاهدة والملاحظة السمعية والبصرية والتمثيل الصوري دون ممارسة يدوية كاملة."
+            },
+            {
+                id: 1,
+                title: "النوع الأول: الوسائل المحسوسة = (خبرات مباشرة فعلية) - قاعدة المخروط (ص ٣٢)",
+                badge: "قاعدة المخروط - الأكثر واقعية وبقاءً لأثر التعلم",
+                color: "emerald",
+                items: [
+                    "١. الخبرات الممثلة (لعب الأدوار والتمثيل المسرحي)",
+                    "٢. الخبرات المعدلة (النماذج والعينات والمجسمات)",
+                    "٣. الممارسة الواقعية المباشرة الهادفة (أوسع قاعدة في أسفل المخروط)"
+                ],
+                desc: "تمثل قاعدة مخروط الخبرة لإدجار ديل، وتشمل الممارسة الواقعية المباشرة التي يشترك فيها المتعلم بجميع حواسه وعمله اليدوي المباشر. (سؤال اختبار سابق ص ٣٢: تمثل قاعدة المخروط: الخبرات المباشرة الواقعية)."
+            }
+        ];
+
+        const ERIKSON_STAGES = [
+            { id: 1, name: "١. الثقة مقابل عدم الثقة", age: "من الميلاد حتى عمر سنتين", color: "indigo", details: "المرحلة الأولى (الرضاعة): إذا حصل الرضيع على الرعاية والحنان والتغذية المنتظمة من الأم تنمو لديه الثقة بالعالم، وإذا تعرض للإهمال ينشأ لديه شعور بعدم الثقة والخوف." },
+            { id: 2, name: "٢. الاستقلال مقابل الشعور بالخجل", age: "من سنتين حتى ٤ سنوات", color: "indigo", details: "المرحلة الثانية (الطفولة المبكرة الأولى): يبدأ الطفل بتعلم المشي والكلام والإخراج والاعتماد على نفسه؛ فإذا شُجع نما لديه الاستقلال، وإذا وُبخ أو قُيدت حركته شعر بالخجل والشك في قدراته." },
+            { id: 3, name: "٣. المبادرة مقابل الشعور بالذنب", age: "من ٣ حتى ٥ سنوات (طفل الروضة)", color: "emerald", details: "المرحلة الثالثة (مرحلة الروضة وما قبل المدرسة): يكثر فيها حب الاستطلاع والأسئلة والمبادرة باللعب والاكتشاف؛ تشجيع طفل الروضة يكسبه روح المبادرة، وقمعه أو السخرية منه يورثه الشعور بالذنب. (تكرر في قياس ص ٣٠)." },
+            { id: 4, name: "٤. الكفاية والاجتهاد مقابل الشعور بالنقص", age: "من ٦ حتى ٩/١٢ سنة (الابتدائي)", color: "amber", details: "المرحلة الرابعة (الطفولة المتوسطة والمتأخرة - سن المدرسة الابتدائية): يسعى الطالب لإتقان المهارات الأكاديمية والاجتماعية والمثابرة؛ تعزيز المعلم له يكسبه الكفاية والاجتهاد، ومقارنته السلبية أو الفشل المتكرر يصيبه بالشعور بالنقص والدونية." },
+            { id: 5, name: "٥. الهوية مقابل اضطراب الهوية والدور", age: "من ١٠ حتى ١٨ سنة (المراهقة)", color: "rose", details: "المرحلة الخامسة (المراهقة - المتوسطة والثانوية): يبحث المراهق عن وجوده وأهدافه وخططه وهويته المستقلة؛ واعتراف الآخرين بأنه أصبح كبيراً وشهادتهم له يؤدي إلى الإحساس بالهوية، بينما التهميش يؤدي لغموض واضطراب الدور." },
+            { id: 6, name: "٦. المودة والألفة مقابل العزلة", age: "من ١٩ حتى ٢٤ سنة (مرحلة الشباب)", color: "cyan", details: "المرحلة السادسة (مرحلة الشباب): مرحلة الزواج وتكوين العلاقات العاطفية والاجتماعية العميقة؛ النجاح فيها يحقق المودة والألفة، والفشل يهدد الشاب بالشعور بالعزلة والانطواء." },
+            { id: 7, name: "٧. الإنتاجية مقابل الأنانية (الركود)", age: "من ٢٥ حتى ٥٩ سنة (منتصف العمر)", color: "purple", details: "المرحلة السابعة (مرحلة الرشد ومنتصف العمر): مرحلة العطاء المهني وتربية الأجيال والإنتاج للمجتمع؛ الفشل فيها يؤدي إلى الأنانية والتمركز حول الذات والركود." },
+            { id: 8, name: "٨. التكامل مقابل اليأس", age: "ما بعد عمر ٦٠ سنة (الشيخوخة)", color: "teal", details: "المرحلة الثامنة والأخيرة (كبار السن): يتأمل الفرد حصيلة حياته؛ فالإحساسات الإيجابية والرضا عن إنجازاته تؤدي إلى الشعور بالتكامل والحكمة، والندم والسلبية يؤديان للشعور باليأس." }
+        ];
+
+        const BLOOM_LEVELS = [
+            { id: 1, name: "١. التذكر (المعرفة)", type: "مستوى عقلي أدنى (قاعدة الهرم)", verbs: "يعرّف، يعدد، يذكر، يسمي، يصف، يحدد، يسترجع، يكتب نصاً محفوظاً", ex: "أن يعدد الطالب أركان الإيمان / أن يعرّف الطالب التوحيد اصطلاحاً / أن يذكر شروط بناء الفعل المضارع.", color: "slate" },
+            { id: 2, name: "٢. الفهم (الاستيعاب)", type: "مستوى عقلي أدنى", verbs: "يفسر، يشرح، يلخص بلغته، يوضح، يعلل، يترجم، يصوغ بأسلوبه، يعطي مثالاً، يستنتج", ex: "أن يفسر الطالب آية الكرسي / أن يشرح النص الأدبي / أن يلخص خواص الهيدروجين بلغته الخاصة.", color: "emerald" },
+            { id: 3, name: "٣. التطبيق", type: "مستوى عقلي أدنى (حلقة الوصل)", verbs: "يطبق، يستعمل، يعرب جملة جديدة، يحسب، يجري تجربة، يحل مسألة، يرسم بيانياً، ينفذ", ex: "أن يعرب الطالب جملة (ما زالت السماء منهمرة) / أن يحسب درجة الحرارة الفهرنهايتية بمعرفته للمئوية / أن يصمم تغليفاً جديداً للكتب.", color: "cyan" },
+            { id: 4, name: "٤. التحليل", type: "مستوى عقلي أعلى (مهارات عليا)", verbs: "يحلل، يقارن، يوازن، يصنف، يفرق بين، يميز بين الحقائق والآراء، يستخرج العناصر", ex: "أن يفرق الطالب بين صفات الحيوانات آكلات اللحوم وآكلات الأعشاب / أن يصنف المواد إلى فلزات ولافلزات.", color: "amber" },
+            { id: 5, name: "٥. التركيب (الابتكار)", type: "مستوى عقلي أعلى (مهارات عليا)", verbs: "يركب، يؤلف، ينظم قصيدة، ينشئ مؤلفاً جديداً، يصمم، يشتق، يقترح خطة، يعد مقالاً", ex: "أن ينظم الطالب قصيدة شعرية / أن ينشئ مؤلفاً جديداً لكتابة قصة أو موضوع تعبير.", color: "purple" },
+            { id: 6, name: "٦. التقويم (أعلى الهرم)", type: "أعلى مستويات بلوم وأكثرها تعقيداً", verbs: "يحكم على، ينقد، يبدي رأيه، يبرر، يقرر، يقيم، يفند بالحجة", ex: "أن ينقد الطالب القصيدة نقداً أدبياً / أن يبدي رأيه في البيت الرابع من معلقة زهير / أن يعطي رأيه في أنواع الأطعمة.", color: "rose" }
+        ];
+
+        // 3. MASTER STATIONS DATA
         const STATIONS = [
             {
                 id: 0,
                 shortTitle: "١. دورة النمو المهني",
                 title: "الدرس الأول: دورة النمو المهني ومجتمعات التعلم المهنية",
-                pages: "صفحات ٦ - ١١",
+                pages: "صفحات ١ - ١١",
                 icon: "fa-chart-line",
                 subtitle: "تعريف النمو والمهنة، الأهداف الـ ١٠، المبررات الـ ٧، البرامج الـ ٤، ساعات النمو، والأساليب العملية والنظرية والذاتية.",
                 quizzes: [
                     { q: "أي الأطراف الآتية تقع عليه المسؤولية المباشرة في جهود النمو المهني للمعلم؟ (ص ١٠)", opts: ["قائد المدرسة", "المشرف التربوي", "إدارة التعليم", "المعلم نفسه"], c: 3, exp: "المسؤولية المباشرة الأولى في جهود النمو المهني تقع على عاتق المعلم نفسه من خلال التعلم الذاتي والتطوير المستمر." },
-                    { q: "من أساليب التنمية المهنية للمعلم والتي تهدف إلى إكساب المعلم مهارات التعلم الذاتي: (ص ١٠)", opts: ["التعلم المصغر", "القراءة الموجهة", "الدروس التطبيقية", "الاجتماعات الدورية"], c: 1, exp: "التثقيف الذاتي يشمل القراءة الحرة، القراءة الموجهة، البحث في الإنترنت، والتعلم عن بعد." },
-                    { q: "من أساليب التنمية المهنية التي تهدف لإكساب المعلم مهارات التعلم النظرية: (ص ١٠ و ١١)", opts: ["تبادل الزيارات", "البحث في الإنترنت", "المحاضرات التربوية", "التدريس المصغر"], c: 2, exp: "المحاضرات، الندوات، النشرات التربوية، والاجتماعات تصنف كأساليب نظرية." },
-                    { q: "اليوم التدريبي الواحد المعتمد للترقية في لائحة الوظائف التعليمية يعادل: (ص ٨)", opts: ["ساعتين", "٣ ساعات", "٥ ساعات", "٧ ساعات"], c: 2, exp: "حددت اللائحة أن اليوم التدريبي الواحد المعتمد يعادل ٥ ساعات نمو مهني." }
+                    { q: "من أساليب التنمية المهنية للمعلم والتي تهدف إلى إكساب المعلم مهارات التعلم الذاتي: (ص ١٠)", opts: ["التعلم المصغر", "القراءة الموجهة", "الدروس التطبيقية", "الاجتماعات الدورية"], c: 1, exp: "التثقيف الذاتي يشمل القراءة الحرة، القراءة الموجهة، البحث في الإنترنت، واليوتيوب، والمراسلة عن بعد." },
+                    { q: "من أساليب التنمية المهنية التي تهدف لإكساب المعلم مهارات التعلم النظرية: (ص ١٠ و ١١)", opts: ["تبادل الزيارات", "البحث في الإنترنت", "المحاضرات التربوية", "التدريس المصغر"], c: 2, exp: "المحاضرات، الندوات، النشرات التربوية، الاجتماعات، ورش العمل، وحلقات النقاش تصنف كأساليب نظرية." },
+                    { q: "اليوم التدريبي الواحد المعتمد للترقية في لائحة الوظائف التعليمية يعادل: (ص ٨)", opts: ["ساعتين", "٣ ساعات", "٥ ساعات", "٧ ساعات"], c: 2, exp: "حددت اللائحة أن اليوم التدريبي الواحد المعتمد يعادل ٥ ساعات نمو مهني." },
+                    { q: "لاحظت المعلمة (زينب) قصوراً في إعداد ملف الإنجاز ثم دخلت قوقل وكتبت (مكونات ملف إنجاز المعلمة)، بذلك استخدمت أسلوب: (ص ١١)", opts: ["التنمية المهنية العملية", "التنمية المهنية النظرية", "التنمية المهنية الذاتية", "التنمية المهنية التدريبية"], c: 2, exp: "البحث الذاتي عبر الإنترنت ومحركات البحث يصنف ضمن أساليب التنمية المهنية الذاتية." }
                 ]
             },
             {
@@ -302,10 +569,11 @@
                 title: "الدرس الثالث: هرم ماسلو للحاجات ومخروط الخبرة لإدجار ديل",
                 pages: "صفحات ٣١ - ٣٢",
                 icon: "fa-layer-group",
-                subtitle: "تدرج الدوافع والحاجات الإنسانية الخمس، وتصنيف الوسائل التعليمية (المحسوسة، شبه المحسوسة، والمجردة).",
+                subtitle: "تدرج الدوافع والحاجات الإنسانية الخمس (اضغط على أي طبقة في الهرم لعرض شرحها)، وتصنيف الوسائل التعليمية في مخروط ديل.",
                 quizzes: [
                     { q: "اهتم ماسلو في هرمه بعد الحاجات الفسيولوجية مباشرة بالحاجة إلى: (ص ٣١ - ٣٢)", opts: ["تقدير الذات", "الأمن والأمان", "تحقيق الذات", "الحب والانتماء"], c: 1, exp: "استشهدت الملزمة بالآية (أطعمهم من جوع وآمنهم من خوف)؛ فالحاجة للأمان تأتي فوراً بعد الفسيولوجية." },
-                    { q: "وفقاً لمخروط الخبرة للعالم إدجار ديل، تمثل قاعدة المخروط: (ص ٣٢)", opts: ["الخبرات المجردة (الرموز اللفظية)", "الخبرات المباشرة الواقعية (المحسوسة)", "الخبرات شبه المحسوسة", "الخبرات الممثلة"], c: 1, exp: "قاعدة مخروط الخبرة لديل تتكون من الممارسة الواقعية والخبرات المباشرة الحية." }
+                    { q: "وفقاً لمخروط الخبرة للعالم إدجار ديل، تمثل قاعدة المخروط: (ص ٣٢)", opts: ["الخبرات المجردة (الرموز اللفظية)", "الخبرات المباشرة الواقعية (المحسوسة)", "الخبرات شبه المحسوسة", "الخبرات غير المباشرة"], c: 1, exp: "قاعدة مخروط الخبرة لديل تتكون من الممارسة الواقعية والخبرات المباشرة الحية." },
+                    { q: "الابتكار وحل المشكلات وتقبل الحقائق وتحقيق الأحلام تقع ضمن هرم ماسلو في مستوى: (ص ٣١)", opts: ["الحاجات الفسيولوجية", "حاجات الأمان", "الحاجة إلى التقدير", "الحاجة إلى تحقيق الذات (قمة الهرم)"], c: 3, exp: "قمة هرم ماسلو هي الحاجة إلى تحقيق الذات وتشمل الابتكار وحل المشكلات وتقبل الحقائق." }
                 ]
             },
             {
@@ -314,11 +582,11 @@
                 title: "الدرس الرابع: هندسة المنهج الدراسي وعناصره والأنواع الـ ١١",
                 pages: "صفحات ٣٣ - ٣٩",
                 icon: "fa-sitemap",
-                subtitle: "المفهوم التقليدي والحديث، عناصر المنهج الـ ٦، معايير اختيار وتنظيم المحتوى، وأنواع المناهج (المحوري، النشاط، الخفي، إلخ).",
+                subtitle: "المفهوم التقليدي والحديث، عناصر المنهج الـ ٦، معايير اختيار وتنظيم المحتوى، وأنواع المناهج الـ ١١ (المحوري، النشاط، الخفي، المتكامل...).",
                 quizzes: [
                     { q: "منهج غير رسمي وغير مخطط له يكتسبه الطالب داخل المدرسة وخارجها بدون قصد أو توجيه: (ص ٣٦ - ٣٧)", opts: ["المنهج الرسمي", "المنهج المحوري", "المنهج الخفي (المستتر)", "المنهج الظاهري"], c: 2, exp: "المنهج الخفي هو ما يتعلمه الطالب من القيم والممارسات من خلال القدوة والمناخ المدرسي غير المخطط." },
                     { q: "أي من عناصر المنهج يعد أكثر أهمية وتتأثر به بقية العناصر؟ (ص ٣٤ و ٣٨)", opts: ["الأهداف", "المحتوى", "التقويم", "طريقة التدريس"], c: 0, exp: "الأهداف هي نقطة الانطلاق والموجه الذي تتأثر به جميع مكونات المنهج الأخرى." },
-                    { q: "المنهج الذي يدور حول حاجات ومشكلات المجتمع هو: (ص ٣٦ - ٣٧)", opts: ["منهج المواد المنفصلة", "منهج النشاط", "المنهج المحوري", "المنهج التكاملي"], c: 2, exp: "المنهج المحوري يركز بالأساس على المجتمع ومشكلاته." }
+                    { q: "المنهج الذي يدور حول حاجات ومشكلات المجتمع ويقدم برنامجاً عاماً وخاصاً هو: (ص ٣٦ - ٣٧)", opts: ["منهج المواد المنفصلة", "منهج النشاط", "المنهج المحوري", "المنهج التكنولوجي"], c: 2, exp: "المنهج المحوري يركز بالأساس على المجتمع ومشكلاته." }
                 ]
             },
             {
@@ -327,11 +595,12 @@
                 title: "الدرس الخامس: التقويم والتقييم والقياس ونماذج أدوات الرصد الـ ٤",
                 pages: "صفحات ٤٠ - ٥٦",
                 icon: "fa-scale-balanced",
-                subtitle: "الفرق بين القياس والتقييم والتقويم، التقويم القبلي والتكويني والتشخيصي والختامي، محكي ومعياري المرجع، والنماذج الأصلية.",
+                subtitle: "الفرق بين القياس والتقييم والتقويم، التقويم القبلي والتكويني والتشخيصي والختامي، محكي ومعياري المرجع، والنماذج الأصلية الأربعة.",
                 quizzes: [
                     { q: "حصل أحمد على ٦٠ من ١٠٠ (هذا قياس)، وتقديره جيد (هذا تقييم)، وتوجيهه لبرنامج علاجي يمثل: (ص ٤٠ - ٤١)", opts: ["قياساً كمياً", "تقويماً تربوياً", "اختباراً معيارياً", "تقديراً عددياً"], c: 1, exp: "التقويم عملية تشخيصية وعلاجية تتضمن إصدار حكم واتخاذ قرار لتعديل المسار." },
                     { q: "التقويم الذي يهدف لمتابعة تقدم الطالب أثناء الحصة وتعديل التدريس هو التقويم: (ص ٤٢ و ٤٧)", opts: ["القبلي", "التكويني (البنائي المستمر)", "الختامي التجميعي", "الانتقائي"], c: 1, exp: "التقويم التكويني يصاحب عملية التعلم ويوجه المعلم والمتعلم للتطوير المستمر." },
-                    { q: "أداة تقويم ترصد السلوك باختيار أحد تقديرين (نعم/لا) أو (صح/خطأ) دون أي تدرج تسمى: (ص ٥٢)", opts: ["سلم التقدير اللفظي", "قائمة الرصد أو الشطب (Checklist)", "السجل القصصي", "سجل سير التعلم"], c: 1, exp: "قائمة الشطب قائمة ثنائية قاطعة (يا أبيض يا أسود) تخلو من أي تدرج." }
+                    { q: "أداة تقويم ترصد السلوك باختيار أحد تقديرين (نعم/لا) أو (صح/خطأ) دون أي تدرج تسمى: (ص ٥٢)", opts: ["سلم التقدير اللفظي", "قائمة الرصد أو الشطب (Checklist)", "السجل القصصي", "سجل سير التعلم"], c: 1, exp: "قائمة الشطب قائمة ثنائية قاطعة (يا أبيض يا أسود) تخلو من أي تدرج." },
+                    { q: "أي العبارات الآتية تمثل نتيجة اختبار معياري المرجع؟ (ص ٤٥ و ٤٨)", opts: ["يفوق أداء محمد أداء ٩٠٪ من زملائه في الصف", "يكتب خالد ما يملى عليه بنسبة ٩٠٪", "يجمع أحمد أي عددين دون أخطاء", "يطبع ٩٠ كلمة في الدقيقة"], c: 0, exp: "الاختبار معياري المرجع يقارن أداء الطالب بمتوسط أداء زملائه (المجموعة المعيارية)." }
                 ]
             },
             {
@@ -343,7 +612,7 @@
                 subtitle: "الطلاقة بأنواعها الـ ٥، المرونة، الأصالة، الإفاضة، الاستقراء والاستنباط، خطوات حل المشكلات الـ ٧، والتفكير فوق المعرفي.",
                 quizzes: [
                     { q: "توليد أكبر قدر ممكن من البدائل والأفكار والحلول خلال وقت محدد يمثل مهارة: (ص ٥٨ و ٦٣)", opts: ["المرونة", "الأصالة", "الطلاقة", "الإفاضة"], c: 2, exp: "الطلاقة تهتم بالكم وغزارة توليد الأفكار والبدائل في وقت محدد." },
-                    { q: "اذكر ٣ استخدامات غريبة وغير مألوفة لمشط الشعر أو قلم الرصاص، يقيس ذلك مهارة: (ص ٥٨ و ٦٣)", opts: ["الأصالة", "الطلاقة", "المرونة", "الإفاضة"], c: 0, exp: "الأصالة تعني التفرد والندرة والجدة وإنتاج أفكار غير مسبوقة وغير مألوفة." },
+                    { q: "اذكر ٣ طرق لفتح الكتاب دون لمسه، أو استخدامات غير مألوفة لقلم الرصاص، يقيس ذلك مهارة: (ص ٥٨ و ٦٣)", opts: ["الأصالة", "الطلاقة", "المرونة", "الإفاضة"], c: 0, exp: "الأصالة تعني التفرد والندرة والجدة وإنتاج أفكار غير مسبوقة وغير مألوفة." },
                     { q: "التفكير الذي ينتقل من دراسة الأمثلة والجزئيات للوصول إلى القاعدة الكلية والتعميم هو: (ص ٥٩ و ٦٣)", opts: ["الاستنباطي", "الاستقرائي", "المنطقي الشكلي", "الميتا معرفي"], c: 1, exp: "التفكير الاستقرائي يسير من الجزء إلى الكل ومن الأمثلة إلى القاعدة." }
                 ]
             },
@@ -353,11 +622,11 @@
                 title: "الدرس السابع: لائحة الإجازات وتقويم أداء المعلم ونافذة جوهاري",
                 pages: "صفحات ٦٦ - ٧١",
                 icon: "fa-id-card-clip",
-                subtitle: "الإجازات الـ ٩ وتفاصيلها، سلم تقويم الأداء الوظيفي، صفات المعلم، ونافذة جوهاري للتأمل الذاتي والمناطق الأربع.",
+                subtitle: "الإجازات الـ ٩ وتفاصيلها، سلم تقويم الأداء الوظيفي، صفات وأنواع المعلمين، ونافذة جوهاري التفاعلية للتأمل الذاتي.",
                 quizzes: [
                     { q: "الإجازة الاضطرارية للمعلم تبلغ في السنة الميلادية: (ص ٦٦)", opts: ["٣ أيام", "٥ أيام (بموافقة قائد المدرسة)", "١٠ أيام", "١٥ يوماً"], c: 1, exp: "الإجازة الاضطرارية ٥ أيام في السنة الميلادية سواء متفرقة أو مجتمعة بموافقة القائد." },
                     { q: "حسب نافذة جوهاري، المنطقة التي يعرفها الآخرون عنك ولا تعرفها أنت عن نفسك هي: (ص ٦٩ - ٧٠)", opts: ["المنطقة المفتوحة", "المنطقة العمياء", "المنطقة الخفية (القناع)", "المنطقة المجهولة"], c: 1, exp: "المنطقة العمياء تشمل السمات والسلوكيات التي يراها الآخرون فيك وأنت غافل عنها." },
-                    { q: "إذا حصل المعلم الممارس على تقدير غير مرضي لثلاث سنوات متتالية فإن الإجراء هو: (ص ٦٧)", opts: ["حرمانه من العلاوة فقط", "نقله إلى مدرسة أخرى", "الفصل من الخدمة", "توجيه إنذار أخير"], c: 2, exp: "السنة الأولى تنبيه وحرمان علاوة، الثانية تحويل إداري، والثالثة يفصل من العمل." }
+                    { q: "إذا حصل المعلم الممارس على تقدير غير مرضي لثلاث سنوات متتالية فإن الإجراء هو: (ص ٦٧ و ٧١)", opts: ["حرمانه من العلاوة فقط", "نقله إلى مدرسة أخرى", "الفصل من الخدمة", "توجيه إنذار أخير"], c: 2, exp: "السنة الأولى تنبيه وحرمان علاوة، الثانية تحويل لوظيفة إدارية، والثالثة يفصل من العمل." }
                 ]
             },
             {
@@ -368,7 +637,7 @@
                 icon: "fa-child-reaching",
                 subtitle: "الفرق بين النمو والنضج والتعلم، العوامل الوراثية والبيئية، وخصائص الروضة، والصفوف الدنيا والعليا والمتوسطة والثانوية.",
                 quizzes: [
-                    { q: "أشد مراحل الحياة خطورة وحرجاً في نمو الإنسان هي مرحلة: (ص ٧٣ و ٧٨)", opts: ["الطفولة المبكرة", "المراهقة المبكرة", "البيئة الرحمية (ما قبل الميلاد)", "الشيخوخة"], c: 2, exp: "مرحلة الحمل في بطن الأم هي أشد وأخطر المراحل تأثيراً على تكوين الفرد." },
+                    { q: "أشد مراحل الحياة خطورة وحرجاً في نمو الإنسان هي مرحلة: (ص ٧٣ و ٧٨)", opts: ["الطفولة المبكرة", "المراهقة المبكرة", "البيئة الرحمية (الحمل ما قبل الميلاد)", "الشيخوخة"], c: 2, exp: "مرحلة الحمل في بطن الأم هي أشد وأخطر المراحل تأثيراً على تكوين الفرد." },
                     { q: "مرحلة التمرد والنزوع نحو الاستقلال والاضطراب الانفعالي والطفرة الجسمية هي: (ص ٧٦ و ٧٨)", opts: ["الطفولة المتأخرة", "المراهقة المبكرة (المرحلة المتوسطة: ١٢-١٤ سنة)", "مرحلة الرشد", "الطفولة الهادئة"], c: 1, exp: "المرحلة المتوسطة تمثل المراهقة المبكرة وفيها تحدث طفرة نمو وصراع مع السلطة." }
                 ]
             },
@@ -392,7 +661,7 @@
                 icon: "fa-shuffle",
                 subtitle: "أنصبة الحصص للرتب التعليمية، ضوابط الندب الجزئي والكلي وحوافزه، وطريقة الإثارة العشوائية في التفكير الإبداعي.",
                 quizzes: [
-                    { q: "نصاب الحصص الأسبوعي للمعلم الممارس في التعليم العام هو: (ص ٩٠)", opts: ["١٨ حصة", "٢٠ حصة", "٢٢ حصة", "٢٤ حصة"], c: 3, exp: "الممارس ٢٤ حصة، المتقدم ٢٢ حصة، والخبير ١٨ حصة." },
+                    { q: "نصاب الحصص الأسبوعي للمعلم الممارس في التعليم العام هو: (ص ٩٠)", opts: ["١٨ حصة", "٢٠ حصة", "٢٢ حصة", "٢٤ حصة"], c: 3, exp: "الممارس ٢٤ حصة، المتقدم ٢٢ حصة، والخبير ١٨ حصة (وفي التربية الخاصة: ١٨، ١٦، ١٤)." },
                     { q: "المعلم المكلف بالندب الجزئي يعفى من الإشراف والاحتياط والنشاط إذا بلغ نصابه: (ص ٩٠)", opts: ["١٤ حصة فأكثر", "١٦ حصة فأكثر", "١٨ حصة فأكثر", "٢٠ حصة فأكثر"], c: 1, exp: "إذا بلغ نصابه ١٦ حصة فأكثر بالندب الجزئي يعفى من الإشراف وحصص الاحتياط والنشاط." }
                 ]
             },
@@ -402,10 +671,10 @@
                 title: "الدرس الثاني عشر: الأهداف السلوكية وتصنيف بلوم وكراثول وسمبسون",
                 pages: "صفحات ٩٤ - ١٠٨",
                 icon: "fa-bullseye",
-                subtitle: "شروط صياغة الهدف السلوكي، الأفعال المقاسة وغير المقاسة، مستويات بلوم الـ ٦، المجال الوجداني، والمجال المهاري.",
+                subtitle: "شروط صياغة الهدف السلوكي، الأفعال المقاسة وغير المقاسة، مستويات بلوم الـ ٦ التفاعلية، المجال الوجداني، والمجال المهاري.",
                 quizzes: [
-                    { q: "أي الأفعال التالية يعتبر فعلاً سلوكياً غير قابل للقياس والملاحظة المباشرة؟ (ص ٩٦)", opts: ["يرسم", "يعرب", "يدرك", "يحدد"], c: 2, exp: "أفعال مثل (يدرك، يفهم، يستوعب، يعرف) عمليات عقلية داخلية غير قابلة للقياس المباشر." },
-                    { q: "أن يقارن الطالب بين الخلية الحيوانية والنباتية؛ يصنف هذا الهدف ضمن مستوى بلوم: (ص ١٠٠ - ١٠٤)", opts: ["التطبيق", "التحليل", "التركيب", "التقويم"], c: 1, exp: "المقارنة والتفريق والتصنيف تندرج تحت مهارات التحليل." }
+                    { q: "أي الأفعال التالية يعتبر فعلاً سلوكياً غير قابل للقياس والملاحظة المباشرة؟ (ص ٩٦)", opts: ["يرسم", "يعرب", "يدرك", "يحدد"], c: 2, exp: "أفعال مثل (يدرك، يفهم، يستوعب، يعرف، يقدر) عمليات عقلية داخلية غير قابلة للقياس المباشر." },
+                    { q: "أن يفرق الطالب بين صفات الحيوانات آكلات اللحوم وآكلات الأعشاب؛ يصنف ضمن مستوى بلوم: (ص ١٠٤)", opts: ["التطبيق", "التحليل", "التركيب", "التقويم"], c: 1, exp: "المقارنة والتفريق والتصنيف تندرج تحت مهارات التحليل." }
                 ]
             },
             {
@@ -414,7 +683,7 @@
                 title: "الدرس الثالث عشر: استراتيجيات التدريس الحديثة",
                 pages: "صفحات ١٠٩ - ١٣١",
                 icon: "fa-chalkboard-user",
-                subtitle: "الفرق بين الاستراتيجية والطريقة والأسلوب، KWL، استراتيجية 4H، الصف المقلوب، الاستقصاء، والتعلم التعاوني.",
+                subtitle: "الفرق بين الاستراتيجية والطريقة والأسلوب والمدخل، KWL، استراتيجية 4H، الصف المقلوب، الاستقصاء، والتعلم التعاوني.",
                 quizzes: [
                     { q: "استراتيجية تعليمية يشاهد فيها الطلاب الشرح في منازلهم بالفيديو وتخصص الحصة للتطبيق والأنشطة: (ص ١٢٤ و ١٣٠)", opts: ["التعليم المبرمج", "الصف المقلوب (Flipped Classroom)", "التدريس المصغر", "المحاضرة"], c: 1, exp: "الصف المقلوب يعكس بيئة التعلم بحيث يكون التحصيل المنزلي والنقاش والتطبيق صفي." },
                     { q: "استراتيجية تدريس تقوم على تفاعل وتبادل أدوار القراءة والتوضيح والتلخيص والتنبؤ هي: (ص ١٢٤ و ١٣١)", opts: ["التدريس التبادلي", "حل المشكلات", "العصف الذهني", "لعب الأدوار"], c: 0, exp: "التدريس التبادلي أثبت كفاءة عالية خاصة في فهم واستيعاب النصوص القرائية بالابتدائية." }
@@ -426,9 +695,9 @@
                 title: "الدرس الرابع عشر: البيئة الصفية وإدارة الصف",
                 pages: "صفحات ١٣٢ - ١٣٥",
                 icon: "fa-chalkboard",
-                subtitle: "إدارة الصف مقابل ضبط الصف، المناخ الإيجابي، صياغة القواعد الصفية، والتعامل مع السلوكيات غير المرغوبة.",
+                subtitle: "إدارة الصف مقابل ضبط الصف، المناخ الإيجابي، صياغة القواعد الصفية بمشاركة الطلاب، والتعامل مع السلوكيات غير المرغوبة.",
                 quizzes: [
-                    { q: "الفرق الجوهري بين إدارة الصف وضبط الصف يكمن في أن إدارة الصف: (ص ١٣٣)", opts: ["تركز على الهدوء التام فقط", "أشمل وتهتم بتهيئة البيئة النفسية والتعليمية لنمو المتعلم", "تعتمد على العقاب الصارم", "مسؤولية قائد المدرسة فقط"], c: 1, exp: "إدارة الصف مفهوم إيجابي شامل يشمل التنظيم والتفاعل الإنساني وتحقيق أهداف التعلم." }
+                    { q: "الفرق الجوهري بين إدارة الصف وضبط الصف يكمن في أن إدارة الصف: (ص ١٣٣ و ١٧٩)", opts: ["تركز على الهدوء التام فقط", "أشمل من ضبط الصف وتهتم بتهيئة البيئة النفسية والاجتماعية والتعليمية", "تعتمد على العقاب الصارم", "مسؤولية قائد المدرسة فقط"], c: 1, exp: "إدارة الصف مفهوم إيجابي شامل يشمل التنظيم والتفاعل الإنساني وتحقيق أهداف التعلم." }
                 ]
             },
             {
@@ -439,7 +708,7 @@
                 icon: "fa-people-roof",
                 subtitle: "خطوات البحث الإجرائي، ومختبر استراتيجيات تعديل السلوك (التصحيح الزائد، الاقتصاد الرمزي، الإطفاء، الغمر، وتكلفة الاستجابة).",
                 quizzes: [
-                    { q: "إلزام الطلاب الذين شوهوا جدران المدرسة بإعادة طلائها وتنظيفها بأفضل مما كانت يسمى: (ص ١٣٧)", opts: ["العقاب السلبي", "تكلفة الاستجابة", "التصحيح الزائد", "الإقصاء"], c: 2, exp: "التصحيح الزائد يلزم الطالب بتصحيح خطئه وإعادة الشيء لحال أفضل." },
+                    { q: "إلزام الطلاب الذين شوهوا جدران المدرسة بإعادة طلائها وتنظيفها بأفضل مما كانت يسمى: (ص ١٣٧)", opts: ["العقاب السلبي", "تكلفة الاستجابة", "التصحيح الزائد", "الإقصاء"], c: 2, exp: "التصحيح الزائد يلزم الطالب بتصحيح خطئه وإعادة الشيء لحال أفضل مما كان عليه." },
                     { q: "بحث تطبيقي علمي يقوم به المعلم لمعالجة مشكلة محددة تواجهه داخل صفه أو مدرسته يسمى: (ص ١٣٦ و ٢٢٥)", opts: ["البحث النظري", "البحث الإجرائي (Action Research)", "البحث الوصفي", "البحث التاريخي"], c: 1, exp: "البحث الإجرائي موجه لحل مشكلة محددة ومباشرة في الميدان التربوي." }
                 ]
             },
@@ -451,7 +720,7 @@
                 icon: "fa-universal-access",
                 subtitle: "صعوبات التعلم (إعاقة خفية) مقابل بطء التعلم والتأخر الدراسي، مقاييس الذكاء، جدول المواصفات، ومعامل الصعوبة والتمييز.",
                 quizzes: [
-                    { q: "طالب ذكاؤه طبيعي أو فوق الطبيعي لكنه يعاني من تعثر نوعي في القراءة (ديسلكسيا) أو الحساب يصنف ضمن: (ص ١٤٦ - ١٤٨)", opts: ["صعوبات التعلم", "بطء التعلم", "التأخر الدراسي", "الإعاقة العقلية"], c: 0, exp: "صعوبات التعلم تظهر لدى طلاب بذكاء طبيعي أو مرتفع ولكن لديهم خلل نمائي أو أكاديمي نوعي." },
+                    { q: "طالب ذكاؤه طبيعي أو فوق الطبيعي لكنه يعاني من تعثر نوعي في القراءة (ديسلكسيا) أو الحساب يصنف ضمن: (ص ١٤٦ - ١٤٨)", opts: ["صعوبات التعلم", "بطء التعلم", "التأخر الدراسي", "الإعاقة العقلية"], c: 0, exp: "صعوبات التعلم تظهر لدى طلاب بذكاء طبيعي أو مرتفع ولكن لديهم خلل نمائي أو أكاديمي نوعي وتسمى الإعاقة الخفية." },
                     { q: "طالب درجاته منخفضة في جميع المواد وذكاؤه حدي منخفض (بين ٧٠ و ٨٤) يصنف ضمن: (ص ١٤٦ - ١٤٨)", opts: ["صعوبات التعلم", "بطء التعلم", "الموهوبين", "التخلف البسيط"], c: 1, exp: "بطء التعلم يشمل انخفاضاً عاماً في جميع المواد مع انخفاض معامل الذكاء." },
                     { q: "أفضل معامل تمييز لفقرات الاختبار التحصيلي الجيد هو: (ص ١٥٢ و ١٨٩)", opts: ["عندما يكون سالباً", "صفر", "٠.٣٠ فأكثر", "٠.١٠ فأقل"], c: 2, exp: "الفقرة الاختبارية الممتازة يجب ألا يقل معامل تمييزها عن ٠.٣٠ لتفصل بين المتمكنين والضعفاء." }
                 ]
@@ -459,18 +728,21 @@
             {
                 id: 15,
                 shortTitle: "١٦. مصفوفة التتبع",
-                title: "مصفوفة التتبع والتدقيق الشاملة للملزمة (٢٤١ صفحة)",
+                title: "مصفوفة التتبع والتدقيق الشاملة للملزمة (٢٤١ صفحة) + الـ ٦٨ مصطلحاً",
                 pages: "صفحات ١ - ٢٤١",
                 icon: "fa-table-list",
-                subtitle: "فهرس تفصيلي يربط كل صفحات وفصول الملزمة الـ ٢٩ وبنك التجميعات بالمحطات التفاعلية في التطبيق.",
+                subtitle: "فهرس تفصيلي تفاعلي يربط كل صفحات وفصول الملزمة الـ ٢٩ وجدول الـ ٦٨ مصطلحاً (ص ١٦٦) بالمحطات التفاعلية.",
                 quizzes: [
                     { q: "المصدر المعتمد في هذا التطبيق هو ملزمة النمو المهني الشاملة لإعداد اختبار الرخصة المهنية للمدرب: (ص ١)", opts: ["أ. مخلد الروقي", "أ. محمد العمري", "هيئة تقويم التعليم", "معهد الإدارة العامة"], c: 0, exp: "الملزمة من إعداد الأستاذ القدير مخلد الروقي لقسم المعايير التربوية العامة." }
                 ]
             }
         ];
 
-        // 2. SEARCH DICTIONARY FOR LIVE AUTOCOMPLETE
+        // 4. SEARCH DICTIONARY FOR LIVE AUTOCOMPLETE
         const SEARCH_INDEX = [
+            { term: "تحقيق الذات - قمة هرم ماسلو: الابتكار، حل المشكلات، تقبل الحقائق (ص ٣١)", station: 2 },
+            { term: "هرم ماسلو للحاجات الخمس - الفسيولوجية، الأمان، الاجتماعية، التقدير، تحقيق الذات", station: 2 },
+            { term: "مخروط الخبرة لإدجار ديل - الوسائل المحسوسة وشبه المحسوسة والمجردة (ص ٣٢)", station: 2 },
             { term: "بافلوف - الاشتراط الكلاسيكي، الكلب، الانطفاء، مثير واستجابة", station: 1 },
             { term: "سكنر - التعلم الإجرائي الشرطي، الفأر والرافعة، مصفوفة التعزيز والعقاب", station: 1 },
             { term: "ثورندايك - المحاولة والخطأ، قانون الأثر، قانون التدريب والاستعداد", station: 1 },
@@ -482,8 +754,6 @@
             { term: "فيجوتسكي - منطقة النمو الوشيك ZPD والسقالات التعليمية", station: 1 },
             { term: "باندورا - التعلم الاجتماعي، الملاحظة، التقليد، والنمذجة", station: 1 },
             { term: "أريكسون - مراحل النمو النفس اجتماعي الثمان والأزمات (فرويد ضد أريكسون)", station: 1 },
-            { term: "ماسلو - هرم الحاجات الإنسانية الخمس من القاعدة للقمة", station: 2 },
-            { term: "إدجار ديل - مخروط الخبرة، الوسائل المحسوسة وشبه المحسوسة والمجردة", station: 2 },
             { term: "عناصر المنهج - المحوري، النشاط، الخفي، المتكامل، التكنولوجي", station: 3 },
             { term: "القياس والتقويم - الفرق بين القياس والتقييم والتقويم، محكي ومعياري المرجع", station: 4 },
             { term: "أدوات التقويم - قائمة الشطب، سلم التقدير، السجل القصصي، سجل سير التعلم", station: 4 },
@@ -495,20 +765,24 @@
             { term: "قواعد السلوك والمواظبة - المخالفات الست، حسم الغياب، العقد السلوكي", station: 8 },
             { term: "الندب والتكليف - أنصبة الحصص، ضوابط الندب، والإثارة العشوائية", station: 9 },
             { term: "الأهداف السلوكية - تصنيف بلوم المعرفي، كراثول الوجداني، وسمبسون المهاري", station: 10 },
-            { term: "استراتيجيات التدريس - الصف المقلوب، التدريس التبادلي، KWL، شكل V", station: 11 },
+            { term: "استراتيجيات التدريس - الصف المقلوب، التدريس التبادلي، KWL، شكل V، 4H", station: 11 },
             { term: "البيئة الصفية - إدارة الصف مقابل ضبط الصف، والتنظيم الإيجابي", station: 12 },
             { term: "تعديل السلوك - التصحيح الزائد، الاقتصاد الرمزي، الإطفاء، الغمر، البحث الإجرائي", station: 13 },
             { term: "صعوبات التعلم - الديسلكسيا، الديسجرافيا، الديسكلكوليا، بطء التعلم، والتأخر", station: 14 },
-            { term: "مصفوفة التتبع - الفهرس والتدقيق الكامل لـ ٢٤١ صفحة", station: 15 }
+            { term: "مصفوفة التتبع - الفهرس والتدقيق الكامل لـ ٢٤١ صفحة + الـ ٦٨ مصطلحاً", station: 15 }
         ];
 
-        // 3. APPLICATION STATE
-        let activeStationIdx = 1; // Default to Station 2 (shown in screenshot)
-        let activeSchoolTab = 'erikson'; // Sub-tab for Station 2
-        let answeredQuestions = {}; // Persisted answers
+        // 5. APPLICATION STATE
+        let activeStationIdx = 2; // Opens directly on Station 3 (Maslow & Dale Pyramid) to showcase restored interactivity
+        let activeSchoolTab = 'erikson';
+        let selectedMaslowId = 5; // Default selected: 5 - تحقيق الذات
+        let selectedDaleId = 1;   // Default selected: 1 - قاعدة المخروط
+        let selectedEriksonId = 4;
+        let selectedBloomId = 6;
+        let selectedToolTab = 'checklist';
+        let answeredQuestions = {};
         const STORAGE_KEY = 'rukhsa_exam_answers_full';
 
-        // Load Persisted Answers
         function loadSavedState() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
@@ -528,21 +802,19 @@
             }
         }
 
-        // 4. UI INITIALIZATION
+        // 6. UI INITIALIZATION
         function init() {
             loadSavedState();
             renderDrawerItems();
             renderStation(activeStationIdx);
             setupSearch();
 
-            // Auto-collapse search dropdown on scroll
             window.addEventListener('scroll', () => {
                 const dd = document.getElementById('searchDropdown');
                 if (dd && !dd.classList.contains('hidden')) dd.classList.add('hidden');
             });
         }
 
-        // Drawer Navigation
         function toggleDrawer() {
             const drawer = document.getElementById('stationsDrawer');
             const backdrop = document.getElementById('drawerBackdrop');
@@ -562,8 +834,8 @@
         function renderDrawerItems() {
             const list = document.getElementById('drawerList');
             list.innerHTML = STATIONS.map((st, idx) => `
-                <button onclick="jumpToStation(${idx}); closeDrawer();" 
-                    class="w-full text-right p-2 rounded-xl border flex items-center justify-between transition ${idx === activeStationIdx ? 'bg-indigo-600/30 border-indigo-500 text-white font-bold' : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:bg-slate-800'}">
+                <button onclick="playSound('open'); jumpToStation(${idx}); closeDrawer();" 
+                    class="interactive-card w-full text-right p-2.5 rounded-xl border flex items-center justify-between ${idx === activeStationIdx ? 'bg-indigo-600/30 border-indigo-500 text-white font-bold shadow-md' : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:bg-slate-800'}">
                     <div class="flex items-center gap-2 truncate">
                         <i class="fa-solid ${st.icon} text-indigo-400 w-4 text-center"></i>
                         <span class="truncate">${st.shortTitle}</span>
@@ -581,6 +853,7 @@
         }
 
         function navigateStation(delta) {
+            playSound('open');
             jumpToStation(activeStationIdx + delta);
         }
 
@@ -588,7 +861,7 @@
             document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 5. LIVE SEARCH SETUP
+        // 7. LIVE SEARCH SETUP
         function setupSearch() {
             const input = document.getElementById('fastSearchInput');
             const dropdown = document.getElementById('searchDropdown');
@@ -612,7 +885,7 @@
                     dropdown.innerHTML = `<div class="p-3 text-xs text-slate-400 text-center font-tajawal">لم يتم العثور على مصطلح يطابق بحثك...</div>`;
                 } else {
                     dropdown.innerHTML = matches.map(m => `
-                        <button onclick="jumpToStation(${m.station}); document.getElementById('searchDropdown').classList.add('hidden');"
+                        <button onclick="playSound('open'); jumpToStation(${m.station}); document.getElementById('searchDropdown').classList.add('hidden');"
                             class="w-full text-right p-2.5 rounded-xl hover:bg-slate-800 text-xs flex items-center justify-between transition group">
                             <div class="flex items-center gap-2 text-slate-200 group-hover:text-white">
                                 <i class="fa-solid fa-arrow-turn-down text-[10px] text-indigo-400"></i>
@@ -639,17 +912,15 @@
             document.getElementById('searchClearBtn').classList.add('hidden');
         }
 
-        // 6. RENDER STATION DETAILS & LABS
+        // 8. RENDER STATION DETAILS & INTERACTIVE LABS
         function renderStation(idx) {
             const st = STATIONS[idx];
 
-            // Header Elements
             document.getElementById('topStationBadge').textContent = `محطة ${idx + 1}/١٦`;
             document.getElementById('headerScrubber').value = idx;
             const percent = Math.round(((idx + 1) / STATIONS.length) * 100);
             document.getElementById('scrubberPercent').textContent = `${percent}٪`;
 
-            // Hero Card
             document.getElementById('heroStationBadge').textContent = `المحطة ${idx + 1} من ١٦`;
             document.getElementById('heroPagesBadge').textContent = st.pages;
             document.getElementById('heroTitle').textContent = st.title;
@@ -657,46 +928,229 @@
             document.getElementById('heroIcon').innerHTML = `<i class="fa-solid ${st.icon}"></i>`;
             document.getElementById('bottomStationLabel').textContent = `محطة ${idx + 1} من ١٦`;
 
-            // Dynamic Station Educational Content
             const container = document.getElementById('stationContentWrapper');
+            container.classList.remove('anim-fade');
+            void container.offsetWidth; // Reflow for fresh spring animation
+            container.classList.add('anim-fade');
             container.innerHTML = getStationHTML(idx);
 
-            // Quizzes
             renderQuizSection(idx);
         }
 
-        // 7. SPECIFIC STATION CONTENT GENERATION (INCLUDING EXACT LABS FROM SCREENSHOT)
+        // 9. INTERACTIVE HANDLERS FOR PYRAMIDS, CONES, STAGES & MATRICES
+        function selectMaslowTier(id) {
+            playSound('pop');
+            selectedMaslowId = id;
+            renderStation(2);
+        }
+
+        function selectDaleTier(id) {
+            playSound('pop');
+            selectedDaleId = id;
+            renderStation(2);
+        }
+
+        function selectEriksonStage(id) {
+            playSound('pop');
+            selectedEriksonId = id;
+            document.getElementById('schoolTabBody').innerHTML = getSchoolTabContent('erikson');
+        }
+
+        function selectBloomLevel(id) {
+            playSound('pop');
+            selectedBloomId = id;
+            renderStation(10);
+        }
+
+        function switchToolTab(tab) {
+            playSound('open');
+            selectedToolTab = tab;
+            renderStation(4);
+        }
+
+        function showInteractiveDetail(boxId, title, content, badgeText = 'تفصيل تربوي من الملزمة') {
+            playSound('pop');
+            const box = document.getElementById(boxId);
+            if (!box) return;
+            box.classList.remove('anim-fade');
+            void box.offsetWidth;
+            box.classList.add('anim-fade');
+            box.innerHTML = `
+                <div class="flex items-center justify-between border-b border-indigo-500/30 pb-2 mb-2">
+                    <strong class="text-indigo-300 text-xs sm:text-sm font-cairo flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info text-indigo-400"></i>
+                        <span>${title}</span>
+                    </strong>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold">${badgeText}</span>
+                </div>
+                <div class="text-slate-200 text-xs leading-relaxed">${content}</div>
+            `;
+        }
+
+        // 10. COMPLETE STATION HTML RENDERERS (ALL 16 STATIONS WITH CLICKABLE DETAILS)
         function getStationHTML(idx) {
-            if (idx === 1) {
-                // STATION 2: EXACT RECREATION OF THE SCREENSHOT (مختبر مدارس ونظريات التعلم الخمس الكبرى)
+            // STATION 3 (idx === 2): MASLOW'S HIERARCHY & DALE'S CONE WITH FULL CLICKABLE DETAILS
+            if (idx === 2) {
+                const activeMaslow = MASLOW_LEVELS.find(m => m.id === selectedMaslowId) || MASLOW_LEVELS[0];
+                const activeDale = DALE_LEVELS.find(d => d.id === selectedDaleId) || DALE_LEVELS[2];
+
                 return `
-                <div class="space-y-4 text-xs">
-                    <!-- Interactive Laboratory Container (Screenshot Fidelity) -->
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
+                <div class="space-y-5 text-xs">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         
-                        <!-- Header of the Lab -->
-                        <div class="flex items-center gap-2 border-b border-slate-800/80 pb-3">
-                            <i class="fa-solid fa-flask-vial text-indigo-400 text-base"></i>
-                            <h2 class="text-sm sm:text-base font-cairo font-bold text-white">
-                                مختبر مدارس ونظريات التعلم الخمس الكبرى (ص ١٢ - ٢٣)
-                            </h2>
+                        <!-- هرم ماسلو التفاعلي الكامل (ص ٣١) -->
+                        <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-xl">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                                <div>
+                                    <strong class="text-amber-400 block text-sm sm:text-base font-cairo">١. هرم ماسلو للحاجات والدوافع الإنسانية (ص ٣١)</strong>
+                                    <span class="text-[11px] text-slate-400">اضغط على أي طبقة في الهرم (من ١ إلى ٥) لإظهار أمثلتها وتفاصيلها الكاملة:</span>
+                                </div>
+                                <span class="px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[10px] font-bold">النظرية الإنسانية</span>
+                            </div>
+
+                            <!-- Interactive Clickable Pyramid -->
+                            <div class="flex flex-col items-center space-y-2 py-2 select-none">
+                                <!-- 5. تحقيق الذات -->
+                                <button onclick="selectMaslowTier(5)" class="maslow-tier w-7/12 sm:w-1/2 p-2.5 text-center bg-gradient-to-r from-purple-700 to-purple-500 rounded-t-2xl rounded-b-lg text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 5 ? 'border-white ring-4 ring-purple-500/40 scale-105' : 'border-purple-400/30 opacity-85'}">
+                                    <div class="flex items-center justify-center gap-1">
+                                        <i class="fa-solid fa-crown text-amber-300 text-[10px]"></i>
+                                        <span>٥. الحاجة لتحقيق الذات</span>
+                                    </div>
+                                    <span class="block text-[10px] font-normal text-purple-100 truncate">الابتكار • حل المشكلات • تقبل الحقائق</span>
+                                </button>
+
+                                <!-- 4. الحاجة للتقدير -->
+                                <button onclick="selectMaslowTier(4)" class="maslow-tier w-8/12 sm:w-8/12 p-2.5 text-center bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 4 ? 'border-white ring-4 ring-indigo-500/40 scale-105' : 'border-indigo-400/30 opacity-85'}">
+                                    <div>٤. الحاجة إلى التقدير</div>
+                                    <span class="block text-[10px] font-normal text-indigo-100 truncate">تقدير الذات • الثقة • الإنجازات • الاحترام المتبادل</span>
+                                </button>
+
+                                <!-- 3. الحاجات الاجتماعية -->
+                                <button onclick="selectMaslowTier(3)" class="maslow-tier w-10/12 sm:w-9/12 p-2.5 text-center bg-gradient-to-r from-cyan-700 to-cyan-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 3 ? 'border-white ring-4 ring-cyan-500/40 scale-105' : 'border-cyan-400/30 opacity-85'}">
+                                    <div>٣. الحاجات الاجتماعية (الحب والانتماء)</div>
+                                    <span class="block text-[10px] font-normal text-cyan-100 truncate">الصداقة • العلاقات الأسرية • الألفة</span>
+                                </button>
+
+                                <!-- 2. حاجات الأمان -->
+                                <button onclick="selectMaslowTier(2)" class="maslow-tier w-11/12 p-2.5 text-center bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 2 ? 'border-white ring-4 ring-emerald-500/40 scale-105' : 'border-emerald-400/30 opacity-85'}">
+                                    <div>٢. حاجات الأمن والأمان</div>
+                                    <span class="block text-[10px] font-normal text-emerald-100 truncate">السلامة الجسدية • الأمن الوظيفي والصحي والأسري • الممتلكات</span>
+                                </button>
+
+                                <!-- 1. الحاجات الفسيولوجية -->
+                                <button onclick="selectMaslowTier(1)" class="maslow-tier w-full p-3 text-center bg-gradient-to-r from-amber-700 to-amber-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 1 ? 'border-white ring-4 ring-amber-500/40 scale-105' : 'border-amber-400/30 opacity-85'}">
+                                    <div>١. الحاجات الفسيولوجية (قاعدة الهرم)</div>
+                                    <span class="block text-[10px] font-normal text-amber-100 truncate">التنفس • الطعام • الماء • النوم • التوازن • الإخراج</span>
+                                </button>
+                            </div>
+
+                            <!-- Dynamic Detail Panel for Selected Maslow Tier -->
+                            <div class="anim-fade p-3.5 rounded-2xl bg-slate-950 border-2 border-indigo-500/50 space-y-2 shadow-inner">
+                                <div class="flex flex-wrap items-center justify-between gap-1 border-b border-slate-800 pb-2">
+                                    <strong class="text-white text-xs sm:text-sm font-cairo flex items-center gap-1.5">
+                                        <i class="fa-solid fa-star text-amber-400"></i>
+                                        <span>${activeMaslow.title}</span>
+                                    </strong>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold">${activeMaslow.badge}</span>
+                                </div>
+                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-amber-300 font-bold text-[11px]">
+                                    <i class="fa-solid fa-tags ml-1 text-indigo-400"></i>عناصر المستوى في الملزمة: ${activeMaslow.keywords}
+                                </div>
+                                <p class="text-slate-200 leading-relaxed text-xs">${activeMaslow.desc}</p>
+                                <div class="p-2 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-[11px]">
+                                    <i class="fa-solid fa-lightbulb ml-1 text-amber-400"></i><strong>مفتاح الاختبار:</strong> ${activeMaslow.examTip}
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- 5 School Filter Tabs (Exact Labels from Screenshot) -->
+                        <!-- مخروط الخبرة لإدجار ديل التفاعلي الكامل (ص ٣٢) -->
+                        <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-xl flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                                    <div>
+                                        <strong class="text-cyan-400 block text-sm sm:text-base font-cairo">٢. مخروط الخبرة لإدجار ديل (ص ٣٢)</strong>
+                                        <span class="text-[11px] text-slate-400">اضغط على أي قسم في المخروط لعرض الوسائل التعليمية المدرجة فيه:</span>
+                                    </div>
+                                    <span class="px-2 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[10px] font-bold">الوسائل التعليمية</span>
+                                </div>
+
+                                <!-- Interactive Clickable Cone of Experience -->
+                                <div class="flex flex-col items-center space-y-2.5 py-2 select-none">
+                                    <!-- Top: Abstract -->
+                                    <button onclick="selectDaleTier(3)" class="maslow-tier w-7/12 p-3 rounded-t-2xl rounded-b-lg bg-gradient-to-r from-rose-700 to-rose-500 text-white text-center shadow-lg border-2 ${selectedDaleId === 3 ? 'border-white ring-4 ring-rose-500/40 scale-105' : 'border-rose-400/30 opacity-85'}">
+                                        <strong class="block text-xs">٣. القمة: الوسائل المجردة (خبرات مجردة)</strong>
+                                        <span class="text-[10px] text-rose-100">الرموز اللفظية • الرموز البصرية</span>
+                                    </button>
+
+                                    <!-- Middle: Iconic / Semi-concrete -->
+                                    <button onclick="selectDaleTier(2)" class="maslow-tier w-10/12 p-3 rounded-xl bg-gradient-to-r from-indigo-700 to-indigo-500 text-white text-center shadow-lg border-2 ${selectedDaleId === 2 ? 'border-white ring-4 ring-indigo-500/40 scale-105' : 'border-indigo-400/30 opacity-85'}">
+                                        <strong class="block text-xs">٢. الوسط: الوسائل شبه المحسوسة (خبرات ممثلة)</strong>
+                                        <span class="text-[10px] text-indigo-100">الصور والتسجيلات • الأفلام • التلفزيون • المعارض • الدراسات • العروض</span>
+                                    </button>
+
+                                    <!-- Base: Concrete / Direct -->
+                                    <button onclick="selectDaleTier(1)" class="maslow-tier w-full p-3.5 rounded-xl bg-gradient-to-r from-emerald-700 to-emerald-500 text-white text-center shadow-lg border-2 ${selectedDaleId === 1 ? 'border-white ring-4 ring-emerald-500/40 scale-105' : 'border-emerald-400/30 opacity-85'}">
+                                        <strong class="block text-xs">١. القاعدة: الوسائل المحسوسة (خبرات مباشرة فعلية)</strong>
+                                        <span class="text-[10px] text-emerald-100">الخبرات الممثلة • الخبرات المعدلة • الممارسة الواقعية المباشرة</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Detail Panel for Selected Dale Cone Level -->
+                            <div class="anim-fade p-3.5 rounded-2xl bg-slate-950 border-2 border-cyan-500/50 space-y-2 shadow-inner">
+                                <div class="flex flex-wrap items-center justify-between gap-1 border-b border-slate-800 pb-2">
+                                    <strong class="text-white text-xs sm:text-sm font-cairo flex items-center gap-1.5">
+                                        <i class="fa-solid fa-eye text-cyan-400"></i>
+                                        <span>${activeDale.title}</span>
+                                    </strong>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">${activeDale.badge}</span>
+                                </div>
+                                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+                                    ${activeDale.items.map(item => `
+                                        <li class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-cyan-200 font-bold text-[11px] flex items-center gap-1.5">
+                                            <i class="fa-solid fa-check-circle text-emerald-400 text-[10px]"></i>
+                                            <span>${item}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                                <p class="text-slate-300 leading-relaxed text-xs pt-1">${activeDale.desc}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>`;
+            }
+
+            // STATION 2 (idx === 1): LEARNING THEORIES LAB WITH CLICKABLE ERIKSON STAGES & SKINNER MATRIX
+            if (idx === 1) {
+                return `
+                <div class="space-y-4 text-xs">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-flask-vial text-indigo-400 text-base"></i>
+                                <h2 class="text-sm sm:text-base font-cairo font-bold text-white">
+                                    مختبر مدارس ونظريات التعلم الخمس الكبرى (ص ١٢ - ٢٣)
+                                </h2>
+                            </div>
+                            <span class="text-[10px] text-indigo-300 bg-indigo-950/70 px-2.5 py-1 rounded-lg border border-indigo-500/30">اضغط على التبويبات والبطاقات للتفاعل</span>
+                        </div>
+
+                        <!-- 5 School Filter Tabs -->
                         <div class="flex flex-wrap gap-1.5 sm:gap-2">
-                            <button onclick="switchSchoolTab('behavioral')" id="tab_behavioral" class="px-2.5 py-1.5 rounded-lg border text-xs font-bold transition ${activeSchoolTab === 'behavioral' ? 'bg-indigo-600 border-indigo-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
+                            <button onclick="playSound('open'); switchSchoolTab('behavioral')" id="tab_behavioral" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'behavioral' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
                                 ١. السلوكية (ص ١٢-١٧)
                             </button>
-                            <button onclick="switchSchoolTab('cognitive')" id="tab_cognitive" class="px-2.5 py-1.5 rounded-lg border text-xs font-bold transition ${activeSchoolTab === 'cognitive' ? 'bg-indigo-600 border-indigo-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
+                            <button onclick="playSound('open'); switchSchoolTab('cognitive')" id="tab_cognitive" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'cognitive' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
                                 ٢. المعرفية (ص ١٧-٢٠)
                             </button>
-                            <button onclick="switchSchoolTab('constructivist')" id="tab_constructivist" class="px-2.5 py-1.5 rounded-lg border text-xs font-bold transition ${activeSchoolTab === 'constructivist' ? 'bg-indigo-600 border-indigo-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
+                            <button onclick="playSound('open'); switchSchoolTab('constructivist')" id="tab_constructivist" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'constructivist' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
                                 ٣. البنائية (ص ٢١-٢٢)
                             </button>
-                            <button onclick="switchSchoolTab('social')" id="tab_social" class="px-2.5 py-1.5 rounded-lg border text-xs font-bold transition ${activeSchoolTab === 'social' ? 'bg-indigo-600 border-indigo-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
+                            <button onclick="playSound('open'); switchSchoolTab('social')" id="tab_social" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'social' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
                                 ٤. الاجتماعية (ص ٢٢-٢٣)
                             </button>
-                            <button onclick="switchSchoolTab('erikson')" id="tab_erikson" class="px-2.5 py-1.5 rounded-lg border text-xs font-bold transition ${activeSchoolTab === 'erikson' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
+                            <button onclick="playSound('open'); switchSchoolTab('erikson')" id="tab_erikson" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'erikson' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
                                 ٥. أريكسون النفس-اجتماعية (ص ٢٣)
                             </button>
                         </div>
@@ -707,153 +1161,280 @@
                         </div>
                     </div>
                 </div>`;
-            } else if (idx === 0) {
+            }
+
+            // STATION 1 (idx === 0): PROFESSIONAL DEVELOPMENT CYCLE
+            if (idx === 0) {
                 return `
                 <div class="space-y-4 text-xs">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                            <strong class="text-indigo-400 block text-sm">أهداف التنمية المهنية الـ ١٠ (ص ٦):</strong>
-                            <p class="text-slate-300 leading-relaxed">• مواكبة المستجدات في النظريات وتطبيقها • مواكبة تخصص المادة • ترسيخ التعلم الذاتي مدى الحياة • الالتزام بأخلاقيات المهنة • ربط النظرية بالتطبيق • توظيف تقنيات التعليم المعاصرة • مهارات البحث والتقييم الذاتي.</p>
+                    <!-- Interactive 4 PD Programs Cards -->
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                        <strong class="text-indigo-400 block text-sm font-cairo">أولاً: برامج النمو المهني الأربعة (ص ٧) - اضغط على أي برنامج لعرض مثاله التطبيقي:</strong>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button onclick="showInteractiveDetail('pdDetailBox', '١. برامج التأهيل (ص ٧)', 'تُعقد للمعلم المتخرج من الجامعة وغير حامل لمؤهل تربوي، أو لديه قصور في الجانب التربوي؛ فيتم إلحاقه ببرامج تأهيل وإعداد المعلم.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-indigo-500/40 text-center space-y-1">
+                                <i class="fa-solid fa-user-graduate text-indigo-400 text-lg"></i>
+                                <span class="block font-bold text-white">١. برامج التأهيل</span>
+                                <span class="block text-[10px] text-slate-400">لغير التربويين</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('pdDetailBox', '٢. برامج العلاج (ص ٧)', 'تُعقد للمعلمين الذين لديهم مشكلة أو قصور في الشرح أو عدم معرفة باستخدام الأجهزة والتقنيات؛ فتعالج مشكلاتهم وتدربهم عملياً.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-rose-500/40 text-center space-y-1">
+                                <i class="fa-solid fa-kit-medical text-rose-400 text-lg"></i>
+                                <span class="block font-bold text-white">٢. برامج العلاج</span>
+                                <span class="block text-[10px] text-slate-400">لمعالجة القصور الفني</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('pdDetailBox', '٣. برامج التجديد (ص ٧)', 'تُعقد عند صدور أي شيء جديد (قرار وزاري، منهج جديد، استراتيجية حديثة)؛ فيُجمع المعلمون لتدريبهم على المستجدات.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-cyan-500/40 text-center space-y-1">
+                                <i class="fa-solid fa-arrows-rotate text-cyan-400 text-lg"></i>
+                                <span class="block font-bold text-white">٣. برامج التجديد</span>
+                                <span class="block text-[10px] text-slate-400">للمناهج والقرارات الجديدة</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('pdDetailBox', '٤. برامج الترقي (ص ٧)', 'تُعقد للمرشحين للترقية إلى مناصب قيادية (مثل: من معلم إلى مدير مدرسة أو مشرف تربوي) لتعريفهم بواجبات ومتطلبات التعيين الجديد.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-center space-y-1">
+                                <i class="fa-solid fa-ranking-star text-emerald-400 text-lg"></i>
+                                <span class="block font-bold text-white">٤. برامج الترقي</span>
+                                <span class="block text-[10px] text-slate-400">للمرشحين للإدارة والقيادة</span>
+                            </button>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                            <strong class="text-cyan-400 block text-sm">برامج النمو المهني الـ ٤ (ص ٧):</strong>
-                            <p class="text-slate-300 leading-relaxed">١. <strong>التأهيل:</strong> للمعلم الخريج غير التربوي.<br>٢. <strong>العلاج:</strong> لمعالجة مشكلات التدريس واستخدام الأجهزة.<br>٣. <strong>التجديد:</strong> لتدريب المعلمين على القرارات والمناهج الحديثة.<br>٤. <strong>الترقي:</strong> للمرشحين للقيادة وإدارة المدارس.</p>
+                        <div id="pdDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
+                            <strong class="text-indigo-300 block mb-1"><i class="fa-solid fa-hand-pointer ml-1"></i>اضغط على أي برنامج أعلاه لعرض شرحه التفصيلي من الملزمة (ص ٧).</strong>
                         </div>
                     </div>
 
-                    <!-- ساعات الترقية والجهات المعتمدة -->
-                    <div class="p-4 rounded-xl bg-slate-900 border border-emerald-500/30 space-y-3">
+                    <!-- تصنيف أساليب النمو المهني + الفروق الأربعة (ص ٨-٩) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="p-3.5 rounded-xl bg-slate-900 border border-emerald-500/30 space-y-1.5">
+                            <strong class="text-emerald-400 block text-xs">١. الأساليب العملية (٧ أساليب - ص ٨):</strong>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">• الزيارات الصفية • تبادل الزيارات • الدروس التطبيقية (النموذجية) • التدريس المصغر (الفعال) • العروض العلمية • العصف الذهني • الدورات التدريبية.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900 border border-cyan-500/30 space-y-1.5">
+                            <strong class="text-cyan-400 block text-xs">٢. الأساليب النظرية (٦ أساليب - ص ٩):</strong>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">• المحاضرات التربوية • الندوات التربوية • الاجتماعات • النشرات التربوية • ورش العمل • حلقات النقاش.</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-900 border border-amber-500/30 space-y-1.5">
+                            <strong class="text-amber-400 block text-xs">٣. الأساليب الذاتية (٤ أساليب - ص ٩):</strong>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">• التثقيف الذاتي (القراءة الحرة، القراءة الموجهة) • البحث في الإنترنت • اليوتيوب • المراسلة والتعلم عن بعد.</p>
+                        </div>
+                    </div>
+
+                    <!-- حاسبة ساعات النمو المهني والجهات السبع المعتمدة (ص ٨) -->
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-emerald-500/30 space-y-3">
                         <div class="flex items-center justify-between text-xs font-bold">
                             <span class="text-emerald-400"><i class="fa-solid fa-calculator ml-1"></i>حاسبة ساعات النمو المهني المعتمدة للترقية (ص ٨):</span>
-                            <span id="pdDaysLabel" class="text-slate-300 font-mono">٥ أيام تدريبية</span>
+                            <span id="pdDaysLabel" class="text-white font-mono bg-emerald-950 px-2.5 py-0.5 rounded-lg border border-emerald-500/40">٥ أيام تدريبية</span>
                         </div>
-                        <input type="range" min="1" max="40" value="5" class="w-full accent-emerald-500 cursor-pointer"
-                            oninput="document.getElementById('pdDaysLabel').textContent = this.value + ' أيام'; document.getElementById('pdHoursOutput').textContent = (this.value * 5) + ' ساعة نمو معتمدة';">
+                        <input type="range" min="1" max="30" value="5" class="w-full accent-emerald-500 cursor-pointer"
+                            oninput="playSound('click'); document.getElementById('pdDaysLabel').textContent = this.value + ' أيام تدريبية'; document.getElementById('pdHoursOutput').textContent = (this.value * 5) + ' ساعة نمو معتمدة';">
                         <div class="text-center p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40">
-                            <span class="text-slate-400 text-xs">مجموع الساعات المحتسبة للترقي: </span>
+                            <span class="text-slate-300 text-xs">مجموع الساعات المحتسبة للترقي: </span>
                             <strong id="pdHoursOutput" class="text-emerald-400 font-mono text-base">٢٥ ساعة نمو معتمدة</strong>
-                            <span class="text-[10px] text-slate-500 block mt-0.5">(القاعدة النظامية: اليوم التدريبي الواحد = ٥ ساعات معتمدة)</span>
+                            <span class="text-[10px] text-slate-400 block mt-1">الجهات الـ ٧ المعتمدة (ص ٨): ١. وزارة التعليم ٢. الجامعات السعودية ٣. هيئة تقويم التعليم ٤. معهد الإدارة العامة ٥. الجامعات العالمية المعترف بها ٦. مركز الملك عبدالعزيز للحوار الوطني ٧. المؤسسة العامة للتدريب التقني والمهني.</span>
                         </div>
                     </div>
                 </div>`;
-            } else if (idx === 2) {
-                return `
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                    <!-- هرم ماسلو -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-amber-400 block text-sm">هرم ماسلو للحاجات والدوافع (ص ٣١):</strong>
-                        <p class="text-slate-400 text-[11px] leading-relaxed">تنتظم الحاجات الإنسانية في نظام تصاعدي أولوي يبدأ بإشباع الحاجة الأكثر إلحاحاً: "وأطعمهم من جوع وآمنهم من خوف".</p>
-                        <div class="flex flex-col items-center space-y-1.5 pt-1">
-                            <div class="w-2/5 p-1.5 text-center bg-purple-600 rounded-lg text-white font-bold text-[10px] shadow">٥. تحقيق الذات (الابتكار)</div>
-                            <div class="w-3/5 p-1.5 text-center bg-indigo-600 rounded-lg text-white font-bold text-[10px] shadow">٤. الحاجة للتقدير (الثقة والاحترام)</div>
-                            <div class="w-4/5 p-1.5 text-center bg-cyan-600 rounded-lg text-white font-bold text-[10px] shadow">٣. الحاجات الاجتماعية (الألفة والصداقة)</div>
-                            <div class="w-11/12 p-2 text-center bg-emerald-600 rounded-lg text-white font-bold text-[11px] shadow">٢. حاجات الأمان (السلامة والأمن الوظيفي والصحي)</div>
-                            <div class="w-full p-2.5 text-center bg-amber-600 rounded-lg text-white font-bold text-xs shadow">١. الحاجات الفسيولوجية (التنفس، الطعام، الماء، النوم) - القاعدة</div>
-                        </div>
-                    </div>
+            }
 
-                    <!-- مخروط إدجار ديل -->
+            // STATION 4 (idx === 3): CURRICULUM ENGINEERING & 11 TYPES
+            if (idx === 3) {
+                return `
+                <div class="space-y-4 text-xs">
                     <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-cyan-400 block text-sm">مخروط الخبرة لإدجار ديل (ص ٣٢):</strong>
-                        <p class="text-slate-400 text-[11px] leading-relaxed">نموذج لتوزيع وسائل التعليم وخبراتها بحسب درجة التجريد والواقعية:</p>
-                        <div class="space-y-2">
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-rose-500/30 text-rose-300">
-                                <strong class="block text-xs text-rose-400">القمة: الوسائل المجردة (خبرات مجردة)</strong>
-                                • الرموز اللفظية (الكلمات) • الرموز البصرية (الرسوم والمخططات).
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-indigo-500/30 text-indigo-300">
-                                <strong class="block text-xs text-indigo-400">الوسط: الوسائل شبه المحسوسة (خبرات ممثلة)</strong>
-                                • التسجيلات الصوتية والصور • الأفلام المتحركة • التلفزيون التعليمي • المعارض والمتاحف • الدراسات الميدانية • العروض العلمية.
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30 text-emerald-300">
-                                <strong class="block text-xs text-emerald-400">القاعدة: الوسائل المحسوسة (خبرات مباشرة فعلية)</strong>
-                                • الخبرات الممثلة • الخبرات المعدلة • الممارسة الواقعية المباشرة (أعلى درجات الواقعية).
-                            </div>
+                        <strong class="text-indigo-400 block text-sm font-cairo">مختبر أنواع المناهج الـ ١١ والفرق الجوهري بينها (ص ٣٥ - ٣٧) - اضغط على أي منهج لعرض تفاصيله:</strong>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button onclick="showInteractiveDetail('currDetailBox', '١. منهج المواد المنفصلة والمترابطة (ص ٣٥)', 'يركز على (المادة الدراسية) والمعرفة المنظمة من الأسهل للأصعب، ويُخطط له مسبقاً. أما المترابطة فيربط مادتين كالأدب والتاريخ مع بقائهما منفصلتين.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">١. المواد المنفصلة والمترابطة</button>
+                            <button onclick="showInteractiveDetail('currDetailBox', '٢. منهج المجالات الواسعة والمتكامل (ص ٣٥)', 'المجالات الواسعة يزيل الحواجز بدمج مواد في مجال واحد (كالمواد الاجتماعية). والمتكامل نوعان: تكامل أفقي (بين مادتين) وتكامل عمودي/رأسي/حلزوني (داخل المادة نفسها عبر المراحل كدرس الضوء).')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-indigo-300 font-bold">٢. الواسعة والمتكامل</button>
+                            <button onclick="showInteractiveDetail('currDetailBox', '٣. منهج النشاط - جون ديوي (ص ٣٦)', 'يركز على (الطالب) وميوله وحاجاته وإيجابيته؛ ولا يخطط له مسبقاً بل يعتمد على الأنشطة وطريقة المشروعات وحل المشكلات.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-emerald-500/40 text-emerald-300 font-bold">٣. منهج النشاط (ديوي)</button>
+                            <button onclick="showInteractiveDetail('currDetailBox', '٤. المنهج المحوري (ص ٣٦)', 'يركز على (المجتمع ومشكلاته)؛ جاء لتلافي قصور منهج النشاط، وله قسمان: برنامج تربوي عام (خبرات أساسية لجميع الطلاب) وبرنامج خاص (حسب ميول وقدرات كل طالب).')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-bold">٤. المنهج المحوري</button>
+                            <button onclick="showInteractiveDetail('currDetailBox', '٥. المنهج الحلزوني - برونر (ص ٣٦)', 'علاقة رأسية بين المفاهيم؛ يقدم المفهوم في كل مرحلة دراسية بعمق واتساع أكبر مما سبقه.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-cyan-500/40 text-cyan-300 font-bold">٥. الحلزوني (برونر)</button>
+                            <button onclick="showInteractiveDetail('currDetailBox', '٦. المنهج الخفي / المستتر (ص ٣٦)', 'خبرات وقيم وعادات يكتسبها الطالب بدون قصد وبدون تخطيط رسمي من خلال القدوة المدرسية والمواقف خارج المنهج المعلن.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-rose-500/40 text-rose-300 font-bold">٦. المنهج الخفي</button>
+                            <button onclick="showInteractiveDetail('currDetailBox', '٧. منهج الوحدات والإثرائي والتكنولوجي (ص ٣٧)', 'الوحدات: مشروع يدور حول موضوع أو مشكلة (مثل وحدة بر الوالدين بالروضة). الإثرائي: أنشطة إضافية للموهوبين. التكنولوجي: توظيف التقنية في التعلم.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-purple-500/40 text-purple-300 font-bold">٧. الوحدات والإثرائي</button>
+                            <button onclick="showInteractiveDetail('currDetailBox', 'التلخيص الذهبي للاختبار (ص ٣٧)', '• المنفصلة والمترابطة يركز على: (المادة الدراسية).<br>• النشاط والوحدات يركز على: (الطالب).<br>• المحوري يركز على: (المجتمع).<br>• التكاملي يركز على: (المشكلات).')" class="interactive-card p-2.5 rounded-xl bg-amber-500/20 border border-amber-400 text-amber-300 font-bold">⭐ خلاصة التركيز</button>
+                        </div>
+                        <div id="currDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
+                            <strong>التلخيص الذهبي (ص ٣٧):</strong> المنفصلة يركز على (المادة) • النشاط والوحدات يركز على (الطالب) • المحوري يركز على (المجتمع) • التكاملي يركز على (المشكلات).
                         </div>
                     </div>
                 </div>`;
-            } else if (idx === 4) {
+            }
+
+            // STATION 5 (idx === 4): EVALUATION & THE 4 ORIGINAL TEMPLATES (PAGES 40-56)
+            if (idx === 4) {
                 return `
                 <div class="space-y-4 text-xs">
                     <!-- المفاهيم الأساسية -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2 text-slate-300 leading-relaxed">
-                        <strong class="text-indigo-400 block text-sm">المثل التوضيحي للفرق بين القياس والتقييم والتقويم (ص ٤٠ - ٤١):</strong>
-                        "في اختبار سرعة القراءة حصل الطالب محمد على ٧ من ٢٠ وهذا التقدير ضعيف وينبغي متابعته وتخصيص آخر جزء من الحصة لتحسين أدائه":
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2.5 text-slate-300 leading-relaxed">
+                        <strong class="text-indigo-400 block text-sm font-cairo">الفرق التطبيقي بين القياس والتقييم والتقويم (مثال سرعة القراءة - ص ٤٠ و ٤١):</strong>
+                        <p class="text-[11px]">"في اختبار سرعة القراءة حصل الطالب محمد على ٧ من ٢٠ وهذا التقدير ضعيف وينبغي متابعته وتخصيص آخر جزء من الحصة لتحسين أدائه":</p>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 font-bold text-center">
-                            <div class="p-2 rounded-xl bg-cyan-950/50 border border-cyan-500/40 text-cyan-300">القياس (قيمة رقمية كمية): ٧ من ٢٠</div>
-                            <div class="p-2 rounded-xl bg-amber-950/50 border border-amber-500/40 text-amber-300">التقييم (وصف لفظي تشخيصي): ضعيف</div>
-                            <div class="p-2 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-emerald-300">التقويم (حكم وعلاج وتعديل): تخصيص وقت للعلاج</div>
+                            <div class="p-2.5 rounded-xl bg-cyan-950/50 border border-cyan-500/40 text-cyan-300">القياس (قيمة رقمية كمية): ٧ من ٢٠</div>
+                            <div class="p-2.5 rounded-xl bg-amber-950/50 border border-amber-500/40 text-amber-300">التقييم (وصف لفظي تشخيصي): ضعيف</div>
+                            <div class="p-2.5 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-emerald-300">التقويم (حكم وعلاج وإصلاح): خطة التحسين</div>
                         </div>
                     </div>
 
-                    <!-- النماذج الأصلية الأربعة -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-                            <span class="text-xs font-bold text-cyan-400">١. قائمة الشطب / الرصد (Checklist) - ص ٥٢:</span>
-                            <p class="text-slate-400 text-[11px]">رصد ثنائي قاطع بدون تدرج (نعم/لا - صح/خطأ) لملاحظة مهارة محددة مثل: تفحص المعادن وتصنيفها لفلز ولا فلز.</p>
+                    <!-- Interactive Viewer for the 4 Authentic Templates (Pages 52-55) -->
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                        <strong class="text-amber-400 block text-sm font-cairo">مستعرض النماذج الأربعة الأصلية لأدوات التقويم (ص ٥٢ - ٥٥) - اضغط لاستعراض الجدول الكامل:</strong>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="switchToolTab('checklist')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'checklist' ? 'bg-cyan-600 border-cyan-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">١. قائمة الشطب (ص ٥٢)</button>
+                            <button onclick="switchToolTab('rating')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'rating' ? 'bg-emerald-600 border-emerald-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">٢. سلم التقدير (ص ٥٣)</button>
+                            <button onclick="switchToolTab('anecdotal')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'anecdotal' ? 'bg-amber-600 border-amber-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">٣. السجل القصصي (ص ٥٤)</button>
+                            <button onclick="switchToolTab('learninglog')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'learninglog' ? 'bg-purple-600 border-purple-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">٤. سجل سير التعلم (ص ٥٥)</button>
                         </div>
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-                            <span class="text-xs font-bold text-emerald-400">٢. سلالم التقدير (Rating Scale) - ص ٥٣:</span>
-                            <p class="text-slate-400 text-[11px]">أداة قياس تشتمل على مستويات متدرجة (عددي: ١-٥ أو لفظي: ممتاز، جيد، ضعيف)، كمناظرة تنظيم الأسرة والزيادة السكانية.</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-                            <span class="text-xs font-bold text-amber-400">٣. بطاقة السجل القصصي (ص ٥٤):</span>
-                            <p class="text-slate-400 text-[11px]">وصف قصير موضوعي مدون من المعلم لملاحظة موقف واقعي يظهر تطور الطالب (مثل: تقرير أحمد عن الاستثمار بالمملكة).</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-                            <span class="text-xs font-bold text-purple-400">٤. سجل وصف سير التعلم (Learning Log) - ص ٥٥:</span>
-                            <p class="text-slate-400 text-[11px]">سجل منتظم يكتب فيه الطالب بنفسه انطباعاته وتأملاته الحرة حول ما شاهده أو تعلمه (مثل: انطباعات مسرحية مدرسية).</p>
+
+                        <div class="anim-fade p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                            ${selectedToolTab === 'checklist' ? `
+                                <div class="space-y-2">
+                                    <strong class="text-cyan-400 block">١. قائمة الرصد / الشطب (Check List) - ص ٥٢:</strong>
+                                    <p class="text-slate-300 text-[11px]">قوائم ثنائية قاطعة: (يا أبيض يا أسود، يا موجود يا غير موجود، لا يوجد فيها تدرج نهائياً) مثل: (نعم / لا) أو (صح / خطأ). الموقف التعليمي: تفحص الطالب لمجموعة من المعادن وتحديد خصائصها الفيزيائية (٨ فقرات):</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-slate-300 pt-1">
+                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>١. يصنف المعدن إلى فلز ولافلز حسب لمعانه</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
+                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>٢. يحدد اللون لسطح حديث القطع</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
+                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>٣. يحدد لون مسحوق المعدن بحكه بخزف</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
+                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>٤. يصنف المعدن حسب قساوته</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
+                                    </div>
+                                </div>
+                            ` : selectedToolTab === 'rating' ? `
+                                <div class="space-y-2">
+                                    <strong class="text-emerald-400 block">٢. سلالم التقدير (Rating Scale) - ص ٥٣:</strong>
+                                    <p class="text-slate-300 text-[11px]">أداة تقويم بسيطة تظهر فيها المهارة بتدرج من عدة مستويات (عددي: ١-٥ أو لفظي: عالية جداً، عالية، متوسطة، منخفضة، منخفضة جداً). مثال الملزمة: مناظرة الصف الثانوي في الجغرافيا حول الزيادة السكانية وتنظيم الأسرة بين مجموعة (أ) ومجموعة (ب).</p>
+                                </div>
+                            ` : selectedToolTab === 'anecdotal' ? `
+                                <div class="space-y-2">
+                                    <strong class="text-amber-400 block">٣. السجل القصصي (Anecdotal Records) - ص ٥٤:</strong>
+                                    <p class="text-slate-300 text-[11px]">وصف قصير موضوعي مدوّن من المعلم يسجل فيه ما يفعله المتعلم والحالة التي تمت عندها الملاحظة. مثال الملزمة: بطاقة ملاحظة الطالب (أحمد) في مادة التربية الوطنية وكتابته تقريراً متميزاً عن "الاستثمار في المملكة العربية السعودية" بالاستعانة بالإنترنت.</p>
+                                </div>
+                            ` : `
+                                <div class="space-y-2">
+                                    <strong class="text-purple-400 block">٤. سجل وصف سير التعلم (Learning Log) - ص ٥٥:</strong>
+                                    <p class="text-slate-300 text-[11px]">سجل منظم يكتب فيه الطالب بنفسه عبر الوقت عبارات وانطباعات حرة حول أمور قرأها أو شاهدها، ويجمعه المعلم دورياً ويعلق عليه. مثال الملزمة: تسجيل انطباعات طالب عن مسرحية مدرسية شاهدها.</p>
+                                </div>
+                            `}
                         </div>
                     </div>
                 </div>`;
-            } else if (idx === 6) {
+            }
+
+            // STATION 6 (idx === 5): THINKING SKILLS
+            if (idx === 5) {
                 return `
                 <div class="space-y-4 text-xs">
-                    <!-- نافذة جوهاري للتأمل الذاتي -->
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                        <strong class="text-indigo-400 block text-sm font-cairo">مختبر مهارات التفكير الإبداعي الست (ص ٥٨ - ٥٩) - اضغط على المهارة لعرض أمثلتها الحرفية:</strong>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                            <button onclick="showInteractiveDetail('thinkDetailBox', '١. الطلاقة وأنواعها الخمسة (ص ٥٨-٥٩)', 'توليد أكبر عدد من الأفكار والبدائل بسرعة وسهولة (الكم أهم من الكيف). أنواعها الـ ٥: ١. لفظية (حيوانات آكلات أعشاب في نصف دقيقة) ٢. فكرية/معاني (استخدامات قرص CD) ٣. طلاقة التداعي (مرادفات كلمة الأسد) ٤. طلاقة الأشكال ٥. طلاقة تعبيرية.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-indigo-500/40 text-indigo-300 font-bold">١. الطلاقة (الكم والغزارة)</button>
+                            <button onclick="showInteractiveDetail('thinkDetailBox', '٢. المرونة (ص ٥٨)', 'توليد أفكار متنوعة وتغيير الوجهة الذهنية (تهتم بالكيف ونوعية الفكرة). مثال الملزمة: ما هي الاستخدامات المتنوعة لمشط الشعر؟')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-emerald-300 font-bold">٢. المرونة (التنوع والكيف)</button>
+                            <button onclick="showInteractiveDetail('thinkDetailBox', '٣. الأصالة (ص ٥٨)', 'التفرد والندرة والجدة في توليد أفكار غير مألوفة وغير مكررة (أكثر المهارات ارتباطاً بالإبداع). مثال الملزمة: اذكر ٣ طرق لفتح الكتاب دون لمسه / استخدامات غريبة لقلم الرصاص.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-bold">٣. الأصالة (الجدة والندرة)</button>
+                            <button onclick="showInteractiveDetail('thinkDetailBox', '٤. الإفاضة / التوسع (ص ٥٩)', 'إضافة تفاصيل جديدة ومتنوعة لفكرة أو شكل لتطويره. مثال الملزمة: ما هي الرموز التي يمكن إضافتها للخريطة لتجعل قراءتها أكثر سهولة؟')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-cyan-500/40 text-cyan-300 font-bold">٤. الإفاضة (إضافة تفاصيل)</button>
+                            <button onclick="showInteractiveDetail('thinkDetailBox', '٥. الحساسية للمشكلات و ٦. التخيل (ص ٥٩)', '• الحساسية للمشكلات: الخطوة الأولى من مهارات التفكير الإبداعي وتعني الوعي بوجود مشكلة.<br>• التخيل: إطلاق العنان للأفكار بلا قيود وهو أعلى مستويات الإبداع وأندرها.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-purple-500/40 text-purple-300 font-bold">٥. الحساسية والتخيل</button>
+                            <button onclick="showInteractiveDetail('thinkDetailBox', 'خطوات حل المشكلات الـ ٧ بالترتيب (ص ٦٠)', '١. الشعور بالمشكلة -> ٢. جمع المعلومات -> ٣. وضع الفروض -> ٤. فحص الفروض -> ٥. اختيار الحل المناسب -> ٦. تطبيق الحل -> ٧. الوصول إلى النتائج.')" class="interactive-card p-3 rounded-xl bg-rose-950/40 border border-rose-500/40 text-rose-300 font-bold">٧ خطوات حل المشكلات</button>
+                        </div>
+                        <div id="thinkDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
+                            اضغط على أي مهارة أعلاه لعرض أمثلة الملزمة الدقيقة (ص ٥٨ - ٦٠).
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // STATION 7 (idx === 6): LEAVES, TEACHER EVALUATION & JOHARI WINDOW
+            if (idx === 6) {
+                return `
+                <div class="space-y-4 text-xs">
+                    <!-- نافذة جوهاري التفاعلية -->
                     <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
                         <div class="flex items-center justify-between">
-                            <strong class="text-amber-400 text-sm">أداة التأمل والتقويم الذاتي: نافذة جوهاري (ص ٦٩):</strong>
-                            <span class="text-[10px] text-slate-400">من أهم أدوات تقويم أداء المعلم</span>
+                            <strong class="text-amber-400 text-sm font-cairo">أداة التأمل والتقويم الذاتي التفاعلية: نافذة جوهاري (ص ٦٩) - اضغط على أي منطقة:</strong>
+                            <span class="text-[10px] text-slate-400">اضغط للتفاصيل</span>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 text-center font-bold">
-                            <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-200">
-                                <span class="block text-xs font-bold text-emerald-400">المنطقة المفتوحة</span>
-                                <span class="text-[10px] opacity-80">تعرفها أنت ويعرفها الآخرون عنك</span>
-                            </div>
-                            <div class="p-3 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-200">
-                                <span class="block text-xs font-bold text-rose-400">المنطقة العمياء</span>
-                                <span class="text-[10px] opacity-80">لا تعرفها أنت ويعرفها الآخرون عنك</span>
-                            </div>
-                            <div class="p-3 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-cyan-200">
-                                <span class="block text-xs font-bold text-cyan-400">المنطقة الخفية (القناع)</span>
-                                <span class="text-[10px] opacity-80">تعرفها أنت ولا يعرفها الآخرون عنك</span>
-                            </div>
-                            <div class="p-3 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-200">
-                                <span class="block text-xs font-bold text-purple-400">المنطقة المجهولة</span>
-                                <span class="text-[10px] opacity-80">لا تعرفها أنت ولا يعرفها الآخرون عنك</span>
-                            </div>
+                        <div class="grid grid-cols-2 gap-2.5 text-center font-bold">
+                            <button onclick="showInteractiveDetail('johariDetailBox', '١. المنطقة المفتوحة (ص ٦٩)', 'هي المساحة التي تعرفها أنت عن نفسك ويعرفها الآخرون عنك (تواصل واضح وشفاف بين المعلم وزملائه وطلابه).')" class="interactive-card p-3.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-200">
+                                <span class="block text-xs font-bold text-emerald-400">١. المنطقة المفتوحة</span>
+                                <span class="text-[10px] opacity-85">تعرفها أنت ويعرفها الآخرون عنك</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('johariDetailBox', '٢. المنطقة العمياء (ص ٦٩ - سؤال اختبار مكرر)', 'هي المساحة التي لا تعرفها أنت عن نفسك ولكن يعرفها ويلاحظها الآخرون فيك (مثل لزمة لفظية أو نبرة صوت مرتفعة يلاحظها الطلاب والمشرف).')" class="interactive-card p-3.5 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-200">
+                                <span class="block text-xs font-bold text-rose-400">٢. المنطقة العمياء</span>
+                                <span class="text-[10px] opacity-85">لا تعرفها أنت ويعرفها الآخرون عنك</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('johariDetailBox', '٣. المنطقة الخفية / القناع (ص ٦٩)', 'هي الأسرار والسمات التي تعرفها أنت عن نفسك وتخفيها بحيث لا يعرفها الآخرون عنك.')" class="interactive-card p-3.5 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-cyan-200">
+                                <span class="block text-xs font-bold text-cyan-400">٣. المنطقة الخفية (القناع)</span>
+                                <span class="text-[10px] opacity-85">تعرفها أنت ولا يعرفها الآخرون عنك</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('johariDetailBox', '٤. المنطقة المجهولة (ص ٦٩)', 'هي القدرات والسمات الكامنة التي لا تعرفها أنت عن نفسك ولا يعرفها الآخرون عنك بعد.')" class="interactive-card p-3.5 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-200">
+                                <span class="block text-xs font-bold text-purple-400">٤. المنطقة المجهولة</span>
+                                <span class="text-[10px] opacity-85">لا تعرفها أنت ولا يعرفها الآخرون عنك</span>
+                            </button>
+                        </div>
+                        <div id="johariDetailBox" class="p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-slate-200">
+                            اضغط على أي مربع في نافذة جوهاري أعلاه، أو راجع أنواع المعلمين الأربعة (التقليدي، المرشد، الميسر، المفوض - ص ٧٠).
                         </div>
                     </div>
 
-                    <!-- لائحة الإجازات الرسمية -->
+                    <!-- لائحة الإجازات الرسمية الـ ٩ -->
                     <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-                        <strong class="text-indigo-400 block text-sm">لائحة الإجازات الرسمية للمعلمين (ص ٦٦):</strong>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-slate-300 text-[11px]">
-                            <div class="p-2 rounded bg-slate-950 border border-slate-800"><strong>الاضطرارية:</strong> ٥ أيام بالسنة الميلادية.</div>
-                            <div class="p-2 rounded bg-slate-950 border border-slate-800"><strong>المرضية:</strong> سنتان (٦ أشهر براتب، ٦ بنصف، سنة بربع).</div>
-                            <div class="p-2 rounded bg-slate-950 border border-slate-800"><strong>الوضع:</strong> ٧٠ يوماً براتب كامل.</div>
-                            <div class="p-2 rounded bg-slate-950 border border-slate-800"><strong>رعاية مولود:</strong> حتى ٣ سنوات بربع راتب.</div>
-                            <div class="p-2 rounded bg-slate-950 border border-slate-800"><strong>أبوة:</strong> ٣ أيام للأب عند المولود.</div>
-                            <div class="p-2 rounded bg-slate-950 border border-slate-800"><strong>الوفاة:</strong> ٥ أيام (العدة: ٤ أشهر و ١٠ أيام براتب).</div>
+                        <strong class="text-indigo-400 block text-sm font-cairo">لائحة الإجازات الرسمية الـ ٩ للمعلمين والمعلمات (ص ٦٦):</strong>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300 text-[11px]">
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>١. الاضطرارية:</strong> ٥ أيام بالسنة الميلادية بموافقة قائد المدرسة.</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٢. المرضية:</strong> سنتان (٦ أشهر براتب، ٦ بنصف، سنة بربع راتب).</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٣. الوضع:</strong> ٧٠ يوماً براتب كامل، ورعاية مولود حتى ٣ سنوات بربع راتب.</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٤. المولود للأب:</strong> ٣ أيام براتب كامل.</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٥. الوفاة والعدة:</strong> ٥ أيام للدرجات ١-٣، وعدة المتوفى زوجها ٤ أشهر و١٠ أيام براتب.</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٦. الاستثنائية والاعتيادية:</strong> الاستثنائية سنتان كل ٥ سنوات بلا راتب، والاعتيادية ألا تقل عن ٣٦ يوماً.</div>
                         </div>
                     </div>
                 </div>`;
-            } else if (idx === 15) {
+            }
+
+            // STATION 11 (idx === 10): BLOOM'S INTERACTIVE PYRAMID & BEHAVIORAL OBJECTIVES (PAGES 94-108)
+            if (idx === 10) {
+                const activeBloom = BLOOM_LEVELS.find(b => b.id === selectedBloomId) || BLOOM_LEVELS[5];
+                return `
+                <div class="space-y-4 text-xs">
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                            <div>
+                                <strong class="text-indigo-400 block text-sm sm:text-base font-cairo">هرم بلوم التفاعلي للأهداف المعرفية الستة (ص ٩٩ - ١٠٦)</strong>
+                                <span class="text-[11px] text-slate-400">اضغط على أي مستوى في هرم بلوم لعرض الأفعال السلوكية والأمثلة الواردة في الملزمة:</span>
+                            </div>
+                            <span class="px-2 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold">٦ مستويات</span>
+                        </div>
+
+                        <div class="flex flex-col items-center space-y-1.5 py-1 select-none">
+                            ${[...BLOOM_LEVELS].reverse().map((lvl, i) => {
+                                const widths = ['w-6/12', 'w-7/12', 'w-8/12', 'w-9/12', 'w-10/12', 'w-full'];
+                                const colors = {
+                                    rose: 'from-rose-700 to-rose-500',
+                                    purple: 'from-purple-700 to-purple-500',
+                                    amber: 'from-amber-700 to-amber-500',
+                                    cyan: 'from-cyan-700 to-cyan-500',
+                                    emerald: 'from-emerald-700 to-emerald-500',
+                                    slate: 'from-slate-700 to-slate-600'
+                                };
+                                return `
+                                <button onclick="selectBloomLevel(${lvl.id})" class="maslow-tier ${widths[i]} p-2.5 rounded-xl bg-gradient-to-r ${colors[lvl.color]} text-white font-bold text-xs shadow border-2 ${selectedBloomId === lvl.id ? 'border-white scale-105 ring-2 ring-indigo-400' : 'border-white/20 opacity-85'}">
+                                    ${lvl.name} — <span class="font-normal text-[10px] opacity-90">${lvl.type}</span>
+                                </button>`;
+                            }).join('')}
+                        </div>
+
+                        <div class="anim-fade p-3.5 rounded-xl bg-slate-950 border-2 border-indigo-500/50 space-y-2">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                                <strong class="text-white text-sm font-cairo">${activeBloom.name}</strong>
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-bold">${activeBloom.type}</span>
+                            </div>
+                            <p class="text-amber-300 font-bold text-[11px]">الأفعال المفتاحية: ${activeBloom.verbs}</p>
+                            <p class="text-slate-300 text-xs"><strong>أمثلة الملزمة والتجميعات:</strong> ${activeBloom.ex}</p>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-200 text-[11px]">
+                            <strong>أفعال غير قابلة للقياس والملاحظة لا تصلح في الهدف السلوكي (ص ٩٦):</strong> (يلم، ينمي، يدرك، يستوعب، يفهم، يعرف، يكسب، يفكر، يقدر، يتذوق، يتأمل). ومعادلة الهدف السلوكي: <span class="text-white font-bold">أن + فعل سلوكي مضارع يقاس + الطالب + المصطلح العلمي + الحد الأدنى للأداء.</span>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // STATION 16 (idx === 15): FULL TRACEABILITY MATRIX & 68 TERMS (PAGES 1-241)
+            if (idx === 15) {
                 return `
                 <div class="space-y-4 text-xs">
                     <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-amber-400 block text-sm">مصفوفة التتبع والتدقيق الشاملة للملزمة الكاملة (٢٤١ صفحة):</strong>
-                        <p class="text-slate-300 leading-relaxed text-[11px]">تم تدقيق كامل محتوى ملف الـ PDF الأصلي لإعداد الأستاذ مخلد الروقي، وتوثيق جميع موضوعاته الـ ٢٩:</p>
+                        <strong class="text-amber-400 block text-sm font-cairo">مصفوفة التتبع والتدقيق الشاملة للملزمة الكاملة (٢٤١ صفحة) - اضغط على أي صف للانتقال للمحطة:</strong>
+                        <p class="text-slate-300 leading-relaxed text-[11px]">تم تدقيق كامل محتوى ملف الـ PDF الأصلي لإعداد الأستاذ مخلد الروقي، وتوثيق جميع موضوعاته الـ ٢٩ والـ ٦٨ مصطلحاً (ص ١٦٦):</p>
                         
                         <div class="overflow-x-auto">
                             <table class="w-full text-right border-collapse text-[11px]">
@@ -861,181 +1442,195 @@
                                     <tr class="bg-slate-950 text-indigo-400 border-b border-slate-800">
                                         <th class="p-2">نطاق الصفحات</th>
                                         <th class="p-2">الدرس / القسم في الملزمة</th>
-                                        <th class="p-2">المحطة المقابلة</th>
+                                        <th class="p-2">انتقال سريع</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-800 text-slate-300">
-                                    <tr><td class="p-2 font-mono">ص ٦ - ١١</td><td class="p-2">الدرس ١: دورة النمو المهني</td><td class="p-2 text-indigo-400 font-bold">محطة ١</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ١٢ - ٣٠</td><td class="p-2">الدرس ٢: نظريات التعلم الكبرى وأريكسون</td><td class="p-2 text-indigo-400 font-bold">محطة ٢</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٣١ - ٣٢</td><td class="p-2">ماسلو ومخروط الخبرة لديل</td><td class="p-2 text-indigo-400 font-bold">محطة ٣</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٣٣ - ٣٩</td><td class="p-2">الدرس ٣: المنهج المدرسي</td><td class="p-2 text-indigo-400 font-bold">محطة ٤</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٤٠ - ٥٦</td><td class="p-2">الدرس ٤: التقويم والقياس والنماذج</td><td class="p-2 text-indigo-400 font-bold">محطة ٥</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٥٧ - ٦٥</td><td class="p-2">الدرس ٥: أنواع التفكير</td><td class="p-2 text-indigo-400 font-bold">محطة ٦</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٦٦ - ٧١</td><td class="p-2">الدرس ٦ و ٧: الإجازات وتقويم المعلم وجوهاري</td><td class="p-2 text-indigo-400 font-bold">محطة ٧</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٧٢ - ٧٩</td><td class="p-2">الدرس ٨: علم نفس النمو</td><td class="p-2 text-indigo-400 font-bold">محطة ٨</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٨٠ - ٨٩</td><td class="p-2">الدرس ٩: قواعد السلوك والمواظبة</td><td class="p-2 text-indigo-400 font-bold">محطة ٩</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٩٠ - ٩٣</td><td class="p-2">الدرس ١٠ و ١١: الندب والإثارة العشوائية</td><td class="p-2 text-indigo-400 font-bold">محطة ١٠</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ٩٤ - ١٠٨</td><td class="p-2">الدرس ١٢: الأهداف السلوكية وهرم بلوم</td><td class="p-2 text-indigo-400 font-bold">محطة ١١</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ١٠٩ - ١٣١</td><td class="p-2">الدرس ١٣: استراتيجيات التدريس</td><td class="p-2 text-indigo-400 font-bold">محطة ١٢</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ١٣٢ - ١٣٥</td><td class="p-2">الدرس ١٤: البيئة الصفية وإدارة الصف</td><td class="p-2 text-indigo-400 font-bold">محطة ١٣</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ١٣٦ - ١٣٩</td><td class="p-2">الدرس ١٥ و ١٦: البحث الإجرائي وتعديل السلوك</td><td class="p-2 text-indigo-400 font-bold">محطة ١٤</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ١٤٠ - ١٦١</td><td class="p-2">الدروس ١٧ إلى ٢٤: الفروق وصعوبات التعلم والاختبارات</td><td class="p-2 text-indigo-400 font-bold">محطة ١٥</td></tr>
-                                    <tr><td class="p-2 font-mono">ص ١٦٢ - ٢٤١</td><td class="p-2">الـ ٦٨ مصطلحاً وبنك التجميعات الكبرى</td><td class="p-2 text-indigo-400 font-bold">موزعة بالمحطات</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(0)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١ - ١١</td><td class="p-2">المقدمة + الدرس ١: دورة النمو المهني</td><td class="p-2 text-indigo-400 font-bold">محطة ١ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(1)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٢ - ٣٠</td><td class="p-2">الدرس ٢: نظريات التعلم الكبرى وأريكسون</td><td class="p-2 text-indigo-400 font-bold">محطة ٢ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(2)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٣١ - ٣٢</td><td class="p-2">هرم ماسلو التفاعلي ومخروط الخبرة لديل</td><td class="p-2 text-indigo-400 font-bold">محطة ٣ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(3)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٣٣ - ٣٩</td><td class="p-2">الدرس ٣: المنهج المدرسي وأنواعه الـ ١١</td><td class="p-2 text-indigo-400 font-bold">محطة ٤ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(4)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٤٠ - ٥٦</td><td class="p-2">الدرس ٤: التقويم والقياس والنماذج الـ ٤</td><td class="p-2 text-indigo-400 font-bold">محطة ٥ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(5)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٥٧ - ٦٥</td><td class="p-2">الدرس ٥: أنواع التفكير الإبداعي والناقد</td><td class="p-2 text-indigo-400 font-bold">محطة ٦ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(6)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٦٦ - ٧١</td><td class="p-2">الدرس ٦ و ٧: الإجازات وتقويم المعلم وجوهاري</td><td class="p-2 text-indigo-400 font-bold">محطة ٧ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(7)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٧٢ - ٧٩</td><td class="p-2">الدرس ٨: علم نفس النمو وخصائص المراحل</td><td class="p-2 text-indigo-400 font-bold">محطة ٨ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(8)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٨٠ - ٨٩</td><td class="p-2">الدرس ٩: قواعد السلوك والمواظبة والعقد</td><td class="p-2 text-indigo-400 font-bold">محطة ٩ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(9)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٩٠ - ٩٣</td><td class="p-2">الدرس ١٠ و ١١: الندب والإثارة العشوائية</td><td class="p-2 text-indigo-400 font-bold">محطة ١٠ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(10)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٩٤ - ١٠٨</td><td class="p-2">الدرس ١٢: الأهداف السلوكية وهرم بلوم</td><td class="p-2 text-indigo-400 font-bold">محطة ١١ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(11)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٠٩ - ١٣١</td><td class="p-2">الدرس ١٣: استراتيجيات التدريس الحديثة</td><td class="p-2 text-indigo-400 font-bold">محطة ١٢ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(12)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٣٢ - ١٣٥</td><td class="p-2">الدرس ١٤: البيئة الصفية وإدارة الصف</td><td class="p-2 text-indigo-400 font-bold">محطة ١٣ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(13)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٣٦ - ١٣٩</td><td class="p-2">الدرس ١٥ و ١٦: البحث الإجرائي وتعديل السلوك</td><td class="p-2 text-indigo-400 font-bold">محطة ١٤ ⬅</td></tr>
+                                    <tr onclick="playSound('open'); jumpToStation(14)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٤٠ - ١٦١</td><td class="p-2">الدروس ١٧ إلى ٢٧: الفروق وصعوبات التعلم والاختبارات</td><td class="p-2 text-indigo-400 font-bold">محطة ١٥ ⬅</td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>`;
-            } else {
-                return `
-                <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-300 leading-relaxed space-y-2">
-                    <div class="font-bold text-white text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-book-bookmark text-indigo-400"></i>
-                        <span>ملخص معايير المحطة (${STATIONS[idx].shortTitle}):</span>
-                    </div>
-                    <p>${STATIONS[idx].subtitle}</p>
-                    <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400">
-                        مرجع المحتوى: ملزمة النمو المهني الشاملة لاختبار الرخصة المهنية - إعداد أ. مخلد الروقي (${STATIONS[idx].pages}).
-                    </div>
-                </div>`;
             }
+
+            // REMAINING STATIONS (7, 8, 9, 11, 12, 13, 14) WITH INTERACTIVE CARDS
+            const extraCards = {
+                7: [
+                    { t: "الفرق بين النمو والنضج والتعلم (ص ٧٢)", d: "• النمو: تغيرات بسبب التعلم والنضج معاً.<br>• النضج: تغيرات بيولوجية وراثية في أجهزة الجسم لا دخل للبيئة بها.<br>• التعلم: تغيرات في السلوك بفعل التفاعل مع البيئة." },
+                    { t: "البيئة الرحمية وخصائص الروضة والابتدائي (ص ٧٣-٧٦)", d: "• مرحلة الحمل (ما قبل الميلاد): أشد المراحل خطورة وحرجاً.<br>• الروضة (٣-٥): مرحلة السؤال والخيال الحسي.<br>• الابتدائية (٦-١٢): الطفولة الهادئة، تفكير حسي مادي، والصفوف العليا (٩-١٢) أنسب مرحلة للتطبيع الاجتماعي." },
+                    { t: "خصائص المرحلة المتوسطة والثانوية (ص ٧٦-٧٧)", d: "• المتوسطة (١٢-١٤ المراهقة المبكرة): طفرة النمو الجسمي، انفعالات عنيفة متذبذبة، التمرد وصعوبة التوافق مع السلطة.<br>• الثانوية (١٥-١٧ المراهقة الوسطى): النضج الفكري والتفكير المجرد." }
+                ],
+                8: [
+                    { t: "درجات مخالفات المتوسط والثانوي الست (ص ٨٠-٨٥)", d: "• الأولى: الزي والطابور (تنبيه شفوي، وفي المرة ٥ حسم درجة).<br>• الثانية: الفوضى والغش والهروب (حسم درجتين).<br>• الثالثة: المضاربة والتهاون بالصلاة والتوقيع عن ولي الأمر (حسم ٣ درجات).<br>• الرابعة: الإصرار على ترك الصلاة والتدخين وتصوير الطلاب (حسم ١٠ درجات).<br>• الخامسة: السلاح الحاد، إشعال النار، التحرش (حسم ١٥ درجة وشهر حرمان).<br>• السادسة: الاستهزاء بالدين، المخدرات، الابتزاز." },
+                    { t: "حسم المواظبة والغياب والتعاقد السلوكي (ص ٨٧-٨٨)", d: "• غياب يوم عادي بدون عذر: حسم نصف درجة.<br>• الغياب في الأسبوع الذي يسبق الإجازة أو الاختبارات أو أول أسبوع بعد الإجازة: حسم درجة كاملة عن كل يوم.<br>• التأخر الصباحي: حسم ربع درجة بعد المرة الثالثة." }
+                ],
+                9: [
+                    { t: "أنصبة الحصص وضوابط الندب الكلي والجزئي (ص ٩٠-٩١)", d: "• التعليم العام: الممارس ٢٤، المتقدم ٢٢، الخبير ١٨ (التربية الخاصة: ١٨، ١٦، ١٤).<br>• أقصى مدارس للندب غير مدرسته الأصلية: مدرستان (مجموع ٣ مدارس بنصاب ١٨ حصة، أو مدرستان بنصاب ٢٠ حصة).<br>• حافز الندب الجزئي: إذا بلغ نصابه ١٦ حصة فأكثر يعفى من الإشراف والاحتياط والنشاط." },
+                    { t: "طريقة الإثارة العشوائية (ص ٩٢-٩٣)", d: "إحدى طرق التدريس الإبداعي لتحريك الدماغ وإيجاد علاقات وروابط بين أشياء لا توجد بينها علاقة أصلاً (مثل: علاقة التعلم بالبيتزا، أو الوطن بالمخزن). عيبها: تستغرق وقتاً طويلاً." }
+                ],
+                11: [
+                    { t: "الاستراتيجية والطريقة والأسلوب والمدخل (ص ١١٩)", d: "• الاستراتيجية: خطة شاملة منظمة من الإجراءات.<br>• الطريقة: آليات تنفيذ الدرس.<br>• الأسلوب: الأنماط الخاصة بشخصية المعلم.<br>• المدخل: الأسس والمبادئ التي تستند إليها الطريقة." },
+                    { t: "أهم الاستراتيجيات في التجميعات (ص ١١٠-١٣١)", d: "• KWL: ماذا أعرف، ماذا أريد أن أعرف، ماذا تعلمت.<br>• 4H: (Head العقل، Hand اليد، Heart القلب، Heat الحماس) وتستخدم غالباً نهاية الدرس.<br>• شكل V: تربط بين البنائية ونظرية أوزبل.<br>• الصف المقلوب، التدريس التبادلي، والرحلات المعرفية WebQuest." }
+                ],
+                12: [
+                    { t: "إدارة الصف مقابل ضبط الصف (ص ١٣٢-١٣٥)", d: "• إدارة الصف أشمل من ضبط الصف؛ وتعتمد على توفير المناخ الاجتماعي والانفعالي الآمن.<br>• أنجح ممارسة لتعريف الطلاب بالقواعد الصفية: إشراكهم المبكر والفاعل في وضعها وصياغتها.<br>• التعامل مع السلوك غير المرغوب لأول مرة: التجاهل المقصود أو التوجيه الفردي بعد الحصة." }
+                ],
+                13: [
+                    { t: "أساليب تعديل السلوك في التجميعات (ص ١٣٧-١٣٩)", d: "• التصحيح الزائد: إصلاح التالف بأفضل مما كان.<br>• تكلفة الاستجابة: سحب معزز أو دفع غرامة كإحضار لوح زجاج بديل.<br>• الغمر والإغراق: تعريض الطالب لموقف مفزع دون تدرج.<br>• التحصين التدريجي (السحب التدريجي): إزالة الخوف بالتدريج.<br>• الاقتصاد الرمزي: بطاقات أو نجوم تستبدل بمكافآت عينية.<br>• مبدأ بريماك: استخدام سلوك محبب كاللعب لتعزيز سلوك أقل رغبة." }
+                ],
+                14: [
+                    { t: "الفرق بين صعوبات التعلم وبطء التعلم والتأخر الدراسي (ص ١٤٦-١٥٠)", d: "• صعوبات التعلم (الإعاقة الخفية): ذكاء عادي أو مرتفع مع صعوبة نوعية في القراءة (ديسلكسيا) أو الكتابة (ديسجرافيا) أو الحساب (ديسكلكوليا)، ويقدم لهم الدعم في غرفة المصادر.<br>• بطء التعلم: انخفاض في الذكاء وجميع المواد.<br>• التأخر الدراسي: ذكاء عادي وانخفاض في جميع المواد بسبب إهمال أو ظروف أسرية." },
+                    { t: "الفروق الفردية والذكاء والاختبارات (ص ١٤٠-١٦٠)", d: "• الفروق الفردية: اختلافات كمية في الدرجة وليس في النوع، وأوسع مدى لها في السمات الشخصية وأقل مدى في العقلية.<br>• معامل التمييز الجيد للفقرة الاختبارية: ٠.٣٠ فأكثر." }
+                ]
+            };
+
+            const cards = extraCards[idx] || [];
+            return `
+            <div class="space-y-3 text-xs">
+                ${cards.map(c => `
+                    <div onclick="playSound('pop')" class="interactive-card p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1.5">
+                        <strong class="text-indigo-400 block text-sm font-cairo"><i class="fa-solid fa-bookmark ml-1.5"></i>${c.t}</strong>
+                        <p class="text-slate-200 leading-relaxed text-xs">${c.d}</p>
+                    </div>
+                `).join('')}
+            </div>`;
         }
 
-        // 8. SPECIFIC SUB-TAB CONTENT FOR STATION 2 (EXACT RESTORATION OF SCREENSHOT)
+        // 11. SPECIFIC SUB-TAB CONTENT FOR STATION 2 (LEARNING THEORIES & ERIKSON'S 8 STAGES)
         function switchSchoolTab(tabName) {
             activeSchoolTab = tabName;
             ['behavioral', 'cognitive', 'constructivist', 'social', 'erikson'].forEach(t => {
                 const btn = document.getElementById(`tab_${t}`);
                 if (btn) {
                     if (t === tabName) {
-                        btn.className = "px-2.5 py-1.5 rounded-lg border text-xs font-bold transition bg-indigo-600 border-indigo-400 text-white shadow-md";
+                        btn.className = "interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold bg-indigo-600 border-indigo-400 text-white shadow-md";
                     } else {
-                        btn.className = "px-2.5 py-1.5 rounded-lg border text-xs font-bold transition bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200";
+                        btn.className = "interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200";
                     }
                 }
             });
-            document.getElementById('schoolTabBody').innerHTML = getSchoolTabContent(tabName);
+            const body = document.getElementById('schoolTabBody');
+            body.classList.remove('anim-fade');
+            void body.offsetWidth;
+            body.classList.add('anim-fade');
+            body.innerHTML = getSchoolTabContent(tabName);
         }
 
         function getSchoolTabContent(tabName) {
             switch(tabName) {
-                case 'erikson':
-                    // EXACT VISUAL STRUCTURE SHOWN IN THE USER'S SCREENSHOT
+                case 'erikson': {
+                    const activeStage = ERIKSON_STAGES.find(s => s.id === selectedEriksonId) || ERIKSON_STAGES[3];
                     return `
-                    <div class="space-y-3 pt-1">
-                        <!-- Orange Info Bar (Screenshot Fidelity) -->
+                    <div class="space-y-3.5 pt-1">
                         <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-600/50 text-amber-200 leading-relaxed text-[11px]">
-                            <strong class="text-amber-400 block mb-0.5">نظرية النمو النفسي الاجتماعي لإريك أريكسون - ص ٢٣:</strong>
+                            <strong class="text-amber-400 block mb-0.5">نظرية النمو النفسي الاجتماعي لإريك أريكسون - ص ٢٣ (اضغط على أي مرحلة من الـ ٨ لعرض أزمتها وتفاصيلها):</strong>
                             أحد تلاميذ فرويد؛ كان فرويد يرى أن كل خطأ في التعلم بسبب شخص آخر، بينما يرى أريكسون أن كل خطأ بسبب الشخص نفسه وهو المسؤول عنه، وقسم النمو لـ <strong>٨ مراحل</strong> في كل مرحلة أزمة يجب حلها:
                         </div>
 
-                        <!-- 8 Stages Grid (Exact 8 Cards with Colors and Labels from Screenshot) -->
+                        <!-- 8 Interactive Stages Grid -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-center text-xs">
-                            <!-- Stage 1 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-indigo-500/40 hover:border-indigo-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-white text-[11px] leading-tight">١. الثقة مقابل عدم الثقة</span>
-                                <span class="text-[10px] text-indigo-300 mt-1">(من الميلاد - سنتين)</span>
-                            </div>
-                            <!-- Stage 2 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-indigo-500/40 hover:border-indigo-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-white text-[11px] leading-tight">٢. الاستقلال مقابل الخجل</span>
-                                <span class="text-[10px] text-indigo-300 mt-1">(٢ - ٤ سنوات)</span>
-                            </div>
-                            <!-- Stage 3 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-emerald-500/40 hover:border-emerald-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-emerald-300 text-[11px] leading-tight">٣. المبادرة مقابل الذنب</span>
-                                <span class="text-[10px] text-emerald-400 mt-1">(٣ - ٥ سنوات: طفل الروضة)</span>
-                            </div>
-                            <!-- Stage 4 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-amber-500/40 hover:border-amber-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-amber-300 text-[11px] leading-tight">٤. الكفاية والاجتهاد مقابل النقص</span>
-                                <span class="text-[10px] text-amber-400 mt-1">(٦ - ٩ سنوات: الابتدائي)</span>
-                            </div>
+                            ${ERIKSON_STAGES.map(st => `
+                                <button onclick="selectEriksonStage(${st.id})" class="interactive-card p-3 rounded-xl bg-slate-950/90 border-2 ${selectedEriksonId === st.id ? 'border-amber-400 ring-2 ring-amber-400/30 scale-[1.03]' : 'border-slate-800 hover:border-indigo-500/50'} flex flex-col justify-center min-h-[74px]">
+                                    <span class="font-bold text-white text-[11px] leading-tight">${st.name}</span>
+                                    <span class="text-[10px] text-indigo-300 mt-1">(${st.age})</span>
+                                </button>
+                            `).join('')}
+                        </div>
 
-                            <!-- Stage 5 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-rose-500/40 hover:border-rose-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-rose-300 text-[11px] leading-tight">٥. الهوية مقابل اضطراب الدور</span>
-                                <span class="text-[10px] text-rose-400 mt-1">(١٠ - ١٨ سنة: المراهق)</span>
+                        <!-- Clickable Stage Detail Box -->
+                        <div class="anim-fade p-3.5 rounded-xl bg-slate-950 border-2 border-amber-500/50 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <strong class="text-amber-400 text-xs sm:text-sm font-cairo"><i class="fa-solid fa-magnifying-glass-chart ml-1"></i>${activeStage.name}</strong>
+                                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold">${activeStage.age}</span>
                             </div>
-                            <!-- Stage 6 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-cyan-500/40 hover:border-cyan-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-cyan-300 text-[11px] leading-tight">٦. المودة والألفة مقابل العزلة</span>
-                                <span class="text-[10px] text-cyan-400 mt-1">(١٩ - ٢٤ سنة: مرحلة الشباب)</span>
-                            </div>
-                            <!-- Stage 7 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-purple-500/40 hover:border-purple-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-purple-300 text-[11px] leading-tight">٧. الإنتاجية مقابل الأنانية</span>
-                                <span class="text-[10px] text-purple-400 mt-1">(٢٥ - ٥٩ سنة: منتصف العمر)</span>
-                            </div>
-                            <!-- Stage 8 -->
-                            <div class="p-3 rounded-xl bg-slate-950/80 border border-teal-500/40 hover:border-teal-400 transition flex flex-col justify-center min-h-[70px]">
-                                <span class="font-bold text-teal-300 text-[11px] leading-tight">٨. التكامل مقابل اليأس</span>
-                                <span class="text-[10px] text-teal-400 mt-1">(ما بعد ٦٠ سنة)</span>
-                            </div>
+                            <p class="text-slate-200 text-xs leading-relaxed">${activeStage.details}</p>
                         </div>
                     </div>`;
+                }
 
                 case 'behavioral':
                     return `
                     <div class="space-y-3 pt-1">
                         <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 leading-relaxed text-[11px]">
-                            <strong class="text-indigo-400 block mb-1">المدرسة السلوكية (الكلاسيكية) - ص ١٢ - ١٧:</strong>
+                            <strong class="text-indigo-400 block mb-1">المدرسة السلوكية (الكلاسيكية) - ص ١٢ - ١٧ (اضغط على أي عالم أو مربع لعرض أمثلته التربوية):</strong>
                             رائدها واطسون. تركز على السلوك الظاهري الملاحظ وتعتبر عقل المتعلم صندوقاً وصفحة بيضاء، وتعتمد على المثير والاستجابة.
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-indigo-400 block text-xs">بافلوف (الاشتراط الكلاسيكي)</strong>
-                                <span class="text-[11px] text-slate-400">تجارب الكلب والجرس • المثير قبل الاستجابة • حدوث الانطفاء بتوقف المثير المعزز • مثال: هدايا الصف الأول، وتجاهل الطالب المزعج.</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-emerald-400 block text-xs">سكنر (التعلم الإجرائي)</strong>
-                                <span class="text-[11px] text-slate-400">تجربة الفأر والرافعة • المثير والتعزيز بعد الاستجابة • مصفوفة التعزيز الإيجابي والسلبي والعقاب الإيجابي والسلبي • التعلم المبرمج.</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-amber-400 block text-xs">ثورندايك (المحاولة والخطأ)</strong>
-                                <span class="text-[11px] text-slate-400">التعلم يحدث بالصدفة بدون تفكير واكتشاف • قانون الأثر (الارتياح يقوي التعلم) • قانون التدريب (الاستعمال والإهمال) • قانون الاستعداد.</span>
-                            </div>
+                            <button onclick="showInteractiveDetail('behavDetailBox', '١. بافلوف - الاشتراط الكلاسيكي (ص ١٣)', '• المثير (الجرس) يأتي قبل الاستجابة (اللعاب).<br>• يحدث (الانطفاء) إذا تكرر قرع الجرس دون تقديم الطعام.<br>• تطبيقاته في المدرسة: هدايا طلاب الصف الأول (مثير) -> حب المدرسة (استجابة)، وتجاهل المعلم للطالب الذي يرفع صوته يؤدي إلى (انطفاء) السلوك الفوضوي.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-indigo-500/40 text-right">
+                                <strong class="text-indigo-400 block text-xs">١. بافلوف (الاشتراط الكلاسيكي)</strong>
+                                <span class="text-[11px] text-slate-400">المثير قبل الاستجابة • الانطفاء بتوقف المثير • هدايا الصف الأول وتجاهل الفوضوي.</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('behavDetailBox', '٢. سكنر - التعلم الإجرائي والتعزيز والعقاب (ص ١٤-١٧)', '• المثير (التعزيز بالطعام) يأتي بعد الاستجابة مباشرة (الضغط على الرافعة).<br>• التعزيز الإيجابي: إضافة درجة لحل الواجب.<br>• التعزيز السلبي: إزالة إنذار سابق وخصم سابق بسبب المشاركة.<br>• العقاب الإيجابي: كتابة الدرس ٣ مرات بسبب التأخر.<br>• العقاب السلبي: حرمان الطالب من حصة البدنية.<br>• التعلم المبرمج (سكنر): خطي ومتشعب.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-right">
+                                <strong class="text-emerald-400 block text-xs">٢. سكنر (التعلم الإجرائي والمبرمج)</strong>
+                                <span class="text-[11px] text-slate-400">المثير بعد الاستجابة • مصفوفة التعزيز والعقاب • البرمجة الخطية والتفريعية.</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('behavDetailBox', '٣. ثورندايك - المحاولة والخطأ وقوانينه الـ ٣ (ص ١٥-١٦)', '• يرى أن التعلم يحدث بالصدفة عبر المحاولة والخطأ.<br>• ١. قانون الأثر: الارتياح يقوي التعلم والضيق يضعفه.<br>• ٢. قانون التدريب (التكرار): يشمل الاستعمال (الممارسة تقوي الارتباط) والإهمال (الترك يضعفه).<br>• ٣. قانون الاستعداد: يصف الأسس الفسيولوجية لقانون الأثر.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-right">
+                                <strong class="text-amber-400 block text-xs">٣. ثورندايك (المحاولة والخطأ)</strong>
+                                <span class="text-[11px] text-slate-400">قانون الأثر • قانون التدريب (الاستعمال والإهمال) • قانون الاستعداد.</span>
+                            </button>
+                        </div>
+                        <div id="behavDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
+                            اضغط على بطاقة بافلوف أو سكنر أو ثورندايك أعلاه لعرض كافة الأمثلة التربوية وأسئلة الاختبار الخاصة بها.
                         </div>
                     </div>`;
 
                 case 'cognitive':
                     return `
                     <div class="space-y-3 pt-1">
-                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 leading-relaxed text-[11px]">
-                            <strong class="text-indigo-400 block mb-1">المدرسة المعرفية - ص ١٧ - ٢٠:</strong>
-                            نادت بتحريك ذهن وعقل الطالب؛ فالتعلم ليس مجرد مثير واستجابة، بل معالجة عقلية للمعلومات وإدراك واستبصار.
-                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-cyan-400 block text-xs">برونر (الاكتشاف والمنهج الحلزوني)</strong>
-                                <span class="text-[11px] text-slate-400">٣ أنماط للتعلم: الحركي العملي باللمس، التمثيلي الصوري للابتدائي، والرمزي المجرد للمتوسط والثانوي.</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-purple-400 block text-xs">أوزبل (التعلم ذو المعنى)</strong>
-                                <span class="text-[11px] text-slate-400">خرائط المفاهيم • ربط المعرفة الجديدة بالسابقة • المنظم الشارح (للمادة غير المألوفة) والمنظم المقارن (للمألوفة).</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-emerald-400 block text-xs">الجشطالت (الاستبصار)</strong>
-                                <span class="text-[11px] text-slate-400">كوهلر، فرتمر، كوفكا • الإدراك الكلي للموقف • التعلم من الكل إلى الجزء (مثل قراءة كلمة المهني -> ال-م-هـ-ني).</span>
-                            </div>
+                            <button onclick="showInteractiveDetail('cogDetailBox', '١. جيروم برونر - التعلم بالاكتشاف والمنهج الحلزوني (ص ١٧-١٨)', 'مراحل التمثيل المعرفي الثلاث عند برونر:<br>١. الحركي العملي: باللمس والنشاط الحركي.<br>٢. التمثيل التشكيلي (الصوري / شبه المحسوس): بالصور والنماذج للمرحلة الابتدائية.<br>٣. التمثيل الرمزي (المجرد): بالرموز والتحليل للمرحلة المتوسطة والثانوية.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-cyan-500/40 text-right">
+                                <strong class="text-cyan-400 block text-xs">١. برونر (الاكتشاف والحلزوني)</strong>
+                                <span class="text-[11px] text-slate-400">النمط العملي • الصوري للابتدائي • الرمزي للمتوسط والثانوي.</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('cogDetailBox', '٢. ديفيد أوزبل - التعلم ذو المعنى وخرائط المفاهيم (ص ١٩-٢٠)', '• أنماط التعلم الـ ٤: ١. استقبال قائم على المعنى التام ٢. استقبال قائم على الحفظ ٣. اكتشاف قائم على المعنى التام ٤. اكتشاف قائم على الحفظ.<br>• المنظمات المتقدمة: (المنظم الشارح) للمادة الجديدة غير المألوفة، و(المنظم المقارن) للمادة المألوفة لربطها بالبناء المعرفي.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-purple-500/40 text-right">
+                                <strong class="text-purple-400 block text-xs">٢. أوزبل (التعلم ذو المعنى)</strong>
+                                <span class="text-[11px] text-slate-400">خرائط المفاهيم • الأنماط الأربعة • المنظم الشارح والمقارن.</span>
+                            </button>
+                            <button onclick="showInteractiveDetail('cogDetailBox', '٣. علماء الجشطالت (كوهلر، فرتمر، كوفكا) - الاستبصار (ص ٢٠)', '• الإدراك الكلي للموقف والتعلم من الكل إلى الجزء.<br>• تطبيقاتها: تعليم القراءة والكتابة من الكلمة إلى الحروف مثل كلمة (المهني -> ال - م - هـ - ني)، وفي الرياضيات والنحو تعلم القانون والقاعدة الكلية ثم التطبيق على الأجزاء.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-right">
+                                <strong class="text-emerald-400 block text-xs">٣. الجشطالت (الاستبصار)</strong>
+                                <span class="text-[11px] text-slate-400">كوهلر وفرتمر وكوفكا • من الكل للجزء • كلمة (المهني).</span>
+                            </button>
+                        </div>
+                        <div id="cogDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-cyan-500/40 text-slate-200">
+                            اضغط على أي عالم في المدرسة المعرفية أعلاه لعرض تفاصيل نظريته وأمثلة الملزمة (ص ١٧ - ٢٠).
                         </div>
                     </div>`;
 
                 case 'constructivist':
                     return `
                     <div class="space-y-3 pt-1">
-                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 leading-relaxed text-[11px]">
-                            <strong class="text-indigo-400 block mb-1">المدرسة البنائية - ص ٢١ - ٢٢:</strong>
-                            النظرية الوحيدة التي يبني فيها الطالب معرفته بنفسه اعتماداً على خبراته السابقة؛ والمعلم ميسر وموجه.
-                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-indigo-400 block text-xs">مراحل النمو المعرفي عند بياجيه:</strong>
-                                <span class="text-[11px] text-slate-400">١. الحس حركي (٠-٢ سنة)<br>٢. ما قبل العمليات (٢-٦ سنوات: التمركز حول الذات)<br>٣. العمليات المحسوسة (٦-١٢ سنة: الاحتفاظ والمعكوسية)<br>٤. العمليات المجردة (١٢+ سنة: المنطق والاستنباط).</span>
+                            <div class="p-3 rounded-xl bg-slate-950 border border-indigo-500/40 space-y-1">
+                                <strong class="text-indigo-400 block text-xs">مراحل النمو المعرفي الـ ٤ عند جان بياجيه (ص ٢٢):</strong>
+                                <p class="text-[11px] text-slate-300 leading-relaxed">
+                                    ١. <strong>الحس حركي (٠-٢ سنة):</strong> الحواس واللمس والمحاكاة.<br>
+                                    ٢. <strong>ما قبل العمليات (٢-٦ سنوات):</strong> التصنيف ببعد واحد، التمركز حول الذات، عدم إدراك ثبات العدد.<br>
+                                    ٣. <strong>العمليات المحسوسة (٦-١٢ سنة - الابتدائي):</strong> إدراك <strong>الاحتفاظ والمعكوسية والمقلوبية</strong> والتصنيف والترتيب.<br>
+                                    ٤. <strong>العمليات المجردة (١٢+ سنة - المتوسط والثانوي):</strong> التفكير المنطقي والعلمي ووضع الفروض والانتقال من الاستقراء للاستنباط.
+                                </p>
                             </div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-amber-400 block text-xs">فيجوتسكي وجون ديوي:</strong>
-                                <span class="text-[11px] text-slate-400">• فيجوتسكي: منطقة النمو الوشيك (ZPD) والسقالات التعليمية.<br>• جون ديوي: صاحب منهج النشاط والتعلم بالعمل.</span>
+                            <div class="p-3 rounded-xl bg-slate-950 border border-amber-500/40 space-y-1">
+                                <strong class="text-amber-400 block text-xs">فيجوتسكي وجون ديوي وعوامل بياجيه (ص ٢١-٢٢):</strong>
+                                <p class="text-[11px] text-slate-300 leading-relaxed">
+                                    • <strong>عوامل النمو الـ ٤ عند بياجيه:</strong> ١. الخبرة ٢. التوازن ٣. البيئة ٤. النضج.<br>
+                                    • <strong>فيجوتسكي:</strong> صاحب مصطلح <strong>منطقة النمو الوشيك (ZPD)</strong> وهي المسافة بين ما يفعله الطالب وحده وما يفعله بمساعدة المعلم أو الأقران.<br>
+                                    • <strong>جون ديوي:</strong> رائد ومؤسس <strong>منهج النشاط</strong>.
+                                </p>
                             </div>
                         </div>
                     </div>`;
@@ -1043,13 +1638,10 @@
                 case 'social':
                     return `
                     <div class="space-y-3 pt-1">
-                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 leading-relaxed text-[11px]">
-                            <strong class="text-indigo-400 block mb-1">النظرية الاجتماعية (التعلم بالملاحظة) - ص ٢٢ - ٢٣:</strong>
-                            رائدها ألبرت باندورا (ومعه ريتشارد والترز وروتر). تؤكد أن التعلم مزيج بين السلوكية والمعرفية ويبدأ بالانتباه والملاحظة ثم التقليد والنمذجة.
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-300">
-                            <strong>خطوات التعلم الاجتماعي الأربع:</strong>
-                            ١. الانتباه والملاحظة للنموذج -> ٢. الاحتفاظ بالتمثيل الذهني -> ٣. الإنتاج الحركي للأداء -> ٤. الدافعية والتعزيز.
+                        <div class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200 leading-relaxed text-xs">
+                            <strong class="text-indigo-400 block mb-1">النظرية الاجتماعية (التعلم بالملاحظة والتقليد والنمذجة) - ص ٢٢ - ٢٣:</strong>
+                            رائدها العالم <strong>ألبرت باندورا</strong> (ومعه ريتشارد والترز وروتر). تجمع بين السلوكية والمعرفية، وتؤكد أن التعلم يبدأ بـ:<br>
+                            <span class="text-amber-300 font-bold">١. الانتباه والملاحظة (أول مرحلة) ⬅ ٢. الاحتفاظ والاسترجاع الذهني ⬅ ٣. الإنتاج الحركي وتقليد السلوك ⬅ ٤. الدافعية والتعزيز.</span>
                         </div>
                     </div>`;
 
@@ -1058,7 +1650,7 @@
             }
         }
 
-        // 9. RENDER QUIZZES FOR ACTIVE STATION
+        // 12. RENDER QUIZZES WITH SOUND FEEDBACK
         function renderQuizSection(stIdx) {
             const quizzes = STATIONS[stIdx].quizzes;
             const container = document.getElementById('quizCards');
@@ -1069,10 +1661,10 @@
                 const isAnswered = userChoice !== undefined;
 
                 return `
-                <div class="p-3.5 sm:p-4 rounded-xl bg-slate-950 border ${isAnswered ? (userChoice === q.c ? 'border-emerald-500/50' : 'border-rose-500/50') : 'border-slate-800'} space-y-2.5 text-xs">
+                <div class="p-3.5 sm:p-4 rounded-xl bg-slate-950 border ${isAnswered ? (userChoice === q.c ? 'border-emerald-500/60' : 'border-rose-500/60') : 'border-slate-800'} space-y-2.5 text-xs">
                     <div class="flex items-center justify-between text-slate-400 font-bold text-[11px]">
                         <span class="text-amber-400">سؤال تجميعات #${qIdx + 1}</span>
-                        ${isAnswered ? (userChoice === q.c ? '<span class="text-emerald-400">إجابة صحيحة ✓</span>' : '<span class="text-rose-400">إجابة خاطئة ✗</span>') : ''}
+                        ${isAnswered ? (userChoice === q.c ? '<span class="text-emerald-400 font-bold">إجابة صحيحة ✓</span>' : '<span class="text-rose-400 font-bold">إجابة خاطئة ✗</span>') : ''}
                     </div>
                     <p class="font-bold text-white leading-relaxed text-xs sm:text-sm">${q.q}</p>
                     <div class="space-y-1.5 pt-1">
@@ -1089,15 +1681,15 @@
                             }
                             return `
                             <button onclick="handleOptionSelect(${stIdx}, ${qIdx}, ${optIdx})" ${isAnswered ? 'disabled' : ''}
-                                class="w-full p-2.5 rounded-lg border text-right transition flex items-center justify-between ${style}">
+                                class="interactive-card w-full p-2.5 rounded-xl border text-right flex items-center justify-between ${style}">
                                 <span>${['أ', 'ب', 'ج', 'د'][optIdx]} - ${opt}</span>
                                 ${isAnswered && optIdx === q.c ? '<i class="fa-solid fa-check text-emerald-400"></i>' : ''}
                             </button>`;
                         }).join('')}
                     </div>
                     ${isAnswered ? `
-                    <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-[11px] leading-relaxed">
-                        <strong class="text-indigo-400 block mb-0.5"><i class="fa-solid fa-lightbulb ml-1"></i>التعليل التربوي الرسمي:</strong>
+                    <div class="anim-fade p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-[11px] leading-relaxed">
+                        <strong class="text-indigo-400 block mb-0.5"><i class="fa-solid fa-lightbulb ml-1 text-amber-400"></i>التعليل التربوي الرسمي:</strong>
                         ${q.exp}
                     </div>` : ''}
                 </div>`;
@@ -1107,6 +1699,12 @@
         }
 
         function handleOptionSelect(stIdx, qIdx, optIdx) {
+            const correctIdx = STATIONS[stIdx].quizzes[qIdx].c;
+            if (optIdx === correctIdx) {
+                playSound('success');
+            } else {
+                playSound('error');
+            }
             saveAnswer(stIdx, qIdx, optIdx);
             renderQuizSection(stIdx);
         }
@@ -1139,7 +1737,7 @@
             document.getElementById('quizScoreBadge').textContent = `النتيجة: ${correct} من ${quizzes.length} (أجبت ${answered})`;
         }
 
-        // 10. DOWNLOAD STANDALONE APPLICATION
+        // 13. DOWNLOAD STANDALONE APPLICATION
         function downloadSelfFile() {
             const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
             const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
