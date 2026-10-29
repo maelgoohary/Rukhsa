@@ -1,2131 +1,659 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <title>منصة النمو المهني التفاعلية الشاملة (٢٤١ صفحة) - الرخصة المهنية</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cairo, Tajawal & Amiri (for elegant developer signature) -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,700&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        cairo: ['Cairo', 'sans-serif'],
-                        tajawal: ['Tajawal', 'sans-serif'],
-                    },
-                    colors: {
-                        navy: {
-                            900: '#070d19',
-                            950: '#030712',
-                            800: '#0f172a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Tajawal', 'Cairo', sans-serif;
-            background-color: #070d19;
-            color: #f1f5f9;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-        /* Status Bar Safe Area Spacing for Mobile Apps (iOS / Android APK) */
-        .status-bar-spacer {
-            padding-top: max(env(safe-area-inset-top, 28px), 28px);
-        }
-        /* Custom Clean Scrollbar */
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #030712;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #4f46e5;
-        }
-        /* Creative Spring & 3D Transitions */
-        @keyframes creativeEntrance {
-            0% { opacity: 0; transform: translateY(14px) scale(0.96) perspective(600px) rotateX(4deg); }
-            60% { opacity: 1; transform: translateY(-2px) scale(1.01) perspective(600px) rotateX(0deg); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .anim-fade {
-            animation: creativeEntrance 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
-            50% { box-shadow: 0 0 18px 4px rgba(99, 102, 241, 0.25); }
-        }
-        .interactive-card {
-            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .interactive-card:hover {
-            transform: translateY(-3px) scale(1.015);
-            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.35);
-        }
-        .interactive-card:active {
-            transform: scale(0.96);
-        }
-        .active-Selection-glow {
-            animation: pulseGlow 2s infinite;
-        }
-        /* Pyramid Tier Styling */
-        .maslow-tier {
-            transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: pointer;
-        }
-        .maslow-tier:hover {
-            transform: scale(1.04) translateY(-2px);
-            filter: brightness(1.15);
-        }
-        .maslow-tier:active {
-            transform: scale(0.97);
-        }
-        /* Range Scrubber */
-        input[type=range].scrubber {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            cursor: pointer;
-        }
-        input[type=range].scrubber::-webkit-slider-runnable-track {
-            height: 5px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
-        }
-        input[type=range].scrubber::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 3px solid #4f46e5;
-            margin-top: -5.5px;
-            box-shadow: 0 0 10px rgba(79, 70, 229, 0.9);
-            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        input[type=range].scrubber::-webkit-slider-thumb:hover {
-            transform: scale(1.25);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مؤشر أسعار الصرف في مصر | Egypt FX Live Rates</title>
+  <meta name="description" content="منصة أسعار الصرف الحية للجنيه المصري مقابل العملات الأجنبية من البنك المركزي المصري، البنك الأهلي المصري، وبنك مصر.">
+  <meta name="author" content="Mahmoud El-Gohary">
+  
+  <!-- Favicon / App Icon -->
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="apple-touch-icon" href="logo.jpg">
 
-        /* ============================================================== */
-        /* [UPDATE #2 START] LIGHT MODE THEME & SPLASH SCREEN STYLES      */
-        /* ============================================================== */
-        html.light body {
-            background-color: #f8fafc !important;
-            color: #0f172a !important;
-        }
-        html.light #appTopBar {
-            background-color: rgba(255, 255, 255, 0.96) !important;
-            border-bottom-color: #e2e8f0 !important;
-            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06) !important;
-        }
-        html.light .bg-slate-900,
-        html.light .bg-slate-900\/95,
-        html.light .bg-slate-900\/90,
-        html.light .bg-slate-900\/80 {
-            background-color: #ffffff !important;
-            border-color: #cbd5e1 !important;
-            color: #0f172a !important;
-            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important;
-        }
-        html.light .bg-slate-950,
-        html.light .bg-slate-950\/90,
-        html.light .bg-slate-950\/60 {
-            background-color: #f1f5f9 !important;
-            border-color: #cbd5e1 !important;
-            color: #0f172a !important;
-        }
-        html.light .bg-slate-800,
-        html.light .bg-slate-800\/90 {
-            background-color: #e2e8f0 !important;
-            border-color: #cbd5e1 !important;
-            color: #1e293b !important;
-        }
-        html.light #heroCard {
-            background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%) !important;
-            border-color: #c7d2fe !important;
-        }
-        html.light .text-white {
-            color: #0f172a !important;
-        }
-        html.light .maslow-tier.text-white,
-        html.light #appTopBar button.text-white,
-        html.light nav button.bg-indigo-600 {
-            color: #ffffff !important;
-        }
-        html.light .text-slate-100,
-        html.light .text-slate-200,
-        html.light .text-slate-300 {
-            color: #1e293b !important;
-        }
-        html.light .text-slate-400 {
-            color: #475569 !important;
-        }
-        html.light .text-indigo-300,
-        html.light .text-indigo-400 {
-            color: #4338ca !important;
-        }
-        html.light .text-amber-200,
-        html.light .text-amber-300,
-        html.light .text-amber-400 {
-            color: #b45309 !important;
-        }
-        html.light .text-emerald-200,
-        html.light .text-emerald-300,
-        html.light .text-emerald-400 {
-            color: #047857 !important;
-        }
-        html.light .text-cyan-200,
-        html.light .text-cyan-300,
-        html.light .text-cyan-400 {
-            color: #0e7490 !important;
-        }
-        html.light .text-rose-200,
-        html.light .text-rose-300,
-        html.light .text-rose-400 {
-            color: #be123c !important;
-        }
-        html.light .text-purple-200,
-        html.light .text-purple-300,
-        html.light .text-purple-400 {
-            color: #6d28d9 !important;
-        }
-        html.light .bg-emerald-950\/60,
-        html.light .bg-emerald-950\/70,
-        html.light .bg-emerald-950\/50,
-        html.light .bg-emerald-950\/40,
-        html.light .bg-emerald-950 {
-            background-color: #ecfdf5 !important;
-            border-color: #6ee7b7 !important;
-        }
-        html.light .bg-rose-950\/60,
-        html.light .bg-rose-950\/70,
-        html.light .bg-rose-950\/40,
-        html.light .bg-rose-950\/30 {
-            background-color: #fff1f2 !important;
-            border-color: #fda4af !important;
-        }
-        html.light .bg-cyan-950\/60,
-        html.light .bg-cyan-950\/50 {
-            background-color: #ecfeff !important;
-            border-color: #67e8f9 !important;
-        }
-        html.light .bg-amber-950\/50,
-        html.light .bg-amber-950\/30 {
-            background-color: #fffbeb !important;
-            border-color: #fcd34d !important;
-        }
-        html.light .bg-purple-950\/60 {
-            background-color: #f5f3ff !important;
-            border-color: #c4b5fd !important;
-        }
-        html.light .bg-indigo-950\/70 {
-            background-color: #eef2ff !important;
-            border-color: #a5b4fc !important;
-        }
-        html.light .border-slate-800,
-        html.light .border-slate-800\/80,
-        html.light .border-slate-700,
-        html.light .border-slate-700\/80 {
-            border-color: #cbd5e1 !important;
-        }
-        html.light #searchDropdown {
-            background-color: rgba(255, 255, 255, 0.98) !important;
-            border-color: #6366f1 !important;
-            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25) !important;
-        }
-        /* Splash Screen Animations */
-        @keyframes splashIconFloat {
-            0% { transform: scale(0.7) translateY(20px); opacity: 0; }
-            60% { transform: scale(1.06) translateY(-4px); opacity: 1; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-        .splash-enter {
-            animation: splashIconFloat 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-        .font-amiri {
-            font-family: 'Amiri', 'Cairo', serif;
-        }
-        /* ============================================================== */
-        /* [UPDATE #2 END]                                                */
-        /* ============================================================== */
-    </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="min-h-screen flex flex-col bg-[#070d19] text-slate-100 antialiased selection:bg-indigo-600 selection:text-white transition-colors duration-300">
-
-    <!-- ============================================================== -->
-    <!-- [UPDATE #2] ELEGANT 4-SECOND SPLASH SCREEN (محمود مصطفي)        -->
-    <!-- ============================================================== -->
-    <div id="appSplashScreen" class="fixed inset-0 z-[100] bg-gradient-to-br from-[#070b12] via-[#101923] to-[#1a1814] flex flex-col items-center justify-center p-6 select-none transition-all duration-700 ease-out">
-        <div class="splash-enter flex flex-col items-center text-center space-y-5 max-w-sm">
-            <!-- Custom Illustrated App Emblem matching attached image (Book + Graduation Cap + Golden Quill + "ملخص اختبار الرخصة المهنية") -->
-            <div class="relative">
-                <div class="absolute -inset-4 rounded-[32px] bg-gradient-to-tr from-amber-500/30 via-teal-500/20 to-amber-300/30 opacity-75 blur-xl animate-pulse"></div>
-                <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-[28px] bg-gradient-to-b from-[#3a4f52] via-[#243438] to-[#0f171e] p-1.5 shadow-2xl border border-amber-400/40 overflow-hidden">
-                    <svg viewBox="0 0 300 300" class="w-full h-full rounded-[22px]" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <!-- Background Vintage Library Gradient -->
-                            <radialGradient id="bgGlow" cx="50%" cy="42%" r="65%">
-                                <stop offset="0%" stop-color="#c8b38a" />
-                                <stop offset="45%" stop-color="#566968" />
-                                <stop offset="80%" stop-color="#1e2d33" />
-                                <stop offset="100%" stop-color="#0d161a" />
-                            </radialGradient>
-                            <!-- Book Page Gradient -->
-                            <linearGradient id="pageRight" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#d4be94" />
-                                <stop offset="25%" stop-color="#f5e8c8" />
-                                <stop offset="85%" stop-color="#ebd5ab" />
-                                <stop offset="100%" stop-color="#c7ab79" />
-                            </linearGradient>
-                            <linearGradient id="pageLeft" x1="100%" y1="0%" x2="0%" y2="0%">
-                                <stop offset="0%" stop-color="#cfb68a" />
-                                <stop offset="25%" stop-color="#f5e8c8" />
-                                <stop offset="85%" stop-color="#e8d0a3" />
-                                <stop offset="100%" stop-color="#bfa16e" />
-                            </linearGradient>
-                            <!-- Gold Quill Gradient -->
-                            <linearGradient id="goldQuill" x1="0%" y1="100%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#b58938" />
-                                <stop offset="50%" stop-color="#f7dfa5" />
-                                <stop offset="100%" stop-color="#d4a84f" />
-                            </linearGradient>
-                            <!-- Cap Top Gradient -->
-                            <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#3c4f54" />
-                                <stop offset="100%" stop-color="#182529" />
-                            </linearGradient>
-                        </defs>
-
-                        <!-- Background -->
-                        <rect width="300" height="300" fill="url(#bgGlow)" />
-
-                        <!-- Subtle Left & Right Bookshelves Silhouette -->
-                        <g opacity="0.28" fill="#3b2b1d">
-                            <rect x="0" y="0" width="38" height="220" />
-                            <rect x="262" y="0" width="38" height="220" />
-                            <rect x="4" y="25" width="28" height="6" fill="#6b5137" />
-                            <rect x="4" y="65" width="28" height="6" fill="#6b5137" />
-                            <rect x="4" y="105" width="28" height="6" fill="#6b5137" />
-                            <rect x="4" y="145" width="28" height="6" fill="#6b5137" />
-                            <rect x="268" y="25" width="28" height="6" fill="#6b5137" />
-                            <rect x="268" y="65" width="28" height="6" fill="#6b5137" />
-                            <rect x="268" y="105" width="28" height="6" fill="#6b5137" />
-                            <rect x="268" y="145" width="28" height="6" fill="#6b5137" />
-                        </g>
-
-                        <!-- Open Book Outer Cover & Brown Pages Base -->
-                        <path d="M52,96 L150,112 L248,96 L248,200 L150,214 L52,200 Z" fill="#18262b" stroke="#0d171a" stroke-width="3" stroke-linejoin="round" />
-                        <path d="M58,90 L150,108 L242,90 L242,193 L150,208 L58,193 Z" fill="#8c6c42" />
-
-                        <!-- Left Page -->
-                        <path d="M64,76 Q108,82 150,98 L150,198 Q108,184 64,180 Z" fill="url(#pageLeft)" stroke="#b39766" stroke-width="1" />
-                        <!-- Right Page -->
-                        <path d="M236,76 Q192,82 150,98 L150,198 Q192,184 236,180 Z" fill="url(#pageRight)" stroke="#b39766" stroke-width="1" />
-
-                        <!-- Left Page Content (Header Box, Lines & Bullet Points) -->
-                        <g fill="#4c5855" opacity="0.85">
-                            <polygon points="78,96 135,106 135,121 78,111" />
-                            <line x1="78" y1="120" x2="135" y2="130" stroke="#4c5855" stroke-width="3" stroke-linecap="round" />
-                            <line x1="78" y1="128" x2="135" y2="138" stroke="#4c5855" stroke-width="3" stroke-linecap="round" />
-                            <line x1="78" y1="136" x2="135" y2="146" stroke="#4c5855" stroke-width="3" stroke-linecap="round" />
-                            <circle cx="81" cy="149" r="3.8" />
-                            <line x1="90" y1="149" x2="135" y2="156" stroke="#4c5855" stroke-width="3" stroke-linecap="round" />
-                            <line x1="90" y1="155" x2="135" y2="162" stroke="#4c5855" stroke-width="2.5" stroke-linecap="round" />
-                            <circle cx="81" cy="166" r="3.8" />
-                            <line x1="90" y1="166" x2="135" y2="173" stroke="#4c5855" stroke-width="3" stroke-linecap="round" />
-                            <line x1="90" y1="172" x2="135" y2="179" stroke="#4c5855" stroke-width="2.5" stroke-linecap="round" />
-                        </g>
-
-                        <!-- Right Page Content (4 Bullet Points & Lines) -->
-                        <g fill="#4c5855" opacity="0.85">
-                            <circle cx="164" cy="111" r="3.5" />
-                            <line x1="174" y1="110" x2="220" y2="103" stroke="#4c5855" stroke-width="2.8" stroke-linecap="round" />
-                            <line x1="174" y1="116" x2="220" y2="109" stroke="#4c5855" stroke-width="2.2" stroke-linecap="round" />
-
-                            <circle cx="164" cy="128" r="3.5" />
-                            <line x1="174" y1="127" x2="220" y2="120" stroke="#4c5855" stroke-width="2.8" stroke-linecap="round" />
-                            <line x1="174" y1="133" x2="220" y2="126" stroke="#4c5855" stroke-width="2.2" stroke-linecap="round" />
-
-                            <circle cx="164" cy="145" r="3.5" />
-                            <line x1="174" y1="144" x2="220" y2="137" stroke="#4c5855" stroke-width="2.8" stroke-linecap="round" />
-                            <line x1="174" y1="150" x2="220" y2="143" stroke="#4c5855" stroke-width="2.2" stroke-linecap="round" />
-
-                            <circle cx="164" cy="162" r="3.5" />
-                            <line x1="174" y1="161" x2="220" y2="154" stroke="#4c5855" stroke-width="2.8" stroke-linecap="round" />
-                            <line x1="174" y1="167" x2="220" y2="160" stroke="#4c5855" stroke-width="2.2" stroke-linecap="round" />
-                        </g>
-
-                        <!-- Graduation Cap Base (Skullcap) -->
-                        <path d="M117,64 L117,84 L150,102 L183,84 L183,64 Z" fill="#1b282c" stroke="#c8b07a" stroke-width="1.5" />
-                        <path d="M117,64 L150,80 L183,64" fill="none" stroke="#dec389" stroke-width="2.5" />
-
-                        <!-- Graduation Cap Mortarboard (Diamond Top) -->
-                        <polygon points="150,24 208,47 150,72 92,47" fill="url(#capGrad)" stroke="#3e5257" stroke-width="2" stroke-linejoin="round" />
-
-                        <!-- Hanging Tassel on Left -->
-                        <path d="M128,48 L104,56 L104,78" fill="none" stroke="#c8ad78" stroke-width="2.2" />
-                        <circle cx="104" cy="79" r="3.5" fill="#202e33" stroke="#c8ad78" stroke-width="1.2" />
-                        <polygon points="101,82 107,82 110,103 98,103" fill="#202e33" stroke="#c8ad78" stroke-width="1" />
-
-                        <!-- Golden Feather Quill on Cap -->
-                        <path d="M142,60 C152,42 170,26 196,17 C189,33 178,43 166,47 L173,45 C163,53 153,58 142,60 Z" fill="url(#goldQuill)" />
-                        <path d="M138,64 L194,18" stroke="#fff3d1" stroke-width="1.6" stroke-linecap="round" />
-
-                        <!-- Bottom Dark Banner Overlay with Arabic Typography: ملخص اختبار الرخصة المهنية -->
-                        <text x="150" y="246" text-anchor="middle" fill="#f3dfb6" font-family="Cairo, Tajawal, sans-serif" font-weight="900" font-size="31" style="filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.85));">
-                            ملخص اختبار
-                        </text>
-                        <text x="150" y="283" text-anchor="middle" fill="#f3dfb6" font-family="Cairo, Tajawal, sans-serif" font-weight="900" font-size="31" style="filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.85));">
-                            الرخصة المهنية
-                        </text>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- App Title -->
-            <div class="space-y-1">
-                <h1 class="text-lg sm:text-xl font-cairo font-black text-white tracking-wide">
-                    منصة النمو المهني التفاعلية
-                </h1>
-                <p class="text-xs text-slate-300 font-tajawal">
-                    المعايير التربوية الشاملة • ٢٤١ صفحة
-                </p>
-            </div>
-
-            <!-- Elegant Developer Name Signature: محمود مصطفي -->
-            <div class="pt-3 border-t border-amber-500/30 w-60 flex flex-col items-center">
-                <span class="text-[11px] text-amber-200/90 font-cairo mb-1.5">تصميم وتطوير</span>
-                <div class="px-6 py-1.5 rounded-2xl bg-slate-950/80 border border-amber-400/50 shadow-lg">
-                    <span class="font-amiri text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-200 tracking-wide block">
-                        محمود مصطفي
-                    </span>
-                </div>
-            </div>
+<body>
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="logo-area">
+        <div class="logo-badge logo-img-badge">
+          <img src="logo.jpg" alt="شعار تطبيق اللحلوح" class="site-brand-logo">
         </div>
+        <div class="logo-text">
+          <div class="title-with-pill">
+            <h1 class="site-title" data-i18n="siteTitle">مؤشر الجنيه المصري</h1>
+            <span class="lahlouh-note-pill">
+              <span class="lahlouh-dot"></span>
+              <span data-i18n="lahlouhBadge">بدعم من تطبيق اللحلوح</span>
+            </span>
+          </div>
+          <p class="site-subtitle" data-i18n="siteSubtitle">أسعار الصرف الرسمية الموثقة لحظة بلحظة</p>
+        </div>
+      </div>
+
+      <!-- Quick Ticker or Status Bar in Header -->
+      <div class="header-status">
+        <div class="pulse-indicator">
+          <span class="pulse-dot"></span>
+          <span class="status-label" data-i18n="marketLive">سوق الصرف: تحديث نشط</span>
+        </div>
+        <span class="status-sep">|</span>
+        <div class="time-display" id="headerTime">--:--:--</div>
+      </div>
+
+      <!-- Controls: Theme, Language, Quick Refresh -->
+      <div class="header-controls">
+        <button id="refreshBtn" class="btn-icon" title="تحديث البيانات" aria-label="Refresh rates">
+          <svg class="icon spin-on-click" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+            <path d="M3 21v-5h5"></path>
+          </svg>
+          <span class="control-label" data-i18n="refresh">تحديث</span>
+        </button>
+
+        <button id="themeToggle" class="btn-icon" title="تبديل المظهر" aria-label="Toggle theme">
+          <svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+
+        <button id="langToggle" class="btn-lang" title="Switch Language" aria-label="Switch Language">
+          <span class="lang-flag" id="langFlag">🇬🇧</span>
+          <span class="lang-text" id="langText">English</span>
+        </button>
+      </div>
     </div>
 
-    <!-- ============================================================== -->
-    <!-- ULTRA-CLEAN STREAMLINED TOP BAR WITH STATUS BAR SAFE AREA      -->
-    <!-- ============================================================== -->
-    <header id="appTopBar" class="sticky top-0 z-40 bg-[#070d19]/95 backdrop-blur-md border-b border-slate-800/80 px-3 pb-2 status-bar-spacer shadow-xl transition-colors duration-300">
-        <div class="max-w-4xl mx-auto flex flex-col gap-1.5 relative">
-            <div class="flex items-center gap-1.5 sm:gap-2">
-                <!-- Station Badge Button (Opens drawer) -->
-                <button onclick="playSound('open'); toggleDrawer()" title="عرض قائمة المحطات الـ ١٦" class="interactive-card h-9 px-3 rounded-xl bg-gradient-to-l from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-xs flex items-center gap-1.5 shrink-0 shadow-md">
-                    <i class="fa-solid fa-layer-group text-xs"></i>
-                    <span id="topStationBadge" class="font-mono">محطة ٣/١٦</span>
-                    <i class="fa-solid fa-chevron-down text-[10px] opacity-80"></i>
-                </button>
+    <!-- Live Running Marquee Ticker -->
+    <div class="ticker-wrapper" id="tickerWrapper">
+      <div class="ticker-track" id="tickerTrack">
+        <!-- Dynamically injected currency badges -->
+      </div>
+    </div>
 
-                <!-- Interactive Live Search Box -->
-                <div class="relative flex-1">
-                    <input id="fastSearchInput" type="text" autocomplete="off"
-                        placeholder="ابحث عن: ماسلو، تحقيق الذات، ديل، بافلوف، سكنر، أريكسون، بلوم، جوهاري..." 
-                        class="w-full h-9 bg-slate-900/90 border border-slate-700/80 rounded-xl pr-8 pl-8 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40 transition">
-                    <i class="fa-solid fa-magnifying-glass absolute right-2.5 top-2.5 text-indigo-400 text-xs"></i>
-                    <button id="searchClearBtn" onclick="playSound('click'); clearSearch()" class="hidden absolute left-2.5 top-2 text-slate-400 hover:text-white text-xs">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </button>
-                </div>
-
-                <!-- [UPDATE #2] Sun / Moon Theme Toggle Button Next to Search Box -->
-                <button id="themeToggleBtn" onclick="toggleThemeMode()" title="تبديل الوضع الليلي / النهاري" class="interactive-card w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-400/60 text-amber-400 flex items-center justify-center shrink-0 shadow-sm">
-                    <i id="themeToggleIcon" class="fa-solid fa-sun text-sm"></i>
-                </button>
-
-                <!-- Sound Effects Mute/Unmute Toggle -->
-                <button id="soundToggleBtn" onclick="toggleSound()" title="تشغيل/كتم المؤثرات الصوتية" class="interactive-card w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 text-indigo-400 flex items-center justify-center shrink-0">
-                    <i id="soundToggleIcon" class="fa-solid fa-volume-high text-xs"></i>
-                </button>
-
-                <!-- Fast Prev/Next Station Arrows -->
-                <div class="flex items-center gap-1 shrink-0">
-                    <button onclick="navigateStation(-1)" title="المحطة السابقة" class="interactive-card w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white flex items-center justify-center">
-                        <i class="fa-solid fa-chevron-right text-xs"></i>
-                    </button>
-                    <button onclick="navigateStation(1)" title="المحطة التالية" class="interactive-card w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white flex items-center justify-center">
-                        <i class="fa-solid fa-chevron-left text-xs"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- [UPDATE #2] WIDER, FULL-WIDTH CLEAR SEARCH DROPDOWN LIST -->
-            <div id="searchDropdown" class="hidden absolute right-0 left-0 top-11 w-full sm:w-[98%] mx-auto bg-slate-900/98 backdrop-blur-2xl border-2 border-indigo-500/60 rounded-2xl shadow-2xl max-h-[70vh] overflow-y-auto z-50 p-3 space-y-2 divide-y divide-slate-800/80">
-            </div>
-
-            <!-- Discrete Thin Scrubber Line -->
-            <div class="flex items-center gap-2 px-1">
-                <input id="headerScrubber" type="range" min="0" max="15" value="2" step="1" 
-                    class="scrubber w-full" oninput="playSound('pop'); jumpToStation(parseInt(this.value, 10))">
-                <span id="scrubberPercent" class="text-[10px] text-indigo-300 font-mono font-bold shrink-0">١٩٪</span>
-            </div>
+    <!-- Economic & Global News Ticker Bar (Below currency exchange ticker) -->
+    <div class="news-ticker-bar" id="newsTickerBar">
+      <div class="news-tag-badge">
+        <span class="news-flash-icon">⚡</span>
+        <span class="news-badge-label" data-i18n="newsTagLabel">الأخبار الاقتصادية</span>
+      </div>
+      <div class="news-marquee-wrapper" id="newsMarqueeWrapper">
+        <div class="news-marquee-track" id="newsMarqueeTrack">
+          <!-- Populated dynamically and seeded with immediate readable items -->
+          <div class="news-item">
+            <span class="news-source-tag">البنك المركزي المصري</span>
+            <span class="news-headline">صافي احتياطيات النقد الأجنبي يسجل أعلى مستوياته التاريخية متجاوزاً التوقعات</span>
+            <span class="news-bullet">✦</span>
+          </div>
+          <div class="news-item">
+            <span class="news-source-tag">رويترز</span>
+            <span class="news-headline">صندوق النقد الدولي: الإصلاحات الهيكلية تدعم استقرار سعر الصرف وقوة الاقتصاد المصري</span>
+            <span class="news-bullet">✦</span>
+          </div>
+          <div class="news-item">
+            <span class="news-source-tag">بلومبرغ الشرق</span>
+            <span class="news-headline">تحويلات المصريين بالخارج تقفز بنسبة قياسية مع استمرار تدفقات النقد الأجنبي بالقنوات الرسمية</span>
+            <span class="news-bullet">✦</span>
+          </div>
+          <div class="news-item">
+            <span class="news-source-tag">وكالة أنباء الشرق الأوسط</span>
+            <span class="news-headline">البنوك المصرية تواصل توفير كامل السيولة والاحتياجات الدولارية لتمويل العمليات الاستيرادية</span>
+            <span class="news-bullet">✦</span>
+          </div>
+          <div class="news-item">
+            <span class="news-source-tag">فايننشال تايمز</span>
+            <span class="news-headline">الفيدرالي الأمريكي يبقي الفائدة مستقرة وسط هدوء مؤشرات التضخم وسوق العمل العالمي</span>
+            <span class="news-bullet">✦</span>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <!-- ============================================================== -->
-    <!-- SLIDE-OVER STATIONS DRAWER (16 STATIONS POPUP MENU)             -->
-    <!-- ============================================================== -->
-    <div id="drawerBackdrop" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeDrawer()"></div>
-    <aside id="stationsDrawer" class="fixed top-0 bottom-0 right-0 z-50 w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 shadow-2xl p-4 status-bar-spacer flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out">
-        <div class="flex flex-col flex-1 overflow-hidden space-y-3 mt-2">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-xs shadow-md">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xs font-bold text-white font-cairo">فهرس المحطات الـ ١٦ الشامل</h2>
-                        <span class="text-[10px] text-slate-400">ملزمة أ. مخلد الروقي (٢٤١ صفحة)</span>
-                    </div>
-                </div>
-                <button onclick="playSound('click'); closeDrawer()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
-                    <i class="fa-solid fa-xmark text-xs"></i>
-                </button>
-            </div>
+  <!-- Main Content Layout -->
+  <main class="main-content container">
+    
+    <!-- Hero USD Live Showcase Window (Replaces the old banner with a youthful, big prominent card) -->
+    <section class="hero-usd-section" id="heroUsdSection">
+      <div class="hero-usd-card">
+        <div class="hero-card-glow"></div>
 
-            <!-- Drawer List -->
-            <div id="drawerList" class="flex-1 overflow-y-auto space-y-1.5 pr-1 text-xs">
-            </div>
+        <div class="hero-top-bar">
+          <div class="hero-badge">
+            <span class="currency-flag-pair">🇺🇸 🇪🇬</span>
+            <span class="hero-badge-title" data-i18n="heroUsdTitle">سعر الدولار الأمريكي مقابل الجنيه المصري الآن</span>
+          </div>
+          <div class="hero-live-pill">
+            <span class="live-dot"></span>
+            <span data-i18n="heroLiveUpdated">محدث لحظياً في البنوك</span>
+          </div>
         </div>
 
-        <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-            <button onclick="playSound('open'); jumpToStation(15); closeDrawer();" class="text-amber-400 hover:underline font-bold flex items-center gap-1">
-                <i class="fa-solid fa-table-list"></i>
-                <span>مصفوفة التتبع (٢٤١ ص)</span>
+        <div class="hero-main-row">
+          <div class="hero-price-wrap">
+            <div class="hero-calc-unit">1 USD =</div>
+            <div class="hero-rate-display">
+              <span class="hero-big-number" id="heroUsdRate">56.17</span>
+              <span class="hero-egp-label" data-i18n="egpUnit">جنيه مصري</span>
+
+              <!-- Previous USD Rate Box (Smaller font, timestamp, and increase/decrease color indicator) -->
+              <div class="hero-prev-rate-box" id="heroPrevRateBox">
+                <div class="prev-rate-top">
+                  <span class="prev-rate-title" data-i18n="prevRateTitle">السعر السابق:</span>
+                  <span class="prev-rate-time" id="heroPrevTime">أمس 16:00</span>
+                </div>
+                <div class="prev-rate-values">
+                  <strong class="prev-rate-num" id="heroPrevRate">56.10 ج.م</strong>
+                  <span class="prev-rate-indicator up" id="heroPrevRateBadge">
+                    <span class="prev-diff-icon" id="heroPrevDiffIcon">▲</span>
+                    <span class="prev-diff-text" id="heroPrevDiffText">ارتفع (+0.07 ج.م)</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Note: Powered by El-Lahlouh app -->
+            <div class="hero-lahlouh-note">
+              <img src="logo.jpg" alt="" class="lahlouh-mini-img">
+              <span data-i18n="lahlouhHeroNote">تجميع وتدقيق أسعار الصرف بدعم من تطبيق «اللحلوح»</span>
+            </div>
+
+            <!-- Interactive Rate Change Strip -->
+            <div class="hero-rate-trend" id="heroUsdTrend">
+              <div class="trend-tabs">
+                <button class="trend-tab-btn active" data-period="24h" id="heroTrend24h">24h</button>
+                <button class="trend-tab-btn" data-period="7d" id="heroTrend7d">7d</button>
+              </div>
+              <span class="trend-pill up" id="heroTrendBadge">▲ +0.08% (+0.05 ج.م)</span>
+              <span class="trend-source" id="heroTrendSource" data-i18n="cbeClearingLabel">متوسط البنك المركزي الرسمي</span>
+            </div>
+          </div>
+
+          <!-- Hero Refresh Button Beside the Rate -->
+          <div class="hero-action-wrap">
+            <button id="heroRefreshBtn" class="btn-hero-refresh" title="تحديث السعر الفوري الآن" aria-label="Refresh live rate">
+              <svg class="hero-refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+                <path d="M21 3v5h-5"></path>
+                <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+                <path d="M3 21v-5h5"></path>
+              </svg>
+              <div class="hero-refresh-text">
+                <strong data-i18n="refreshNow">تحديث السعر</strong>
+                <span class="refresh-sub" id="heroLastSync">منذ لحظات</span>
+              </div>
             </button>
-            <button onclick="playSound('success'); downloadSelfFile()" class="text-indigo-400 hover:underline font-bold flex items-center gap-1">
-                <i class="fa-solid fa-download"></i>
-                <span>حفظ التطبيق</span>
-            </button>
+          </div>
         </div>
-    </aside>
 
-    <!-- ============================================================== -->
-    <!-- MAIN APPLICATION VIEWPORT                                      -->
-    <!-- ============================================================== -->
-    <main class="flex-1 max-w-4xl w-full mx-auto px-3 sm:px-4 py-4 space-y-5">
-        
-        <!-- MAIN STATION HEADER CARD -->
-        <section id="heroCard" class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/40 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl relative overflow-hidden">
-            <div class="flex items-start justify-between gap-3">
-                <div class="space-y-1.5 flex-1">
-                    <div class="flex flex-wrap items-center gap-2">
-                        <span id="heroStationBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-mono">
-                            المحطة ٣ من ١٦
-                        </span>
-                        <span id="heroPagesBadge" class="text-[11px] text-slate-300 bg-slate-800/90 px-2.5 py-0.5 rounded-lg font-mono border border-slate-700">
-                            صفحات ٣١ - ٣٢
-                        </span>
-                        <span class="text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-lg font-bold">
-                            <i class="fa-solid fa-hand-pointer ml-1"></i>اضغط على أي عنصر لعرض تفاصيله الكاملة
-                        </span>
-                    </div>
-                    <h1 id="heroTitle" class="text-base sm:text-xl font-cairo font-black text-white leading-tight pt-1">
-                        الدرس الثالث: هرم ماسلو للحاجات ومخروط الخبرة لإدجار ديل
-                    </h1>
-                    <p id="heroSubtitle" class="text-xs sm:text-sm text-slate-300 leading-relaxed pt-0.5">
-                        تدرج الدوافع والحاجات الإنسانية الخمس عند إبراهام ماسلو، وتصنيف الوسائل التعليمية في مخروط الخبرة لإدجار ديل.
-                    </p>
-                    <div class="pt-2 flex flex-wrap gap-2">
-                        <button onclick="playSound('open'); scrollToQuiz()" class="interactive-card px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-bold text-xs flex items-center gap-1.5 shadow-sm">
-                            <i class="fa-solid fa-bolt text-amber-400"></i>
-                            <span>انتقل لتحدي التجميعات</span>
-                        </button>
-                    </div>
-                </div>
-                <div id="heroIcon" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 flex items-center justify-center text-2xl shrink-0 shadow-inner">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
+        <!-- Sub-row: Highest and Lowest Rate Across ALL Egyptian Banks -->
+        <div class="hero-extremes-row">
+          <!-- 1. Highest Buy (Best to sell your USD) -->
+          <div class="extreme-card highest">
+            <div class="extreme-icon-box">🏆</div>
+            <div class="extreme-info">
+              <span class="extreme-title" data-i18n="highestBuyTitle">أعلى سعر شراء (تبيع للبنك):</span>
+              <div class="extreme-value-box">
+                <strong class="extreme-rate" id="heroHighestRate">56.45 ج.م</strong>
+                <span class="extreme-bank-tag" id="heroHighestBank">مصرف أبوظبي الإسلامي (ADIB)</span>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <!-- DYNAMIC RICH INTERACTIVE STATION CONTENT & LABS -->
-        <section id="stationContentWrapper" class="anim-fade space-y-4">
-            <!-- Dynamically Rendered with Full Clickable Details -->
-        </section>
+          <!-- 2. Lowest Buy -->
+          <div class="extreme-card lowest">
+            <div class="extreme-icon-box">📉</div>
+            <div class="extreme-info">
+              <span class="extreme-title" data-i18n="lowestBuyTitle">أدنى سعر شراء:</span>
+              <div class="extreme-value-box">
+                <strong class="extreme-rate" id="heroLowestRate">56.07 ج.م</strong>
+                <span class="extreme-bank-tag" id="heroLowestBank">بنك مصر (BM)</span>
+              </div>
+            </div>
+          </div>
 
-        <!-- AUTHENTIC MULTIPLE-CHOICE EXAM QUIZZES -->
-        <section id="quizSection" class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center text-sm">
-                        <i class="fa-solid fa-clipboard-question"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xs sm:text-sm font-cairo font-bold text-white">تحدي أسئلة التجميعات الرسمية للمحطة</h3>
-                        <p class="text-[10px] text-slate-400">أسئلة قياس واختبارات الرخصة السابقة مطابقة لنص الملزمة مع تصحيح صوتي وفوري</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span id="quizScoreBadge" class="text-[11px] font-bold bg-slate-800 text-indigo-300 px-2.5 py-1 rounded-lg font-mono border border-slate-700">
-                        ٠ / ٠
-                    </span>
-                    <button onclick="playSound('click'); resetCurrentQuiz()" class="interactive-card text-[11px] text-slate-300 hover:text-white px-2.5 py-1 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700">
-                        <i class="fa-solid fa-rotate-right ml-1"></i>إعادة
-                    </button>
-                </div>
+          <!-- 3. Lowest Sell (Best to buy USD from bank) -->
+          <div class="extreme-card best-sell">
+            <div class="extreme-icon-box">💎</div>
+            <div class="extreme-info">
+              <span class="extreme-title" data-i18n="bestSellTitle">أرخص سعر بيع (تشتري من البنك):</span>
+              <div class="extreme-value-box">
+                <strong class="extreme-rate" id="heroBestSellRate">56.17 ج.م</strong>
+                <span class="extreme-bank-tag" id="heroBestSellBank">بنك مصر / البنك الأهلي</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Highest Sell -->
+          <div class="extreme-card highest-sell">
+            <div class="extreme-icon-box">📈</div>
+            <div class="extreme-info">
+              <span class="extreme-title" data-i18n="highestSellTitle">أعلى سعر بيع بالبنوك:</span>
+              <div class="extreme-value-box">
+                <strong class="extreme-rate" id="heroHighestSellRate">56.55 ج.م</strong>
+                <span class="extreme-bank-tag" id="heroHighestSellBank">مصرف أبوظبي الإسلامي / البركة</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Central Bank Reference -->
+          <div class="extreme-card cbe-card">
+            <div class="extreme-icon-box">🏛️</div>
+            <div class="extreme-info">
+              <span class="extreme-title" data-i18n="cbeReferenceTitle">سعر البنك المركزي (CBE):</span>
+              <div class="extreme-value-box">
+                <strong class="extreme-rate" id="heroCbeRate">56.06 شراء | 56.16 بيع</strong>
+                <span class="extreme-bank-tag" data-i18n="cbeOfficialTag">السعر المرجعي المعتمد</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- All Egyptian Banks Showcase Toggle Button -->
+        <div class="all-banks-bar">
+          <button id="toggleAllBanksBtn" class="btn-toggle-all-banks" aria-expanded="false">
+            <span class="banks-btn-icon">🏛️</span>
+            <span class="banks-btn-text" data-i18n="showAllBanks">مقارنة أسعار الدولار في كافة البنوك المصرية (15 بنكاً)</span>
+            <span class="chevron-icon" id="allBanksChevron">▼</span>
+          </button>
+        </div>
+
+        <!-- Collapsible All Egyptian Banks Grid -->
+        <div class="all-banks-collapse" id="allBanksCollapse" style="display: none;">
+          <div class="all-banks-grid" id="allBanksGrid">
+            <!-- Dynamically populated with all 15 Egyptian banks -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bank Selection Bar & Filter Tabs -->
+    <section class="bank-selector-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <h2 class="section-title" data-i18n="selectBankTitle">اختر البنك أو قارن بين البنوك</h2>
+          <p class="section-subtitle" data-i18n="selectBankSub">اختر المصدر المصرفي لعرض أسعاره أو انتقل لتبويب المقارنة الشاملة</p>
+        </div>
+      </div>
+
+      <div class="bank-tabs-wrapper">
+        <div class="bank-tabs" role="tablist">
+          <button class="bank-tab active" data-bank="cbe" role="tab">
+            <div class="bank-tab-icon cbe-icon">🏦</div>
+            <div class="bank-tab-info">
+              <span class="bank-name" data-i18n="bankCbe">البنك المركزي المصري</span>
+              <span class="bank-type" data-i18n="bankCbeType">السعر المرجعي / السوقي المعتمد</span>
+            </div>
+            <div class="bank-check">✓</div>
+          </button>
+
+          <button class="bank-tab" data-bank="nbe" role="tab">
+            <div class="bank-tab-icon nbe-icon">🏛️</div>
+            <div class="bank-tab-info">
+              <span class="bank-name" data-i18n="bankNbe">البنك الأهلي المصري</span>
+              <span class="bank-type" data-i18n="bankNbeType">أكبر بنك حكومي مصري</span>
+            </div>
+            <div class="bank-check">✓</div>
+          </button>
+
+          <button class="bank-tab" data-bank="bm" role="tab">
+            <div class="bank-tab-icon bm-icon">🏢</div>
+            <div class="bank-tab-info">
+              <span class="bank-name" data-i18n="bankBm">بنك مصر</span>
+              <span class="bank-type" data-i18n="bankBmType">أسعار الصرف اللحظية بفروع البنك</span>
+            </div>
+            <div class="bank-check">✓</div>
+          </button>
+
+          <button class="bank-tab compare-tab" data-bank="compare" role="tab">
+            <div class="bank-tab-icon compare-icon">⚖️</div>
+            <div class="bank-tab-info">
+              <span class="bank-name" data-i18n="compareBanks">مقارنة البنوك الذكية</span>
+              <span class="bank-type" data-i18n="compareBanksSub">أفضل سعر شراء وأفضل سعر بيع</span>
+            </div>
+            <div class="bank-check">✓</div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Currency Filters -->
+    <section class="filter-bar">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input type="text" id="currencySearch" placeholder="ابحث باسم العملة أو الرمز (مثال: دولار، USD، ريال...)" data-i18n-placeholder="searchPlaceholder" />
+        <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
+      </div>
+
+      <div class="category-pills">
+        <button class="pill active" data-cat="all" data-i18n="catAll">جميع العملات (10)</button>
+        <button class="pill" data-cat="major" data-i18n="catMajor">العملات الدولية الرئيسية</button>
+        <button class="pill" data-cat="arab" data-i18n="catArab">العملات العربية والخليجية</button>
+      </div>
+    </section>
+
+    <!-- Rates Grid View (Normal Bank View) -->
+    <section id="ratesGridSection" class="rates-section">
+      <div class="cards-grid" id="ratesCardsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Compare Matrix Table View (Visible when compare tab is clicked) -->
+    <section id="compareSection" class="compare-section" style="display: none;">
+      <div class="table-card">
+        <div class="table-header-bar">
+          <div>
+            <h3 class="table-title" data-i18n="compareTableTitle">جدول المقارنة الفورية بين البنوك الثلاثة</h3>
+            <p class="table-subtitle" data-i18n="compareTableSub">يتم تمييز أفضل سعر شراء (للبيع للبنك) وأفضل سعر بيع (للشراء من البنك) تلقائياً باللون الأخضر</p>
+          </div>
+          <div class="table-legend">
+            <span class="legend-badge best-buy-badge"><span class="badge-dot"></span> <span data-i18n="legendBestBuy">أفضل بنك تبيع له</span></span>
+            <span class="legend-badge best-sell-badge"><span class="badge-dot"></span> <span data-i18n="legendBestSell">أفضل بنك تشتري منه</span></span>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="fx-compare-table" id="compareTable">
+            <thead>
+              <tr>
+                <th data-i18n="colCurrency">العملة</th>
+                <th data-i18n="colCbe">البنك المركزي</th>
+                <th data-i18n="colNbe">البنك الأهلي المصري</th>
+                <th data-i18n="colBm">بنك مصر</th>
+                <th data-i18n="colBestDeal">أفضل خيار لك</th>
+              </tr>
+            </thead>
+            <tbody id="compareTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Exchange Rate Chart Section -->
+    <section class="chart-section" id="chartSection">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title-area">
+            <div class="chart-tag">
+              <span class="chart-tag-dot"></span>
+              <span id="selectedCurrencyLabel">الدولار الأمريكي (USD / EGP)</span>
+            </div>
+            <h3 class="chart-main-title" data-i18n="chartTitle">الرسم البياني التفاعلي لحركة سعر الصرف</h3>
+            <p class="chart-desc" data-i18n="chartSub">تحليل الأداء السعري مقابل الجنيه المصري مع إمكانية التحديد الزمني المخصص</p>
+          </div>
+
+          <!-- Timeframe Selector Controls -->
+          <div class="chart-controls">
+            <!-- Currency selector for the chart -->
+            <div class="select-wrapper">
+              <label for="chartCurrencySelect" class="sr-only" data-i18n="chartSelectCurrency">اختر العملة</label>
+              <select id="chartCurrencySelect" class="form-select">
+                <option value="USD">🇺🇸 USD - الدولار الأمريكي</option>
+                <option value="EUR">🇪🇺 EUR - اليورو الأوروبي</option>
+                <option value="SAR">🇸🇦 SAR - الريال السعودي</option>
+                <option value="AED">🇦🇪 AED - الدرهم الإماراتي</option>
+                <option value="GBP">🇬🇧 GBP - الجنيه الإسترليني</option>
+                <option value="KWD">🇰🇼 KWD - الدينار الكويتي</option>
+                <option value="QAR">🇶🇦 QAR - الريال القطري</option>
+                <option value="CHF">🇨🇭 CHF - الفرنك السويسري</option>
+                <option value="CAD">🇨🇦 CAD - الدولار الكندي</option>
+                <option value="JPY">🇯🇵 JPY - الين الياباني (100)</option>
+              </select>
             </div>
 
-            <div id="quizCards" class="space-y-3">
-                <!-- Dynamically Rendered -->
+            <!-- Time Buttons -->
+            <div class="timeframe-buttons">
+              <button class="time-btn active" data-range="24h" data-i18n="range24h">٢٤ ساعة (لحظي)</button>
+              <button class="time-btn" data-range="7d" data-i18n="range7d">٧ أيام (أسبوعي)</button>
+              <button class="time-btn" data-range="custom" data-i18n="rangeCustom">فترة مخصصة 📅</button>
             </div>
-        </section>
-
-        <!-- BOTTOM NAVIGATION -->
-        <nav class="flex items-center justify-between bg-slate-900/80 border border-slate-800 rounded-2xl p-3 text-xs shadow-lg">
-            <button onclick="navigateStation(-1)" class="interactive-card flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-indigo-600 text-slate-200 font-bold">
-                <i class="fa-solid fa-arrow-right"></i>
-                <span>المحطة السابقة</span>
-            </button>
-            <span id="bottomStationLabel" class="text-slate-400 font-mono text-[11px] font-bold">محطة ٣ من ١٦</span>
-            <button onclick="navigateStation(1)" class="interactive-card flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold shadow-md">
-                <span>المحطة التالية</span>
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
-        </nav>
-    </main>
-
-    <!-- ============================================================== -->
-    <!-- WEB AUDIO SYNTHESIZER & COMPLETE INTERACTIVE CURRICULUM DATA   -->
-    <!-- ============================================================== -->
-    <script>
-        // 1. BUILT-IN WEB AUDIO SOUND EFFECTS ENGINE (Zero External Dependencies)
-        let soundEnabled = true;
-        let audioCtx = null;
-
-        function getAudioContext() {
-            if (!audioCtx) {
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                if (AudioContextClass) audioCtx = new AudioContextClass();
-            }
-            if (audioCtx && audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            return audioCtx;
-        }
-
-        function playSound(type) {
-            if (!soundEnabled) return;
-            try {
-                const ctx = getAudioContext();
-                if (!ctx) return;
-                const now = ctx.currentTime;
-
-                if (type === 'click') {
-                    // Crisp UI Pop/Click
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(520, now);
-                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.065);
-                    gain.gain.setValueAtTime(0.14, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.065);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.07);
-                } else if (type === 'pop') {
-                    // Soft Bubble Pop for Pyramid / Interactive Cards
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(340, now);
-                    osc.frequency.exponentialRampToValueAtTime(760, now + 0.09);
-                    gain.gain.setValueAtTime(0.18, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.095);
-                } else if (type === 'open') {
-                    // Pleasant Chime for Station / Tab Switch
-                    [440, 659.25].forEach((freq, idx) => {
-                        const osc = ctx.createOscillator();
-                        const gain = ctx.createGain();
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(freq, now + idx * 0.05);
-                        gain.gain.setValueAtTime(0.12, now + idx * 0.05);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 0.16);
-                        osc.connect(gain);
-                        gain.connect(ctx.destination);
-                        osc.start(now + idx * 0.05);
-                        osc.stop(now + idx * 0.05 + 0.17);
-                    });
-                } else if (type === 'success') {
-                    // Victory Arpeggio for Correct Quiz Answer
-                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
-                        const osc = ctx.createOscillator();
-                        const gain = ctx.createGain();
-                        osc.type = 'triangle';
-                        osc.frequency.setValueAtTime(freq, now + idx * 0.065);
-                        gain.gain.setValueAtTime(0.16, now + idx * 0.065);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.065 + 0.22);
-                        osc.connect(gain);
-                        gain.connect(ctx.destination);
-                        osc.start(now + idx * 0.065);
-                        osc.stop(now + idx * 0.065 + 0.23);
-                    });
-                } else if (type === 'error') {
-                    // Soft Low Buzz for Wrong Quiz Answer
-                    [220, 175].forEach((freq, idx) => {
-                        const osc = ctx.createOscillator();
-                        const gain = ctx.createGain();
-                        osc.type = 'sawtooth';
-                        osc.frequency.setValueAtTime(freq, now + idx * 0.09);
-                        gain.gain.setValueAtTime(0.1, now + idx * 0.09);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.18);
-                        osc.connect(gain);
-                        gain.connect(ctx.destination);
-                        osc.start(now + idx * 0.09);
-                    osc.stop(now + idx * 0.09 + 0.19);
-                });
-                } else if (type === 'splash') {
-                    // [UPDATE #2] Welcoming Ambient Harmonic Chime for Splash Screen
-                    [392.00, 493.88, 587.33, 783.99].forEach((freq, idx) => {
-                        const osc = ctx.createOscillator();
-                        const gain = ctx.createGain();
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-                        gain.gain.setValueAtTime(0.11, now + idx * 0.08);
-                        gain.gain.exponentialRampToValueAtTime(0.0008, now + idx * 0.08 + 0.45);
-                        osc.connect(gain);
-                        gain.connect(ctx.destination);
-                        osc.start(now + idx * 0.08);
-                        osc.stop(now + idx * 0.08 + 0.46);
-                    });
-                }
-            } catch (e) {
-                console.warn(e);
-            }
-        }
-
-        // ==============================================================
-        // [UPDATE #2] THEME TOGGLE (DARK / DAYLIGHT MODE) & SPLASH LOGIC
-        // ==============================================================
-        let isLightMode = false;
-
-        function toggleThemeMode() {
-            isLightMode = !isLightMode;
-            const htmlEl = document.documentElement;
-            const icon = document.getElementById('themeToggleIcon');
-            if (isLightMode) {
-                htmlEl.classList.remove('dark');
-                htmlEl.classList.add('light');
-                if (icon) icon.className = 'fa-solid fa-moon text-sm text-indigo-600';
-            } else {
-                htmlEl.classList.remove('light');
-                htmlEl.classList.add('dark');
-                if (icon) icon.className = 'fa-solid fa-sun text-sm text-amber-400';
-            }
-            playSound('open');
-            try {
-                localStorage.setItem('rukhsa_theme_mode', isLightMode ? 'light' : 'dark');
-            } catch (e) {}
-        }
-
-        function loadSavedTheme() {
-            try {
-                const savedTheme = localStorage.getItem('rukhsa_theme_mode');
-                if (savedTheme === 'light') {
-                    isLightMode = true;
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.classList.add('light');
-                    const icon = document.getElementById('themeToggleIcon');
-                    if (icon) icon.className = 'fa-solid fa-moon text-sm text-indigo-600';
-                }
-            } catch (e) {}
-        }
-
-        function runSplashScreen() {
-            const splash = document.getElementById('appSplashScreen');
-            if (!splash) return;
-            // Attempt gentle welcome chime
-            setTimeout(() => playSound('splash'), 120);
-            // Keep visible for 4 seconds (4000ms), then fade out smoothly
-            setTimeout(() => {
-                playSound('open');
-                splash.style.opacity = '0';
-                splash.style.transform = 'scale(1.04)';
-                splash.style.pointerEvents = 'none';
-                setTimeout(() => {
-                    splash.classList.add('hidden');
-                }, 700);
-            }, 4000);
-        }
-
-        function toggleSound() {
-            soundEnabled = !soundEnabled;
-            const icon = document.getElementById('soundToggleIcon');
-            const btn = document.getElementById('soundToggleBtn');
-            if (soundEnabled) {
-                icon.className = 'fa-solid fa-volume-high text-xs';
-                btn.classList.replace('text-slate-500', 'text-indigo-400');
-                playSound('open');
-            } else {
-                icon.className = 'fa-solid fa-volume-xmark text-xs';
-                btn.classList.replace('text-indigo-400', 'text-slate-500');
-            }
-        }
-
-        // 2. DETAILED INTERACTIVE DATA FOR PYRAMIDS, CONES, MATRICES & LABS
-        const MASLOW_LEVELS = [
-            {
-                id: 5,
-                title: "٥. الحاجة إلى تحقيق الذات (قمة الهرم - ص ٣١)",
-                badge: "قمة الهرم - المستوى الخامس",
-                color: "purple",
-                keywords: "الابتكار • حل المشكلات • تقبل الحقائق • الإنجاز • تحقيق الأحلام",
-                desc: "تمثل قمة هرم ماسلو للحاجات الإنسانية؛ فبعد أن يشبع الفرد حاجاته الفسيولوجية والأمنية والاجتماعية وحاجته للتقدير، يسعى إلى تحقيق ذاته عبر الابتكار، وحل المشكلات، وتقبل الحقائق، والإنجاز، وإحساس الفرد بذاته وتحقيق أحلامه وطموحاته العليا.",
-                examTip: "سؤال تجميعات متكرر: (الابتكار وحل المشكلات وتقبل الحقائق وإحساس الفرد بذاته) تقع في قمة هرم ماسلو وتسمى: الحاجة لتحقيق الذات."
-            },
-            {
-                id: 4,
-                title: "٤. الحاجة إلى التقدير (المستوى الرابع - ص ٣١)",
-                badge: "المستوى الرابع",
-                color: "indigo",
-                keywords: "تقدير الذات • الثقة • الإنجازات • احترام الآخرين • الاحترام من الآخرين",
-                desc: "بما أن الفرد يعيش في مجتمع، فهو يحتاج بعد إشباع حاجاته الاجتماعية إلى تقدير الآخرين له وتقديره لهم، ويشمل ذلك: تقدير الذات، الثقة بالنفس، الإنجازات، احترام الآخرين، وكسب الاحترام من الآخرين.",
-                examTip: "تأتي الحاجة إلى التقدير في المرتبة الرابعة مباشرة بعد الحاجات الاجتماعية (الحب والانتماء) وقبل قمة الهرم (تحقيق الذات)."
-            },
-            {
-                id: 3,
-                title: "٣. الحاجات الاجتماعية - الحب والانتماء (المستوى الثالث - ص ٣١)",
-                badge: "المستوى الثالث",
-                color: "cyan",
-                keywords: "الصداقة • العلاقات الأسرية • الألفة الجسدية • الانتماء للجماعة",
-                desc: "بعد أن يجد الفرد حاجته من المأكل والمشرب والأمان، يريد أن يكوّن صداقات وأسرة وعلاقات اجتماعية، فلا يستطيع الإنسان العيش بمفرده، وتشمل: الصداقة، الأسرة، العلاقات الاجتماعية، والألفة.",
-                examTip: "تسمى في اختبارات قياس: (الحاجات الاجتماعية) أو (الحاجة إلى الحب والانتماء)."
-            },
-            {
-                id: 2,
-                title: "٢. حاجات الأمن والأمان (المستوى الثاني - ص ٣١)",
-                badge: "المستوى الثاني (بعد الفسيولوجية مباشرة)",
-                color: "emerald",
-                keywords: "السلامة الجسدية • الأمن الوظيفي • أمن الموارد • الأمن الأسري والصحي • أمن الممتلكات",
-                desc: "تأتي مباشرة بعد الحاجات الفسيولوجية الأشد إلحاحاً؛ استدلالاً بقوله تعالى: ﴿وَأَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ﴾ حيث قدّم الطعام على الأمان لأن الحاجة للطعام أشد. وتشمل: السلامة الجسدية، وأمن الإنسان في الوظيفة، والصحة، وأمن الموارد، وحفظ النفس والمال والممتلكات في بيئته.",
-                examTip: "سؤال ورد في اختبار سابق (ص ٣٢): اهتم ماسلو في هرمه بعد الحاجات الفسيولوجية مباشرة بالحاجة إلى: (الأمن)."
-            },
-            {
-                id: 1,
-                title: "١. الحاجات الفسيولوجية (قاعدة الهرم - ص ٣١)",
-                badge: "قاعدة الهرم - الحاجات الأكثر إلحاحاً وأهمية",
-                color: "amber",
-                keywords: "التنفس • الطعام • الماء • النوم • التوازن • الإخراج",
-                desc: "تمثل قاعدة هرم ماسلو وأساسه؛ ومعنى (فسيولوجية) أي خاصة بعلم وظائف الأعضاء، وتشمل: الحاجة إلى التنفس، الماء، الطعام، النوم، التوازن، والإخراج؛ حيث لا يستطيع الفرد أن يعيش بدونها، وإذا أشبعت انتقل إلى حاجة الأمان.",
-                examTip: "تقع في قاعدة الهرم وهي نقطة الانطلاق الأولى في نظام ماسلو التصاعدي للأولويات."
-            }
-        ];
-
-        const DALE_LEVELS = [
-            {
-                id: 3,
-                title: "النوع الثالث: الوسائل المجردة = (خبرات مجردة) - قمة المخروط (ص ٣٢)",
-                badge: "قمة المخروط - الأكثر تجريداً",
-                color: "rose",
-                items: ["١. الرموز اللفظية (الكلمات المنطوقة والمكتوبة)", "٢. الرموز البصرية (الرسوم التخطيطية والبيانية والرموز)"],
-                desc: "تقع في قمة مخروط إدجار ديل، وتعتمد على الخيال أو خبرة سابقة لدى المتعلم وعلى صور ذهنية سابقة؛ وفي حال كانت تلك الصور غير واضحة لدى المتعلم تتكون لديه مفاهيم أقل دقة وصحة."
-            },
-            {
-                id: 2,
-                title: "النوع الثاني: الوسائل شبه المحسوسة = (خبرات ممثلة / مصورة) - وسط المخروط (ص ٣٢)",
-                badge: "وسط المخروط - خبرات ممثلة بالصور والملاحظة",
-                color: "indigo",
-                items: [
-                    "١. التسجيلات الصوتية والصور الثابتة",
-                    "٢. الأفلام المتحركة",
-                    "٣. التلفزيون التعليمي",
-                    "٤. المعارض والمتاحف",
-                    "٥. الدراسات والرحلات الميدانية",
-                    "٦. العروض العلمية التوضيحية"
-                ],
-                desc: "تمثل المنطقة الوسطى في مخروط الخبرة لإدجار ديل، وفيها يتعلم الطالب عبر المشاهدة والملاحظة السمعية والبصرية والتمثيل الصوري دون ممارسة يدوية كاملة."
-            },
-            {
-                id: 1,
-                title: "النوع الأول: الوسائل المحسوسة = (خبرات مباشرة فعلية) - قاعدة المخروط (ص ٣٢)",
-                badge: "قاعدة المخروط - الأكثر واقعية وبقاءً لأثر التعلم",
-                color: "emerald",
-                items: [
-                    "١. الخبرات الممثلة (لعب الأدوار والتمثيل المسرحي)",
-                    "٢. الخبرات المعدلة (النماذج والعينات والمجسمات)",
-                    "٣. الممارسة الواقعية المباشرة الهادفة (أوسع قاعدة في أسفل المخروط)"
-                ],
-                desc: "تمثل قاعدة مخروط الخبرة لإدجار ديل، وتشمل الممارسة الواقعية المباشرة التي يشترك فيها المتعلم بجميع حواسه وعمله اليدوي المباشر. (سؤال اختبار سابق ص ٣٢: تمثل قاعدة المخروط: الخبرات المباشرة الواقعية)."
-            }
-        ];
-
-        const ERIKSON_STAGES = [
-            { id: 1, name: "١. الثقة مقابل عدم الثقة", age: "من الميلاد حتى عمر سنتين", color: "indigo", details: "المرحلة الأولى (الرضاعة): إذا حصل الرضيع على الرعاية والحنان والتغذية المنتظمة من الأم تنمو لديه الثقة بالعالم، وإذا تعرض للإهمال ينشأ لديه شعور بعدم الثقة والخوف." },
-            { id: 2, name: "٢. الاستقلال مقابل الشعور بالخجل", age: "من سنتين حتى ٤ سنوات", color: "indigo", details: "المرحلة الثانية (الطفولة المبكرة الأولى): يبدأ الطفل بتعلم المشي والكلام والإخراج والاعتماد على نفسه؛ فإذا شُجع نما لديه الاستقلال، وإذا وُبخ أو قُيدت حركته شعر بالخجل والشك في قدراته." },
-            { id: 3, name: "٣. المبادرة مقابل الشعور بالذنب", age: "من ٣ حتى ٥ سنوات (طفل الروضة)", color: "emerald", details: "المرحلة الثالثة (مرحلة الروضة وما قبل المدرسة): يكثر فيها حب الاستطلاع والأسئلة والمبادرة باللعب والاكتشاف؛ تشجيع طفل الروضة يكسبه روح المبادرة، وقمعه أو السخرية منه يورثه الشعور بالذنب. (تكرر في قياس ص ٣٠)." },
-            { id: 4, name: "٤. الكفاية والاجتهاد مقابل الشعور بالنقص", age: "من ٦ حتى ٩/١٢ سنة (الابتدائي)", color: "amber", details: "المرحلة الرابعة (الطفولة المتوسطة والمتأخرة - سن المدرسة الابتدائية): يسعى الطالب لإتقان المهارات الأكاديمية والاجتماعية والمثابرة؛ تعزيز المعلم له يكسبه الكفاية والاجتهاد، ومقارنته السلبية أو الفشل المتكرر يصيبه بالشعور بالنقص والدونية." },
-            { id: 5, name: "٥. الهوية مقابل اضطراب الهوية والدور", age: "من ١٠ حتى ١٨ سنة (المراهقة)", color: "rose", details: "المرحلة الخامسة (المراهقة - المتوسطة والثانوية): يبحث المراهق عن وجوده وأهدافه وخططه وهويته المستقلة؛ واعتراف الآخرين بأنه أصبح كبيراً وشهادتهم له يؤدي إلى الإحساس بالهوية، بينما التهميش يؤدي لغموض واضطراب الدور." },
-            { id: 6, name: "٦. المودة والألفة مقابل العزلة", age: "من ١٩ حتى ٢٤ سنة (مرحلة الشباب)", color: "cyan", details: "المرحلة السادسة (مرحلة الشباب): مرحلة الزواج وتكوين العلاقات العاطفية والاجتماعية العميقة؛ النجاح فيها يحقق المودة والألفة، والفشل يهدد الشاب بالشعور بالعزلة والانطواء." },
-            { id: 7, name: "٧. الإنتاجية مقابل الأنانية (الركود)", age: "من ٢٥ حتى ٥٩ سنة (منتصف العمر)", color: "purple", details: "المرحلة السابعة (مرحلة الرشد ومنتصف العمر): مرحلة العطاء المهني وتربية الأجيال والإنتاج للمجتمع؛ الفشل فيها يؤدي إلى الأنانية والتمركز حول الذات والركود." },
-            { id: 8, name: "٨. التكامل مقابل اليأس", age: "ما بعد عمر ٦٠ سنة (الشيخوخة)", color: "teal", details: "المرحلة الثامنة والأخيرة (كبار السن): يتأمل الفرد حصيلة حياته؛ فالإحساسات الإيجابية والرضا عن إنجازاته تؤدي إلى الشعور بالتكامل والحكمة، والندم والسلبية يؤديان للشعور باليأس." }
-        ];
-
-        const BLOOM_LEVELS = [
-            { id: 1, name: "١. التذكر (المعرفة)", type: "مستوى عقلي أدنى (قاعدة الهرم)", verbs: "يعرّف، يعدد، يذكر، يسمي، يصف، يحدد، يسترجع، يكتب نصاً محفوظاً", ex: "أن يعدد الطالب أركان الإيمان / أن يعرّف الطالب التوحيد اصطلاحاً / أن يذكر شروط بناء الفعل المضارع.", color: "slate" },
-            { id: 2, name: "٢. الفهم (الاستيعاب)", type: "مستوى عقلي أدنى", verbs: "يفسر، يشرح، يلخص بلغته، يوضح، يعلل، يترجم، يصوغ بأسلوبه، يعطي مثالاً، يستنتج", ex: "أن يفسر الطالب آية الكرسي / أن يشرح النص الأدبي / أن يلخص خواص الهيدروجين بلغته الخاصة.", color: "emerald" },
-            { id: 3, name: "٣. التطبيق", type: "مستوى عقلي أدنى (حلقة الوصل)", verbs: "يطبق، يستعمل، يعرب جملة جديدة، يحسب، يجري تجربة، يحل مسألة، يرسم بيانياً، ينفذ", ex: "أن يعرب الطالب جملة (ما زالت السماء منهمرة) / أن يحسب درجة الحرارة الفهرنهايتية بمعرفته للمئوية / أن يصمم تغليفاً جديداً للكتب.", color: "cyan" },
-            { id: 4, name: "٤. التحليل", type: "مستوى عقلي أعلى (مهارات عليا)", verbs: "يحلل، يقارن، يوازن، يصنف، يفرق بين، يميز بين الحقائق والآراء، يستخرج العناصر", ex: "أن يفرق الطالب بين صفات الحيوانات آكلات اللحوم وآكلات الأعشاب / أن يصنف المواد إلى فلزات ولافلزات.", color: "amber" },
-            { id: 5, name: "٥. التركيب (الابتكار)", type: "مستوى عقلي أعلى (مهارات عليا)", verbs: "يركب، يؤلف، ينظم قصيدة، ينشئ مؤلفاً جديداً، يصمم، يشتق، يقترح خطة، يعد مقالاً", ex: "أن ينظم الطالب قصيدة شعرية / أن ينشئ مؤلفاً جديداً لكتابة قصة أو موضوع تعبير.", color: "purple" },
-            { id: 6, name: "٦. التقويم (أعلى الهرم)", type: "أعلى مستويات بلوم وأكثرها تعقيداً", verbs: "يحكم على، ينقد، يبدي رأيه، يبرر، يقرر، يقيم، يفند بالحجة", ex: "أن ينقد الطالب القصيدة نقداً أدبياً / أن يبدي رأيه في البيت الرابع من معلقة زهير / أن يعطي رأيه في أنواع الأطعمة.", color: "rose" }
-        ];
-
-        // 3. MASTER STATIONS DATA
-        const STATIONS = [
-            {
-                id: 0,
-                shortTitle: "١. دورة النمو المهني",
-                title: "الدرس الأول: دورة النمو المهني ومجتمعات التعلم المهنية",
-                pages: "صفحات ١ - ١١",
-                icon: "fa-chart-line",
-                subtitle: "تعريف النمو والمهنة، الأهداف الـ ١٠، المبررات الـ ٧، البرامج الـ ٤، ساعات النمو، والأساليب العملية والنظرية والذاتية.",
-                quizzes: [
-                    { q: "أي الأطراف الآتية تقع عليه المسؤولية المباشرة في جهود النمو المهني للمعلم؟ (ص ١٠)", opts: ["قائد المدرسة", "المشرف التربوي", "إدارة التعليم", "المعلم نفسه"], c: 3, exp: "المسؤولية المباشرة الأولى في جهود النمو المهني تقع على عاتق المعلم نفسه من خلال التعلم الذاتي والتطوير المستمر." },
-                    { q: "من أساليب التنمية المهنية للمعلم والتي تهدف إلى إكساب المعلم مهارات التعلم الذاتي: (ص ١٠)", opts: ["التعلم المصغر", "القراءة الموجهة", "الدروس التطبيقية", "الاجتماعات الدورية"], c: 1, exp: "التثقيف الذاتي يشمل القراءة الحرة، القراءة الموجهة، البحث في الإنترنت، واليوتيوب، والمراسلة عن بعد." },
-                    { q: "من أساليب التنمية المهنية التي تهدف لإكساب المعلم مهارات التعلم النظرية: (ص ١٠ و ١١)", opts: ["تبادل الزيارات", "البحث في الإنترنت", "المحاضرات التربوية", "التدريس المصغر"], c: 2, exp: "المحاضرات، الندوات، النشرات التربوية، الاجتماعات، ورش العمل، وحلقات النقاش تصنف كأساليب نظرية." },
-                    { q: "اليوم التدريبي الواحد المعتمد للترقية في لائحة الوظائف التعليمية يعادل: (ص ٨)", opts: ["ساعتين", "٣ ساعات", "٥ ساعات", "٧ ساعات"], c: 2, exp: "حددت اللائحة أن اليوم التدريبي الواحد المعتمد يعادل ٥ ساعات نمو مهني." },
-                    { q: "لاحظت المعلمة (زينب) قصوراً في إعداد ملف الإنجاز ثم دخلت قوقل وكتبت (مكونات ملف إنجاز المعلمة)، بذلك استخدمت أسلوب: (ص ١١)", opts: ["التنمية المهنية العملية", "التنمية المهنية النظرية", "التنمية المهنية الذاتية", "التنمية المهنية التدريبية"], c: 2, exp: "البحث الذاتي عبر الإنترنت ومحركات البحث يصنف ضمن أساليب التنمية المهنية الذاتية." }
-                ]
-            },
-            {
-                id: 1,
-                shortTitle: "٢. نظريات التعلم",
-                title: "الدرس الثاني: نظريات التعلم (السلوكية، المعرفية، البنائية، الاجتماعية، وأريكسون)",
-                pages: "صفحات ١٢ - ٣٠",
-                icon: "fa-brain",
-                subtitle: "واطسون، بافلوف، سكنر، ثورندايك، التعلم المبرمج، برونر، أوزبل، الجشطالت، بياجيه، فيجوتسكي، ديوي، باندورا، ومراحل أريكسون الثمان.",
-                quizzes: [
-                    { q: "مؤسس ورائد النظرية الكلاسيكية (السلوكية) الذي يرى عقل الطالب صفحة بيضاء وصندوقاً هو: (ص ١٢ و ٢٤)", opts: ["واطسون", "بافلوف", "سكنر", "ثورندايك"], c: 0, exp: "العالم واطسون هو مؤسس السلوكية، وتلاه بافلوف وسكنر وثورندايك." },
-                    { q: "أزال المعلم إنذاراً سابقاً وخصم درجة سابقة عن الطالب بسبب مشاركته، بذلك استخدم المعلم: (ص ٢٥)", opts: ["تعزيز إيجابي", "تعزيز سلبي", "عقاب إيجابي", "عقاب سلبي"], c: 1, exp: "إزالة مثير مؤلم أو غير مرغوب فيه (الإنذار والخصم) لتقوية سلوك مرغوب فيه هو تعزيز سلبي." },
-                    { q: "كتابة الدرس ثلاث مرات بسبب التأخر عن الحصة تصنف: (ص ٢٥)", opts: ["تعزيز إيجابي", "تعزيز سلبي", "عقاب إيجابي", "عقاب سلبي"], c: 2, exp: "إضافة مثير منفر وغير مرغوب فيه (كتابة الدرس) لتقليل سلوك التأخر يعد عقاباً إيجابياً." },
-                    { q: "حرمان الطالب من حصة التربية البدنية لأنه لم يحل الواجب يصنف: (ص ٢٦)", opts: ["تعزيز إيجابي", "تعزيز سلبي", "عقاب إيجابي", "عقاب سلبي"], c: 3, exp: "سحب أو حرمان الطالب من مثير محبب ومرغوب فيه (حصة البدنية) يعد عقاباً سلبياً." },
-                    { q: "يتجاهل المعلم الطالب الذي يرفع صوته أثناء المشاركات ويسأل زملاءه الباقين؛ بهذا التصرف المعلم يعمل لسلوك الطالب: (ص ٢٦)", opts: ["تعزيز", "عقاب", "انطفاء", "ثواب"], c: 2, exp: "إيقاف المثير المعزز وتجاهل السلوك غير المرغوب يؤدي تدريجياً إلى تلاشيه وحدوث الانطفاء." },
-                    { q: "صاحب فكرة المنهج الحلزوني ونظرية الاكتشاف هو العالم: (ص ١٧ و ٢٨)", opts: ["كوفكا", "برونر", "أوزبل", "سكنر"], c: 1, exp: "العالم جيروم برونر هو صاحب نظرية التعلم بالاكتشاف والمنهج الحلزوني." },
-                    { q: "النظرية التي تعتمد على الإدراك الكلي للموقف وأن التعلم يحدث فجأة من الكل إلى الجزء هي: (ص ٢٠ و ٢٧)", opts: ["الاكتشاف", "الاستبصار (الجشطالت)", "المحاولة والخطأ", "الإجرائية"], c: 1, exp: "نظرية الجشطالت تعني الإدراك الكلي، وتسمى نظرية الاستبصار (الفهم وليس التكرار والحفظ)." },
-                    { q: "الفجوة أو المسافة بين ما يتعلمه الطالب بنفسه وبين ما يتعلمه بمساعدة المعلم أو الأقران: (ص ٢١ و ٢٩)", opts: ["الاحتفاظ", "التعلم ذو المعنى", "المنهج الحلزوني", "منطقة النمو الوشيك (ZPD)"], c: 3, exp: "منطقة النمو الوشيك مفهوم أساسي وضعه العالم البنائي فيجوتسكي." },
-                    { q: "مرحلة (المعكوسية والمقلوبية والاحتفاظ) تمثل عند العالم جان بياجيه مرحلة: (ص ٢٢ و ٢٩)", opts: ["النمو الحس حركي", "ما قبل العمليات", "العمليات الحسية المادية (٦-١٢ سنة)", "العمليات المجردة"], c: 2, exp: "في مرحلة العمليات المحسوسة (الابتدائية) يدرك الطفل ثبات الحجم والكتلة وطبيعة العمليات العكسية." },
-                    { q: "في مرحلة الطفولة المتوسطة والمتأخرة (٦ - ٩ سنوات) بحسب نظرية أريكسون النفس-اجتماعية، تتمثل الأزمة في: (ص ٢٣ و ٣٠)", opts: ["عدم الشعور بالثقة", "الشعور بالخجل", "الشعور بالأنانية", "الكفاية والاجتهاد مقابل الشعور بالنقص"], c: 3, exp: "المرحلة الرابعة عند أريكسون (سن المدرسة) هي الاجتهاد مقابل الشعور بالنقص." }
-                ]
-            },
-            {
-                id: 2,
-                shortTitle: "٣. ماسلو وديل",
-                title: "الدرس الثالث: هرم ماسلو للحاجات ومخروط الخبرة لإدجار ديل",
-                pages: "صفحات ٣١ - ٣٢",
-                icon: "fa-layer-group",
-                subtitle: "تدرج الدوافع والحاجات الإنسانية الخمس (اضغط على أي طبقة في الهرم لعرض شرحها)، وتصنيف الوسائل التعليمية في مخروط ديل.",
-                quizzes: [
-                    { q: "اهتم ماسلو في هرمه بعد الحاجات الفسيولوجية مباشرة بالحاجة إلى: (ص ٣١ - ٣٢)", opts: ["تقدير الذات", "الأمن والأمان", "تحقيق الذات", "الحب والانتماء"], c: 1, exp: "استشهدت الملزمة بالآية (أطعمهم من جوع وآمنهم من خوف)؛ فالحاجة للأمان تأتي فوراً بعد الفسيولوجية." },
-                    { q: "وفقاً لمخروط الخبرة للعالم إدجار ديل، تمثل قاعدة المخروط: (ص ٣٢)", opts: ["الخبرات المجردة (الرموز اللفظية)", "الخبرات المباشرة الواقعية (المحسوسة)", "الخبرات شبه المحسوسة", "الخبرات غير المباشرة"], c: 1, exp: "قاعدة مخروط الخبرة لديل تتكون من الممارسة الواقعية والخبرات المباشرة الحية." },
-                    { q: "الابتكار وحل المشكلات وتقبل الحقائق وتحقيق الأحلام تقع ضمن هرم ماسلو في مستوى: (ص ٣١)", opts: ["الحاجات الفسيولوجية", "حاجات الأمان", "الحاجة إلى التقدير", "الحاجة إلى تحقيق الذات (قمة الهرم)"], c: 3, exp: "قمة هرم ماسلو هي الحاجة إلى تحقيق الذات وتشمل الابتكار وحل المشكلات وتقبل الحقائق." }
-                ]
-            },
-            {
-                id: 3,
-                shortTitle: "٤. هندسة المنهج",
-                title: "الدرس الرابع: هندسة المنهج الدراسي وعناصره والأنواع الـ ١١",
-                pages: "صفحات ٣٣ - ٣٩",
-                icon: "fa-sitemap",
-                subtitle: "المفهوم التقليدي والحديث، عناصر المنهج الـ ٦، معايير اختيار وتنظيم المحتوى، وأنواع المناهج الـ ١١ (المحوري، النشاط، الخفي، المتكامل...).",
-                quizzes: [
-                    { q: "منهج غير رسمي وغير مخطط له يكتسبه الطالب داخل المدرسة وخارجها بدون قصد أو توجيه: (ص ٣٦ - ٣٧)", opts: ["المنهج الرسمي", "المنهج المحوري", "المنهج الخفي (المستتر)", "المنهج الظاهري"], c: 2, exp: "المنهج الخفي هو ما يتعلمه الطالب من القيم والممارسات من خلال القدوة والمناخ المدرسي غير المخطط." },
-                    { q: "أي من عناصر المنهج يعد أكثر أهمية وتتأثر به بقية العناصر؟ (ص ٣٤ و ٣٨)", opts: ["الأهداف", "المحتوى", "التقويم", "طريقة التدريس"], c: 0, exp: "الأهداف هي نقطة الانطلاق والموجه الذي تتأثر به جميع مكونات المنهج الأخرى." },
-                    { q: "المنهج الذي يدور حول حاجات ومشكلات المجتمع ويقدم برنامجاً عاماً وخاصاً هو: (ص ٣٦ - ٣٧)", opts: ["منهج المواد المنفصلة", "منهج النشاط", "المنهج المحوري", "المنهج التكنولوجي"], c: 2, exp: "المنهج المحوري يركز بالأساس على المجتمع ومشكلاته." }
-                ]
-            },
-            {
-                id: 4,
-                shortTitle: "٥. القياس والتقويم",
-                title: "الدرس الخامس: التقويم والتقييم والقياس ونماذج أدوات الرصد الـ ٤",
-                pages: "صفحات ٤٠ - ٥٦",
-                icon: "fa-scale-balanced",
-                subtitle: "الفرق بين القياس والتقييم والتقويم، التقويم القبلي والتكويني والتشخيصي والختامي، محكي ومعياري المرجع، والنماذج الأصلية الأربعة.",
-                quizzes: [
-                    { q: "حصل أحمد على ٦٠ من ١٠٠ (هذا قياس)، وتقديره جيد (هذا تقييم)، وتوجيهه لبرنامج علاجي يمثل: (ص ٤٠ - ٤١)", opts: ["قياساً كمياً", "تقويماً تربوياً", "اختباراً معيارياً", "تقديراً عددياً"], c: 1, exp: "التقويم عملية تشخيصية وعلاجية تتضمن إصدار حكم واتخاذ قرار لتعديل المسار." },
-                    { q: "التقويم الذي يهدف لمتابعة تقدم الطالب أثناء الحصة وتعديل التدريس هو التقويم: (ص ٤٢ و ٤٧)", opts: ["القبلي", "التكويني (البنائي المستمر)", "الختامي التجميعي", "الانتقائي"], c: 1, exp: "التقويم التكويني يصاحب عملية التعلم ويوجه المعلم والمتعلم للتطوير المستمر." },
-                    { q: "أداة تقويم ترصد السلوك باختيار أحد تقديرين (نعم/لا) أو (صح/خطأ) دون أي تدرج تسمى: (ص ٥٢)", opts: ["سلم التقدير اللفظي", "قائمة الرصد أو الشطب (Checklist)", "السجل القصصي", "سجل سير التعلم"], c: 1, exp: "قائمة الشطب قائمة ثنائية قاطعة (يا أبيض يا أسود) تخلو من أي تدرج." },
-                    { q: "أي العبارات الآتية تمثل نتيجة اختبار معياري المرجع؟ (ص ٤٥ و ٤٨)", opts: ["يفوق أداء محمد أداء ٩٠٪ من زملائه في الصف", "يكتب خالد ما يملى عليه بنسبة ٩٠٪", "يجمع أحمد أي عددين دون أخطاء", "يطبع ٩٠ كلمة في الدقيقة"], c: 0, exp: "الاختبار معياري المرجع يقارن أداء الطالب بمتوسط أداء زملائه (المجموعة المعيارية)." }
-                ]
-            },
-            {
-                id: 5,
-                shortTitle: "٦. مهارات التفكير",
-                title: "الدرس السادس: أنواع التفكير ومهارات التفكير الإبداعي والناقد",
-                pages: "صفحات ٥٧ - ٦٥",
-                icon: "fa-wand-magic-sparkles",
-                subtitle: "الطلاقة بأنواعها الـ ٥، المرونة، الأصالة، الإفاضة، الاستقراء والاستنباط، خطوات حل المشكلات الـ ٧، والتفكير فوق المعرفي.",
-                quizzes: [
-                    { q: "توليد أكبر قدر ممكن من البدائل والأفكار والحلول خلال وقت محدد يمثل مهارة: (ص ٥٨ و ٦٣)", opts: ["المرونة", "الأصالة", "الطلاقة", "الإفاضة"], c: 2, exp: "الطلاقة تهتم بالكم وغزارة توليد الأفكار والبدائل في وقت محدد." },
-                    { q: "اذكر ٣ طرق لفتح الكتاب دون لمسه، أو استخدامات غير مألوفة لقلم الرصاص، يقيس ذلك مهارة: (ص ٥٨ و ٦٣)", opts: ["الأصالة", "الطلاقة", "المرونة", "الإفاضة"], c: 0, exp: "الأصالة تعني التفرد والندرة والجدة وإنتاج أفكار غير مسبوقة وغير مألوفة." },
-                    { q: "التفكير الذي ينتقل من دراسة الأمثلة والجزئيات للوصول إلى القاعدة الكلية والتعميم هو: (ص ٥٩ و ٦٣)", opts: ["الاستنباطي", "الاستقرائي", "المنطقي الشكلي", "الميتا معرفي"], c: 1, exp: "التفكير الاستقرائي يسير من الجزء إلى الكل ومن الأمثلة إلى القاعدة." }
-                ]
-            },
-            {
-                id: 6,
-                shortTitle: "٧. الإجازات وتقويم المعلم",
-                title: "الدرس السابع: لائحة الإجازات وتقويم أداء المعلم ونافذة جوهاري",
-                pages: "صفحات ٦٦ - ٧١",
-                icon: "fa-id-card-clip",
-                subtitle: "الإجازات الـ ٩ وتفاصيلها، سلم تقويم الأداء الوظيفي، صفات وأنواع المعلمين، ونافذة جوهاري التفاعلية للتأمل الذاتي.",
-                quizzes: [
-                    { q: "الإجازة الاضطرارية للمعلم تبلغ في السنة الميلادية: (ص ٦٦)", opts: ["٣ أيام", "٥ أيام (بموافقة قائد المدرسة)", "١٠ أيام", "١٥ يوماً"], c: 1, exp: "الإجازة الاضطرارية ٥ أيام في السنة الميلادية سواء متفرقة أو مجتمعة بموافقة القائد." },
-                    { q: "حسب نافذة جوهاري، المنطقة التي يعرفها الآخرون عنك ولا تعرفها أنت عن نفسك هي: (ص ٦٩ - ٧٠)", opts: ["المنطقة المفتوحة", "المنطقة العمياء", "المنطقة الخفية (القناع)", "المنطقة المجهولة"], c: 1, exp: "المنطقة العمياء تشمل السمات والسلوكيات التي يراها الآخرون فيك وأنت غافل عنها." },
-                    { q: "إذا حصل المعلم الممارس على تقدير غير مرضي لثلاث سنوات متتالية فإن الإجراء هو: (ص ٦٧ و ٧١)", opts: ["حرمانه من العلاوة فقط", "نقله إلى مدرسة أخرى", "الفصل من الخدمة", "توجيه إنذار أخير"], c: 2, exp: "السنة الأولى تنبيه وحرمان علاوة، الثانية تحويل لوظيفة إدارية، والثالثة يفصل من العمل." }
-                ]
-            },
-            {
-                id: 7,
-                shortTitle: "٨. علم نفس النمو",
-                title: "الدرس الثامن: علم نفس النمو ومراحل وخصائص النمو",
-                pages: "صفحات ٧٢ - ٧٩",
-                icon: "fa-child-reaching",
-                subtitle: "الفرق بين النمو والنضج والتعلم، العوامل الوراثية والبيئية، وخصائص الروضة، والصفوف الدنيا والعليا والمتوسطة والثانوية.",
-                quizzes: [
-                    { q: "أشد مراحل الحياة خطورة وحرجاً في نمو الإنسان هي مرحلة: (ص ٧٣ و ٧٨)", opts: ["الطفولة المبكرة", "المراهقة المبكرة", "البيئة الرحمية (الحمل ما قبل الميلاد)", "الشيخوخة"], c: 2, exp: "مرحلة الحمل في بطن الأم هي أشد وأخطر المراحل تأثيراً على تكوين الفرد." },
-                    { q: "مرحلة التمرد والنزوع نحو الاستقلال والاضطراب الانفعالي والطفرة الجسمية هي: (ص ٧٦ و ٧٨)", opts: ["الطفولة المتأخرة", "المراهقة المبكرة (المرحلة المتوسطة: ١٢-١٤ سنة)", "مرحلة الرشد", "الطفولة الهادئة"], c: 1, exp: "المرحلة المتوسطة تمثل المراهقة المبكرة وفيها تحدث طفرة نمو وصراع مع السلطة." }
-                ]
-            },
-            {
-                id: 8,
-                shortTitle: "٩. السلوك والمواظبة",
-                title: "الدرس التاسع: قواعد السلوك والمواظبة والتعاقد السلوكي",
-                pages: "صفحات ٨٠ - ٨٩",
-                icon: "fa-scale-unbalanced",
-                subtitle: "مخالفات المتوسط والثانوي الـ ٦ وإجراءاتها، مخالفات الابتدائي الـ ٤، حسم المواظبة، والنموذج الرسمي للتعاقد السلوكي.",
-                quizzes: [
-                    { q: "الإصرار على ترك الصلاة أو التدخين داخل المدرسة في المرحلة المتوسطة والثانوية يعد مخالفة من الدرجة: (ص ٨٣ و ٨٦)", opts: ["الثانية", "الثالثة", "الرابعة (حسم ١٠ درجات)", "الخامسة"], c: 2, exp: "الإصرار على ترك الصلاة والتدخين وتصوير الطلاب مخالفات درجة رابعة يخصم فيها ١٠ درجات." },
-                    { q: "حسم درجات المواظبة عن غياب يوم واحد بدون عذر في الأسبوع الذي يسبق الإجازات أو الاختبارات: (ص ٨٧ و ٨٩)", opts: ["ربع درجة", "نصف درجة", "درجة كاملة عن كل يوم", "درجتان"], c: 2, exp: "غياب اليوم العادي نصف درجة، أما في الأسابيع المحددة قبل الإجازة أو الاختبارات فيحسم درجة كاملة." }
-                ]
-            },
-            {
-                id: 9,
-                shortTitle: "١٠. الندب والإثارة",
-                title: "الدرس العاشر والحادي عشر: الندب والتكليف والإثارة العشوائية",
-                pages: "صفحات ٩٠ - ٩٣",
-                icon: "fa-shuffle",
-                subtitle: "أنصبة الحصص للرتب التعليمية، ضوابط الندب الجزئي والكلي وحوافزه، وطريقة الإثارة العشوائية في التفكير الإبداعي.",
-                quizzes: [
-                    { q: "نصاب الحصص الأسبوعي للمعلم الممارس في التعليم العام هو: (ص ٩٠)", opts: ["١٨ حصة", "٢٠ حصة", "٢٢ حصة", "٢٤ حصة"], c: 3, exp: "الممارس ٢٤ حصة، المتقدم ٢٢ حصة، والخبير ١٨ حصة (وفي التربية الخاصة: ١٨، ١٦، ١٤)." },
-                    { q: "المعلم المكلف بالندب الجزئي يعفى من الإشراف والاحتياط والنشاط إذا بلغ نصابه: (ص ٩٠)", opts: ["١٤ حصة فأكثر", "١٦ حصة فأكثر", "١٨ حصة فأكثر", "٢٠ حصة فأكثر"], c: 1, exp: "إذا بلغ نصابه ١٦ حصة فأكثر بالندب الجزئي يعفى من الإشراف وحصص الاحتياط والنشاط." }
-                ]
-            },
-            {
-                id: 10,
-                shortTitle: "١١. الأهداف وبلوم",
-                title: "الدرس الثاني عشر: الأهداف السلوكية وتصنيف بلوم وكراثول وسمبسون",
-                pages: "صفحات ٩٤ - ١٠٨",
-                icon: "fa-bullseye",
-                subtitle: "شروط صياغة الهدف السلوكي، الأفعال المقاسة وغير المقاسة، مستويات بلوم الـ ٦ التفاعلية، المجال الوجداني، والمجال المهاري.",
-                quizzes: [
-                    { q: "أي الأفعال التالية يعتبر فعلاً سلوكياً غير قابل للقياس والملاحظة المباشرة؟ (ص ٩٦)", opts: ["يرسم", "يعرب", "يدرك", "يحدد"], c: 2, exp: "أفعال مثل (يدرك، يفهم، يستوعب، يعرف، يقدر) عمليات عقلية داخلية غير قابلة للقياس المباشر." },
-                    { q: "أن يفرق الطالب بين صفات الحيوانات آكلات اللحوم وآكلات الأعشاب؛ يصنف ضمن مستوى بلوم: (ص ١٠٤)", opts: ["التطبيق", "التحليل", "التركيب", "التقويم"], c: 1, exp: "المقارنة والتفريق والتصنيف تندرج تحت مهارات التحليل." }
-                ]
-            },
-            {
-                id: 11,
-                shortTitle: "١٢. استراتيجيات التدريس",
-                title: "الدرس الثالث عشر: استراتيجيات التدريس الحديثة",
-                pages: "صفحات ١٠٩ - ١٣١",
-                icon: "fa-chalkboard-user",
-                subtitle: "الفرق بين الاستراتيجية والطريقة والأسلوب والمدخل، KWL، استراتيجية 4H، الصف المقلوب، الاستقصاء، والتعلم التعاوني.",
-                quizzes: [
-                    { q: "استراتيجية تعليمية يشاهد فيها الطلاب الشرح في منازلهم بالفيديو وتخصص الحصة للتطبيق والأنشطة: (ص ١٢٤ و ١٣٠)", opts: ["التعليم المبرمج", "الصف المقلوب (Flipped Classroom)", "التدريس المصغر", "المحاضرة"], c: 1, exp: "الصف المقلوب يعكس بيئة التعلم بحيث يكون التحصيل المنزلي والنقاش والتطبيق صفي." },
-                    { q: "استراتيجية تدريس تقوم على تفاعل وتبادل أدوار القراءة والتوضيح والتلخيص والتنبؤ هي: (ص ١٢٤ و ١٣١)", opts: ["التدريس التبادلي", "حل المشكلات", "العصف الذهني", "لعب الأدوار"], c: 0, exp: "التدريس التبادلي أثبت كفاءة عالية خاصة في فهم واستيعاب النصوص القرائية بالابتدائية." }
-                ]
-            },
-            {
-                id: 12,
-                shortTitle: "١٣. البيئة الصفية",
-                title: "الدرس الرابع عشر: البيئة الصفية وإدارة الصف",
-                pages: "صفحات ١٣٢ - ١٣٥",
-                icon: "fa-chalkboard",
-                subtitle: "إدارة الصف مقابل ضبط الصف، المناخ الإيجابي، صياغة القواعد الصفية بمشاركة الطلاب، والتعامل مع السلوكيات غير المرغوبة.",
-                quizzes: [
-                    { q: "الفرق الجوهري بين إدارة الصف وضبط الصف يكمن في أن إدارة الصف: (ص ١٣٣ و ١٧٩)", opts: ["تركز على الهدوء التام فقط", "أشمل من ضبط الصف وتهتم بتهيئة البيئة النفسية والاجتماعية والتعليمية", "تعتمد على العقاب الصارم", "مسؤولية قائد المدرسة فقط"], c: 1, exp: "إدارة الصف مفهوم إيجابي شامل يشمل التنظيم والتفاعل الإنساني وتحقيق أهداف التعلم." }
-                ]
-            },
-            {
-                id: 13,
-                shortTitle: "١٤. تعديل السلوك",
-                title: "الدرس الخامس عشر والسادس عشر: البحث الإجرائي وتعديل السلوك",
-                pages: "صفحات ١٣٦ - ١٣٩",
-                icon: "fa-people-roof",
-                subtitle: "خطوات البحث الإجرائي، ومختبر استراتيجيات تعديل السلوك (التصحيح الزائد، الاقتصاد الرمزي، الإطفاء، الغمر، وتكلفة الاستجابة).",
-                quizzes: [
-                    { q: "إلزام الطلاب الذين شوهوا جدران المدرسة بإعادة طلائها وتنظيفها بأفضل مما كانت يسمى: (ص ١٣٧)", opts: ["العقاب السلبي", "تكلفة الاستجابة", "التصحيح الزائد", "الإقصاء"], c: 2, exp: "التصحيح الزائد يلزم الطالب بتصحيح خطئه وإعادة الشيء لحال أفضل مما كان عليه." },
-                    { q: "بحث تطبيقي علمي يقوم به المعلم لمعالجة مشكلة محددة تواجهه داخل صفه أو مدرسته يسمى: (ص ١٣٦ و ٢٢٥)", opts: ["البحث النظري", "البحث الإجرائي (Action Research)", "البحث الوصفي", "البحث التاريخي"], c: 1, exp: "البحث الإجرائي موجه لحل مشكلة محددة ومباشرة في الميدان التربوي." }
-                ]
-            },
-            {
-                id: 14,
-                shortTitle: "١٥. الفروق وصعوبات التعلم",
-                title: "الدرس السابع عشر إلى الرابع والعشرين: الفروق الفردية والذكاء وصعوبات التعلم والاختبارات",
-                pages: "صفحات ١٤٠ - ١٦١",
-                icon: "fa-universal-access",
-                subtitle: "صعوبات التعلم (إعاقة خفية) مقابل بطء التعلم والتأخر الدراسي، مقاييس الذكاء، جدول المواصفات، ومعامل الصعوبة والتمييز.",
-                quizzes: [
-                    { q: "طالب ذكاؤه طبيعي أو فوق الطبيعي لكنه يعاني من تعثر نوعي في القراءة (ديسلكسيا) أو الحساب يصنف ضمن: (ص ١٤٦ - ١٤٨)", opts: ["صعوبات التعلم", "بطء التعلم", "التأخر الدراسي", "الإعاقة العقلية"], c: 0, exp: "صعوبات التعلم تظهر لدى طلاب بذكاء طبيعي أو مرتفع ولكن لديهم خلل نمائي أو أكاديمي نوعي وتسمى الإعاقة الخفية." },
-                    { q: "طالب درجاته منخفضة في جميع المواد وذكاؤه حدي منخفض (بين ٧٠ و ٨٤) يصنف ضمن: (ص ١٤٦ - ١٤٨)", opts: ["صعوبات التعلم", "بطء التعلم", "الموهوبين", "التخلف البسيط"], c: 1, exp: "بطء التعلم يشمل انخفاضاً عاماً في جميع المواد مع انخفاض معامل الذكاء." },
-                    { q: "أفضل معامل تمييز لفقرات الاختبار التحصيلي الجيد هو: (ص ١٥٢ و ١٨٩)", opts: ["عندما يكون سالباً", "صفر", "٠.٣٠ فأكثر", "٠.١٠ فأقل"], c: 2, exp: "الفقرة الاختبارية الممتازة يجب ألا يقل معامل تمييزها عن ٠.٣٠ لتفصل بين المتمكنين والضعفاء." }
-                ]
-            },
-            {
-                id: 15,
-                shortTitle: "١٦. مصفوفة التتبع",
-                title: "مصفوفة التتبع والتدقيق الشاملة للملزمة (٢٤١ صفحة) + الـ ٦٨ مصطلحاً",
-                pages: "صفحات ١ - ٢٤١",
-                icon: "fa-table-list",
-                subtitle: "فهرس تفصيلي تفاعلي يربط كل صفحات وفصول الملزمة الـ ٢٩ وجدول الـ ٦٨ مصطلحاً (ص ١٦٦) بالمحطات التفاعلية.",
-                quizzes: [
-                    { q: "المصدر المعتمد في هذا التطبيق هو ملزمة النمو المهني الشاملة لإعداد اختبار الرخصة المهنية للمدرب: (ص ١)", opts: ["أ. مخلد الروقي", "أ. محمد العمري", "هيئة تقويم التعليم", "معهد الإدارة العامة"], c: 0, exp: "الملزمة من إعداد الأستاذ القدير مخلد الروقي لقسم المعايير التربوية العامة." }
-                ]
-            }
-        ];
-
-        // 4. SEARCH DICTIONARY FOR LIVE AUTOCOMPLETE
-        const SEARCH_INDEX = [
-            { term: "تحقيق الذات - قمة هرم ماسلو: الابتكار، حل المشكلات، تقبل الحقائق (ص ٣١)", station: 2 },
-            { term: "هرم ماسلو للحاجات الخمس - الفسيولوجية، الأمان، الاجتماعية، التقدير، تحقيق الذات", station: 2 },
-            { term: "مخروط الخبرة لإدجار ديل - الوسائل المحسوسة وشبه المحسوسة والمجردة (ص ٣٢)", station: 2 },
-            { term: "بافلوف - الاشتراط الكلاسيكي، الكلب، الانطفاء، مثير واستجابة", station: 1 },
-            { term: "سكنر - التعلم الإجرائي الشرطي، الفأر والرافعة، مصفوفة التعزيز والعقاب", station: 1 },
-            { term: "ثورندايك - المحاولة والخطأ، قانون الأثر، قانون التدريب والاستعداد", station: 1 },
-            { term: "واطسون - مؤسس السلوكية، عقل الطالب صفحة بيضاء وصندوق", station: 1 },
-            { term: "برونر - نظرية الاكتشاف، المنهج الحلزوني، الأنماط (الحركي، الصوري، الرمزي)", station: 1 },
-            { term: "أوزبل - التعلم ذو المعنى، خرائط المفاهيم، المنظم الشارح والمقارن", station: 1 },
-            { term: "الجشطالت - كوهلر، فرتمر، كوفكا، الاستبصار، الكل للجزء", station: 1 },
-            { term: "بياجيه - النمو المعرفي، المحسوس والمجرد، الاحتفاظ والمعكوسية", station: 1 },
-            { term: "فيجوتسكي - منطقة النمو الوشيك ZPD والسقالات التعليمية", station: 1 },
-            { term: "باندورا - التعلم الاجتماعي، الملاحظة، التقليد، والنمذجة", station: 1 },
-            { term: "أريكسون - مراحل النمو النفس اجتماعي الثمان والأزمات (فرويد ضد أريكسون)", station: 1 },
-            { term: "عناصر المنهج - المحوري، النشاط، الخفي، المتكامل، التكنولوجي", station: 3 },
-            { term: "القياس والتقويم - الفرق بين القياس والتقييم والتقويم، محكي ومعياري المرجع", station: 4 },
-            { term: "أدوات التقويم - قائمة الشطب، سلم التقدير، السجل القصصي، سجل سير التعلم", station: 4 },
-            { term: "التفكير الإبداعي - الطلاقة، المرونة، الأصالة، الإفاضة، والتخيل", station: 5 },
-            { term: "التفكير الناقد - الاستقراء، الاستنباط، الاستدلال، وخطوات حل المشكلات الـ ٧", station: 5 },
-            { term: "لائحة الإجازات - الاضطرارية ٥ أيام، المرضية سنتان، إجازة الوضع ٧٠ يوماً", station: 6 },
-            { term: "تقويم أداء المعلم - سلم الدرجات، التظلم خلال ١٥ يوماً، ونافذة جوهاري", station: 6 },
-            { term: "علم نفس النمو - النضج والتعلم، البيئة الرحمية، خصائص المراحل", station: 7 },
-            { term: "قواعد السلوك والمواظبة - المخالفات الست، حسم الغياب، العقد السلوكي", station: 8 },
-            { term: "الندب والتكليف - أنصبة الحصص، ضوابط الندب، والإثارة العشوائية", station: 9 },
-            { term: "الأهداف السلوكية - تصنيف بلوم المعرفي، كراثول الوجداني، وسمبسون المهاري", station: 10 },
-            { term: "استراتيجيات التدريس - الصف المقلوب، التدريس التبادلي، KWL، شكل V، 4H", station: 11 },
-            { term: "البيئة الصفية - إدارة الصف مقابل ضبط الصف، والتنظيم الإيجابي", station: 12 },
-            { term: "تعديل السلوك - التصحيح الزائد، الاقتصاد الرمزي، الإطفاء، الغمر، البحث الإجرائي", station: 13 },
-            { term: "صعوبات التعلم - الديسلكسيا، الديسجرافيا، الديسكلكوليا، بطء التعلم، والتأخر", station: 14 },
-            { term: "مصفوفة التتبع - الفهرس والتدقيق الكامل لـ ٢٤١ صفحة + الـ ٦٨ مصطلحاً", station: 15 }
-        ];
-
-        // 5. APPLICATION STATE
-        let activeStationIdx = 2; // Opens directly on Station 3 (Maslow & Dale Pyramid) to showcase restored interactivity
-        let activeSchoolTab = 'erikson';
-        let selectedMaslowId = 5; // Default selected: 5 - تحقيق الذات
-        let selectedDaleId = 1;   // Default selected: 1 - قاعدة المخروط
-        let selectedEriksonId = 4;
-        let selectedBloomId = 6;
-        let selectedToolTab = 'checklist';
-        let answeredQuestions = {};
-        const STORAGE_KEY = 'rukhsa_exam_answers_full';
-
-        function loadSavedState() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) answeredQuestions = JSON.parse(saved);
-            } catch (e) {
-                console.warn(e);
-            }
-        }
-
-        function saveAnswer(stationIdx, questionIdx, selectedOption) {
-            const key = `${stationIdx}_${questionIdx}`;
-            answeredQuestions[key] = selectedOption;
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(answeredQuestions));
-            } catch (e) {
-                console.warn(e);
-            }
-        }
-
-        // 6. UI INITIALIZATION
-        function init() {
-            loadSavedTheme();
-            loadSavedState();
-            renderDrawerItems();
-            renderStation(activeStationIdx);
-            setupSearch();
-            runSplashScreen();
-
-            window.addEventListener('scroll', () => {
-                const dd = document.getElementById('searchDropdown');
-                if (dd && !dd.classList.contains('hidden')) dd.classList.add('hidden');
-            });
-        }
-
-        function toggleDrawer() {
-            const drawer = document.getElementById('stationsDrawer');
-            const backdrop = document.getElementById('drawerBackdrop');
-            if (drawer.classList.contains('translate-x-full')) {
-                drawer.classList.remove('translate-x-full');
-                backdrop.classList.remove('hidden');
-            } else {
-                closeDrawer();
-            }
-        }
-
-        function closeDrawer() {
-            document.getElementById('stationsDrawer').classList.add('translate-x-full');
-            document.getElementById('drawerBackdrop').classList.add('hidden');
-        }
-
-        function renderDrawerItems() {
-            const list = document.getElementById('drawerList');
-            list.innerHTML = STATIONS.map((st, idx) => `
-                <button onclick="playSound('open'); jumpToStation(${idx}); closeDrawer();" 
-                    class="interactive-card w-full text-right p-2.5 rounded-xl border flex items-center justify-between ${idx === activeStationIdx ? 'bg-indigo-600/30 border-indigo-500 text-white font-bold shadow-md' : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:bg-slate-800'}">
-                    <div class="flex items-center gap-2 truncate">
-                        <i class="fa-solid ${st.icon} text-indigo-400 w-4 text-center"></i>
-                        <span class="truncate">${st.shortTitle}</span>
-                    </div>
-                    <span class="text-[10px] text-slate-400 font-mono shrink-0">${st.pages.replace('صفحات ', '')}</span>
-                </button>
-            `).join('');
-        }
-
-        function jumpToStation(idx) {
-            activeStationIdx = Math.max(0, Math.min(STATIONS.length - 1, idx));
-            renderStation(activeStationIdx);
-            renderDrawerItems();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function navigateStation(delta) {
-            playSound('open');
-            jumpToStation(activeStationIdx + delta);
-        }
-
-        function scrollToQuiz() {
-            document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // 7. LIVE SEARCH SETUP
-        function setupSearch() {
-            const input = document.getElementById('fastSearchInput');
-            const dropdown = document.getElementById('searchDropdown');
-            const clearBtn = document.getElementById('searchClearBtn');
-
-            input.addEventListener('input', (e) => {
-                const query = e.target.value.trim().toLowerCase();
-                if (!query) {
-                    dropdown.classList.add('hidden');
-                    clearBtn.classList.add('hidden');
-                    return;
-                }
-                clearBtn.classList.remove('hidden');
-
-                const matches = SEARCH_INDEX.filter(item => 
-                    item.term.toLowerCase().includes(query) || 
-                    STATIONS[item.station].title.toLowerCase().includes(query)
-                );
-
-                if (matches.length === 0) {
-                    dropdown.innerHTML = `<div class="p-4 text-sm text-slate-400 text-center font-tajawal">لم يتم العثور على مصطلح يطابق بحثك...</div>`;
-                } else {
-                    dropdown.innerHTML = matches.map(m => `
-                        <button onclick="playSound('open'); jumpToStation(${m.station}); document.getElementById('searchDropdown').classList.add('hidden');"
-                            class="w-full text-right p-3.5 rounded-xl hover:bg-indigo-600/20 text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2 transition group">
-                            <div class="flex items-start sm:items-center gap-2.5 text-slate-100 group-hover:text-indigo-300 leading-relaxed">
-                                <i class="fa-solid fa-circle-arrow-left text-sm text-indigo-400 mt-1 sm:mt-0 shrink-0"></i>
-                                <span class="font-bold whitespace-normal">${m.term}</span>
-                            </div>
-                            <div class="flex items-center gap-1.5 self-end sm:self-center shrink-0">
-                                <span class="text-[11px] bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 px-2.5 py-1 rounded-lg font-mono font-bold">
-                                    ${STATIONS[m.station].shortTitle} (${STATIONS[m.station].pages})
-                                </span>
-                            </div>
-                        </button>
-                    `).join('');
-                }
-                dropdown.classList.remove('hidden');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-                    dropdown.classList.add('hidden');
-                }
-            });
-        }
-
-        function clearSearch() {
-            const input = document.getElementById('fastSearchInput');
-            input.value = '';
-            document.getElementById('searchDropdown').classList.add('hidden');
-            document.getElementById('searchClearBtn').classList.add('hidden');
-        }
-
-        // 8. RENDER STATION DETAILS & INTERACTIVE LABS
-        function renderStation(idx) {
-            const st = STATIONS[idx];
-
-            document.getElementById('topStationBadge').textContent = `محطة ${idx + 1}/١٦`;
-            document.getElementById('headerScrubber').value = idx;
-            const percent = Math.round(((idx + 1) / STATIONS.length) * 100);
-            document.getElementById('scrubberPercent').textContent = `${percent}٪`;
-
-            document.getElementById('heroStationBadge').textContent = `المحطة ${idx + 1} من ١٦`;
-            document.getElementById('heroPagesBadge').textContent = st.pages;
-            document.getElementById('heroTitle').textContent = st.title;
-            document.getElementById('heroSubtitle').textContent = st.subtitle;
-            document.getElementById('heroIcon').innerHTML = `<i class="fa-solid ${st.icon}"></i>`;
-            document.getElementById('bottomStationLabel').textContent = `محطة ${idx + 1} من ١٦`;
-
-            const container = document.getElementById('stationContentWrapper');
-            container.classList.remove('anim-fade');
-            void container.offsetWidth; // Reflow for fresh spring animation
-            container.classList.add('anim-fade');
-            container.innerHTML = getStationHTML(idx);
-
-            renderQuizSection(idx);
-        }
-
-        // 9. INTERACTIVE HANDLERS FOR PYRAMIDS, CONES, STAGES & MATRICES
-        function selectMaslowTier(id) {
-            playSound('pop');
-            selectedMaslowId = id;
-            renderStation(2);
-        }
-
-        function selectDaleTier(id) {
-            playSound('pop');
-            selectedDaleId = id;
-            renderStation(2);
-        }
-
-        function selectEriksonStage(id) {
-            playSound('pop');
-            selectedEriksonId = id;
-            document.getElementById('schoolTabBody').innerHTML = getSchoolTabContent('erikson');
-        }
-
-        function selectBloomLevel(id) {
-            playSound('pop');
-            selectedBloomId = id;
-            renderStation(10);
-        }
-
-        function switchToolTab(tab) {
-            playSound('open');
-            selectedToolTab = tab;
-            renderStation(4);
-        }
-
-        function showInteractiveDetail(boxId, title, content, badgeText = 'تفصيل تربوي من الملزمة') {
-            playSound('pop');
-            const box = document.getElementById(boxId);
-            if (!box) return;
-            box.classList.remove('anim-fade');
-            void box.offsetWidth;
-            box.classList.add('anim-fade');
-            box.innerHTML = `
-                <div class="flex items-center justify-between border-b border-indigo-500/30 pb-2 mb-2">
-                    <strong class="text-indigo-300 text-xs sm:text-sm font-cairo flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-info text-indigo-400"></i>
-                        <span>${title}</span>
-                    </strong>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold">${badgeText}</span>
-                </div>
-                <div class="text-slate-200 text-xs leading-relaxed">${content}</div>
-            `;
-        }
-
-        // 10. COMPLETE STATION HTML RENDERERS (ALL 16 STATIONS WITH CLICKABLE DETAILS)
-        function getStationHTML(idx) {
-            // STATION 3 (idx === 2): MASLOW'S HIERARCHY & DALE'S CONE WITH FULL CLICKABLE DETAILS
-            if (idx === 2) {
-                const activeMaslow = MASLOW_LEVELS.find(m => m.id === selectedMaslowId) || MASLOW_LEVELS[0];
-                const activeDale = DALE_LEVELS.find(d => d.id === selectedDaleId) || DALE_LEVELS[2];
-
-                return `
-                <div class="space-y-5 text-xs">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        
-                        <!-- هرم ماسلو التفاعلي الكامل (ص ٣١) -->
-                        <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-xl">
-                            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-                                <div>
-                                    <strong class="text-amber-400 block text-sm sm:text-base font-cairo">١. هرم ماسلو للحاجات والدوافع الإنسانية (ص ٣١)</strong>
-                                    <span class="text-[11px] text-slate-400">اضغط على أي طبقة في الهرم (من ١ إلى ٥) لإظهار أمثلتها وتفاصيلها الكاملة:</span>
-                                </div>
-                                <span class="px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[10px] font-bold">النظرية الإنسانية</span>
-                            </div>
-
-                            <!-- Interactive Clickable Pyramid -->
-                            <div class="flex flex-col items-center space-y-2 py-2 select-none">
-                                <!-- 5. تحقيق الذات -->
-                                <button onclick="selectMaslowTier(5)" class="maslow-tier w-7/12 sm:w-1/2 p-2.5 text-center bg-gradient-to-r from-purple-700 to-purple-500 rounded-t-2xl rounded-b-lg text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 5 ? 'border-white ring-4 ring-purple-500/40 scale-105' : 'border-purple-400/30 opacity-85'}">
-                                    <div class="flex items-center justify-center gap-1">
-                                        <i class="fa-solid fa-crown text-amber-300 text-[10px]"></i>
-                                        <span>٥. الحاجة لتحقيق الذات</span>
-                                    </div>
-                                    <span class="block text-[10px] font-normal text-purple-100 truncate">الابتكار • حل المشكلات • تقبل الحقائق</span>
-                                </button>
-
-                                <!-- 4. الحاجة للتقدير -->
-                                <button onclick="selectMaslowTier(4)" class="maslow-tier w-8/12 sm:w-8/12 p-2.5 text-center bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 4 ? 'border-white ring-4 ring-indigo-500/40 scale-105' : 'border-indigo-400/30 opacity-85'}">
-                                    <div>٤. الحاجة إلى التقدير</div>
-                                    <span class="block text-[10px] font-normal text-indigo-100 truncate">تقدير الذات • الثقة • الإنجازات • الاحترام المتبادل</span>
-                                </button>
-
-                                <!-- 3. الحاجات الاجتماعية -->
-                                <button onclick="selectMaslowTier(3)" class="maslow-tier w-10/12 sm:w-9/12 p-2.5 text-center bg-gradient-to-r from-cyan-700 to-cyan-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 3 ? 'border-white ring-4 ring-cyan-500/40 scale-105' : 'border-cyan-400/30 opacity-85'}">
-                                    <div>٣. الحاجات الاجتماعية (الحب والانتماء)</div>
-                                    <span class="block text-[10px] font-normal text-cyan-100 truncate">الصداقة • العلاقات الأسرية • الألفة</span>
-                                </button>
-
-                                <!-- 2. حاجات الأمان -->
-                                <button onclick="selectMaslowTier(2)" class="maslow-tier w-11/12 p-2.5 text-center bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 2 ? 'border-white ring-4 ring-emerald-500/40 scale-105' : 'border-emerald-400/30 opacity-85'}">
-                                    <div>٢. حاجات الأمن والأمان</div>
-                                    <span class="block text-[10px] font-normal text-emerald-100 truncate">السلامة الجسدية • الأمن الوظيفي والصحي والأسري • الممتلكات</span>
-                                </button>
-
-                                <!-- 1. الحاجات الفسيولوجية -->
-                                <button onclick="selectMaslowTier(1)" class="maslow-tier w-full p-3 text-center bg-gradient-to-r from-amber-700 to-amber-500 rounded-xl text-white font-bold text-xs shadow-lg border-2 ${selectedMaslowId === 1 ? 'border-white ring-4 ring-amber-500/40 scale-105' : 'border-amber-400/30 opacity-85'}">
-                                    <div>١. الحاجات الفسيولوجية (قاعدة الهرم)</div>
-                                    <span class="block text-[10px] font-normal text-amber-100 truncate">التنفس • الطعام • الماء • النوم • التوازن • الإخراج</span>
-                                </button>
-                            </div>
-
-                            <!-- Dynamic Detail Panel for Selected Maslow Tier -->
-                            <div class="anim-fade p-3.5 rounded-2xl bg-slate-950 border-2 border-indigo-500/50 space-y-2 shadow-inner">
-                                <div class="flex flex-wrap items-center justify-between gap-1 border-b border-slate-800 pb-2">
-                                    <strong class="text-white text-xs sm:text-sm font-cairo flex items-center gap-1.5">
-                                        <i class="fa-solid fa-star text-amber-400"></i>
-                                        <span>${activeMaslow.title}</span>
-                                    </strong>
-                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold">${activeMaslow.badge}</span>
-                                </div>
-                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-amber-300 font-bold text-[11px]">
-                                    <i class="fa-solid fa-tags ml-1 text-indigo-400"></i>عناصر المستوى في الملزمة: ${activeMaslow.keywords}
-                                </div>
-                                <p class="text-slate-200 leading-relaxed text-xs">${activeMaslow.desc}</p>
-                                <div class="p-2 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-[11px]">
-                                    <i class="fa-solid fa-lightbulb ml-1 text-amber-400"></i><strong>مفتاح الاختبار:</strong> ${activeMaslow.examTip}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- مخروط الخبرة لإدجار ديل التفاعلي الكامل (ص ٣٢) -->
-                        <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-xl flex flex-col justify-between">
-                            <div class="space-y-3">
-                                <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-                                    <div>
-                                        <strong class="text-cyan-400 block text-sm sm:text-base font-cairo">٢. مخروط الخبرة لإدجار ديل (ص ٣٢)</strong>
-                                        <span class="text-[11px] text-slate-400">اضغط على أي قسم في المخروط لعرض الوسائل التعليمية المدرجة فيه:</span>
-                                    </div>
-                                    <span class="px-2 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[10px] font-bold">الوسائل التعليمية</span>
-                                </div>
-
-                                <!-- Interactive Clickable Cone of Experience -->
-                                <div class="flex flex-col items-center space-y-2.5 py-2 select-none">
-                                    <!-- Top: Abstract -->
-                                    <button onclick="selectDaleTier(3)" class="maslow-tier w-7/12 p-3 rounded-t-2xl rounded-b-lg bg-gradient-to-r from-rose-700 to-rose-500 text-white text-center shadow-lg border-2 ${selectedDaleId === 3 ? 'border-white ring-4 ring-rose-500/40 scale-105' : 'border-rose-400/30 opacity-85'}">
-                                        <strong class="block text-xs">٣. القمة: الوسائل المجردة (خبرات مجردة)</strong>
-                                        <span class="text-[10px] text-rose-100">الرموز اللفظية • الرموز البصرية</span>
-                                    </button>
-
-                                    <!-- Middle: Iconic / Semi-concrete -->
-                                    <button onclick="selectDaleTier(2)" class="maslow-tier w-10/12 p-3 rounded-xl bg-gradient-to-r from-indigo-700 to-indigo-500 text-white text-center shadow-lg border-2 ${selectedDaleId === 2 ? 'border-white ring-4 ring-indigo-500/40 scale-105' : 'border-indigo-400/30 opacity-85'}">
-                                        <strong class="block text-xs">٢. الوسط: الوسائل شبه المحسوسة (خبرات ممثلة)</strong>
-                                        <span class="text-[10px] text-indigo-100">الصور والتسجيلات • الأفلام • التلفزيون • المعارض • الدراسات • العروض</span>
-                                    </button>
-
-                                    <!-- Base: Concrete / Direct -->
-                                    <button onclick="selectDaleTier(1)" class="maslow-tier w-full p-3.5 rounded-xl bg-gradient-to-r from-emerald-700 to-emerald-500 text-white text-center shadow-lg border-2 ${selectedDaleId === 1 ? 'border-white ring-4 ring-emerald-500/40 scale-105' : 'border-emerald-400/30 opacity-85'}">
-                                        <strong class="block text-xs">١. القاعدة: الوسائل المحسوسة (خبرات مباشرة فعلية)</strong>
-                                        <span class="text-[10px] text-emerald-100">الخبرات الممثلة • الخبرات المعدلة • الممارسة الواقعية المباشرة</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Dynamic Detail Panel for Selected Dale Cone Level -->
-                            <div class="anim-fade p-3.5 rounded-2xl bg-slate-950 border-2 border-cyan-500/50 space-y-2 shadow-inner">
-                                <div class="flex flex-wrap items-center justify-between gap-1 border-b border-slate-800 pb-2">
-                                    <strong class="text-white text-xs sm:text-sm font-cairo flex items-center gap-1.5">
-                                        <i class="fa-solid fa-eye text-cyan-400"></i>
-                                        <span>${activeDale.title}</span>
-                                    </strong>
-                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">${activeDale.badge}</span>
-                                </div>
-                                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
-                                    ${activeDale.items.map(item => `
-                                        <li class="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-cyan-200 font-bold text-[11px] flex items-center gap-1.5">
-                                            <i class="fa-solid fa-check-circle text-emerald-400 text-[10px]"></i>
-                                            <span>${item}</span>
-                                        </li>
-                                    `).join('')}
-                                </ul>
-                                <p class="text-slate-300 leading-relaxed text-xs pt-1">${activeDale.desc}</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>`;
-            }
-
-            // STATION 2 (idx === 1): LEARNING THEORIES LAB WITH CLICKABLE ERIKSON STAGES & SKINNER MATRIX
-            if (idx === 1) {
-                return `
-                <div class="space-y-4 text-xs">
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
-                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-flask-vial text-indigo-400 text-base"></i>
-                                <h2 class="text-sm sm:text-base font-cairo font-bold text-white">
-                                    مختبر مدارس ونظريات التعلم الخمس الكبرى (ص ١٢ - ٢٣)
-                                </h2>
-                            </div>
-                            <span class="text-[10px] text-indigo-300 bg-indigo-950/70 px-2.5 py-1 rounded-lg border border-indigo-500/30">اضغط على التبويبات والبطاقات للتفاعل</span>
-                        </div>
-
-                        <!-- 5 School Filter Tabs -->
-                        <div class="flex flex-wrap gap-1.5 sm:gap-2">
-                            <button onclick="playSound('open'); switchSchoolTab('behavioral')" id="tab_behavioral" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'behavioral' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
-                                ١. السلوكية (ص ١٢-١٧)
-                            </button>
-                            <button onclick="playSound('open'); switchSchoolTab('cognitive')" id="tab_cognitive" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'cognitive' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
-                                ٢. المعرفية (ص ١٧-٢٠)
-                            </button>
-                            <button onclick="playSound('open'); switchSchoolTab('constructivist')" id="tab_constructivist" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'constructivist' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
-                                ٣. البنائية (ص ٢١-٢٢)
-                            </button>
-                            <button onclick="playSound('open'); switchSchoolTab('social')" id="tab_social" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'social' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
-                                ٤. الاجتماعية (ص ٢٢-٢٣)
-                            </button>
-                            <button onclick="playSound('open'); switchSchoolTab('erikson')" id="tab_erikson" class="interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold ${activeSchoolTab === 'erikson' ? 'bg-indigo-600 border-indigo-400 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'}">
-                                ٥. أريكسون النفس-اجتماعية (ص ٢٣)
-                            </button>
-                        </div>
-
-                        <!-- Tab Sub-content Display -->
-                        <div id="schoolTabBody" class="anim-fade">
-                            ${getSchoolTabContent(activeSchoolTab)}
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // STATION 1 (idx === 0): PROFESSIONAL DEVELOPMENT CYCLE
-            if (idx === 0) {
-                return `
-                <div class="space-y-4 text-xs">
-                    <!-- Interactive 4 PD Programs Cards -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-indigo-400 block text-sm font-cairo">أولاً: برامج النمو المهني الأربعة (ص ٧) - اضغط على أي برنامج لعرض مثاله التطبيقي:</strong>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <button onclick="showInteractiveDetail('pdDetailBox', '١. برامج التأهيل (ص ٧)', 'تُعقد للمعلم المتخرج من الجامعة وغير حامل لمؤهل تربوي، أو لديه قصور في الجانب التربوي؛ فيتم إلحاقه ببرامج تأهيل وإعداد المعلم.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-indigo-500/40 text-center space-y-1">
-                                <i class="fa-solid fa-user-graduate text-indigo-400 text-lg"></i>
-                                <span class="block font-bold text-white">١. برامج التأهيل</span>
-                                <span class="block text-[10px] text-slate-400">لغير التربويين</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('pdDetailBox', '٢. برامج العلاج (ص ٧)', 'تُعقد للمعلمين الذين لديهم مشكلة أو قصور في الشرح أو عدم معرفة باستخدام الأجهزة والتقنيات؛ فتعالج مشكلاتهم وتدربهم عملياً.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-rose-500/40 text-center space-y-1">
-                                <i class="fa-solid fa-kit-medical text-rose-400 text-lg"></i>
-                                <span class="block font-bold text-white">٢. برامج العلاج</span>
-                                <span class="block text-[10px] text-slate-400">لمعالجة القصور الفني</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('pdDetailBox', '٣. برامج التجديد (ص ٧)', 'تُعقد عند صدور أي شيء جديد (قرار وزاري، منهج جديد، استراتيجية حديثة)؛ فيُجمع المعلمون لتدريبهم على المستجدات.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-cyan-500/40 text-center space-y-1">
-                                <i class="fa-solid fa-arrows-rotate text-cyan-400 text-lg"></i>
-                                <span class="block font-bold text-white">٣. برامج التجديد</span>
-                                <span class="block text-[10px] text-slate-400">للمناهج والقرارات الجديدة</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('pdDetailBox', '٤. برامج الترقي (ص ٧)', 'تُعقد للمرشحين للترقية إلى مناصب قيادية (مثل: من معلم إلى مدير مدرسة أو مشرف تربوي) لتعريفهم بواجبات ومتطلبات التعيين الجديد.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-center space-y-1">
-                                <i class="fa-solid fa-ranking-star text-emerald-400 text-lg"></i>
-                                <span class="block font-bold text-white">٤. برامج الترقي</span>
-                                <span class="block text-[10px] text-slate-400">للمرشحين للإدارة والقيادة</span>
-                            </button>
-                        </div>
-                        <div id="pdDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
-                            <strong class="text-indigo-300 block mb-1"><i class="fa-solid fa-hand-pointer ml-1"></i>اضغط على أي برنامج أعلاه لعرض شرحه التفصيلي من الملزمة (ص ٧).</strong>
-                        </div>
-                    </div>
-
-                    <!-- تصنيف أساليب النمو المهني + الفروق الأربعة (ص ٨-٩) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="p-3.5 rounded-xl bg-slate-900 border border-emerald-500/30 space-y-1.5">
-                            <strong class="text-emerald-400 block text-xs">١. الأساليب العملية (٧ أساليب - ص ٨):</strong>
-                            <p class="text-slate-300 text-[11px] leading-relaxed">• الزيارات الصفية • تبادل الزيارات • الدروس التطبيقية (النموذجية) • التدريس المصغر (الفعال) • العروض العلمية • العصف الذهني • الدورات التدريبية.</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-slate-900 border border-cyan-500/30 space-y-1.5">
-                            <strong class="text-cyan-400 block text-xs">٢. الأساليب النظرية (٦ أساليب - ص ٩):</strong>
-                            <p class="text-slate-300 text-[11px] leading-relaxed">• المحاضرات التربوية • الندوات التربوية • الاجتماعات • النشرات التربوية • ورش العمل • حلقات النقاش.</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-slate-900 border border-amber-500/30 space-y-1.5">
-                            <strong class="text-amber-400 block text-xs">٣. الأساليب الذاتية (٤ أساليب - ص ٩):</strong>
-                            <p class="text-slate-300 text-[11px] leading-relaxed">• التثقيف الذاتي (القراءة الحرة، القراءة الموجهة) • البحث في الإنترنت • اليوتيوب • المراسلة والتعلم عن بعد.</p>
-                        </div>
-                    </div>
-
-                    <!-- حاسبة ساعات النمو المهني والجهات السبع المعتمدة (ص ٨) -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-emerald-500/30 space-y-3">
-                        <div class="flex items-center justify-between text-xs font-bold">
-                            <span class="text-emerald-400"><i class="fa-solid fa-calculator ml-1"></i>حاسبة ساعات النمو المهني المعتمدة للترقية (ص ٨):</span>
-                            <span id="pdDaysLabel" class="text-white font-mono bg-emerald-950 px-2.5 py-0.5 rounded-lg border border-emerald-500/40">٥ أيام تدريبية</span>
-                        </div>
-                        <input type="range" min="1" max="30" value="5" class="w-full accent-emerald-500 cursor-pointer"
-                            oninput="playSound('click'); document.getElementById('pdDaysLabel').textContent = this.value + ' أيام تدريبية'; document.getElementById('pdHoursOutput').textContent = (this.value * 5) + ' ساعة نمو معتمدة';">
-                        <div class="text-center p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40">
-                            <span class="text-slate-300 text-xs">مجموع الساعات المحتسبة للترقي: </span>
-                            <strong id="pdHoursOutput" class="text-emerald-400 font-mono text-base">٢٥ ساعة نمو معتمدة</strong>
-                            <span class="text-[10px] text-slate-400 block mt-1">الجهات الـ ٧ المعتمدة (ص ٨): ١. وزارة التعليم ٢. الجامعات السعودية ٣. هيئة تقويم التعليم ٤. معهد الإدارة العامة ٥. الجامعات العالمية المعترف بها ٦. مركز الملك عبدالعزيز للحوار الوطني ٧. المؤسسة العامة للتدريب التقني والمهني.</span>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // STATION 4 (idx === 3): CURRICULUM ENGINEERING & 11 TYPES
-            if (idx === 3) {
-                return `
-                <div class="space-y-4 text-xs">
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-indigo-400 block text-sm font-cairo">مختبر أنواع المناهج الـ ١١ والفرق الجوهري بينها (ص ٣٥ - ٣٧) - اضغط على أي منهج لعرض تفاصيله:</strong>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <button onclick="showInteractiveDetail('currDetailBox', '١. منهج المواد المنفصلة والمترابطة (ص ٣٥)', 'يركز على (المادة الدراسية) والمعرفة المنظمة من الأسهل للأصعب، ويُخطط له مسبقاً. أما المترابطة فيربط مادتين كالأدب والتاريخ مع بقائهما منفصلتين.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white font-bold">١. المواد المنفصلة والمترابطة</button>
-                            <button onclick="showInteractiveDetail('currDetailBox', '٢. منهج المجالات الواسعة والمتكامل (ص ٣٥)', 'المجالات الواسعة يزيل الحواجز بدمج مواد في مجال واحد (كالمواد الاجتماعية). والمتكامل نوعان: تكامل أفقي (بين مادتين) وتكامل عمودي/رأسي/حلزوني (داخل المادة نفسها عبر المراحل كدرس الضوء).')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-indigo-300 font-bold">٢. الواسعة والمتكامل</button>
-                            <button onclick="showInteractiveDetail('currDetailBox', '٣. منهج النشاط - جون ديوي (ص ٣٦)', 'يركز على (الطالب) وميوله وحاجاته وإيجابيته؛ ولا يخطط له مسبقاً بل يعتمد على الأنشطة وطريقة المشروعات وحل المشكلات.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-emerald-500/40 text-emerald-300 font-bold">٣. منهج النشاط (ديوي)</button>
-                            <button onclick="showInteractiveDetail('currDetailBox', '٤. المنهج المحوري (ص ٣٦)', 'يركز على (المجتمع ومشكلاته)؛ جاء لتلافي قصور منهج النشاط، وله قسمان: برنامج تربوي عام (خبرات أساسية لجميع الطلاب) وبرنامج خاص (حسب ميول وقدرات كل طالب).')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-bold">٤. المنهج المحوري</button>
-                            <button onclick="showInteractiveDetail('currDetailBox', '٥. المنهج الحلزوني - برونر (ص ٣٦)', 'علاقة رأسية بين المفاهيم؛ يقدم المفهوم في كل مرحلة دراسية بعمق واتساع أكبر مما سبقه.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-cyan-500/40 text-cyan-300 font-bold">٥. الحلزوني (برونر)</button>
-                            <button onclick="showInteractiveDetail('currDetailBox', '٦. المنهج الخفي / المستتر (ص ٣٦)', 'خبرات وقيم وعادات يكتسبها الطالب بدون قصد وبدون تخطيط رسمي من خلال القدوة المدرسية والمواقف خارج المنهج المعلن.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-rose-500/40 text-rose-300 font-bold">٦. المنهج الخفي</button>
-                            <button onclick="showInteractiveDetail('currDetailBox', '٧. منهج الوحدات والإثرائي والتكنولوجي (ص ٣٧)', 'الوحدات: مشروع يدور حول موضوع أو مشكلة (مثل وحدة بر الوالدين بالروضة). الإثرائي: أنشطة إضافية للموهوبين. التكنولوجي: توظيف التقنية في التعلم.')" class="interactive-card p-2.5 rounded-xl bg-slate-950 border border-purple-500/40 text-purple-300 font-bold">٧. الوحدات والإثرائي</button>
-                            <button onclick="showInteractiveDetail('currDetailBox', 'التلخيص الذهبي للاختبار (ص ٣٧)', '• المنفصلة والمترابطة يركز على: (المادة الدراسية).<br>• النشاط والوحدات يركز على: (الطالب).<br>• المحوري يركز على: (المجتمع).<br>• التكاملي يركز على: (المشكلات).')" class="interactive-card p-2.5 rounded-xl bg-amber-500/20 border border-amber-400 text-amber-300 font-bold">⭐ خلاصة التركيز</button>
-                        </div>
-                        <div id="currDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
-                            <strong>التلخيص الذهبي (ص ٣٧):</strong> المنفصلة يركز على (المادة) • النشاط والوحدات يركز على (الطالب) • المحوري يركز على (المجتمع) • التكاملي يركز على (المشكلات).
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // STATION 5 (idx === 4): EVALUATION & THE 4 ORIGINAL TEMPLATES (PAGES 40-56)
-            if (idx === 4) {
-                return `
-                <div class="space-y-4 text-xs">
-                    <!-- المفاهيم الأساسية -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2.5 text-slate-300 leading-relaxed">
-                        <strong class="text-indigo-400 block text-sm font-cairo">الفرق التطبيقي بين القياس والتقييم والتقويم (مثال سرعة القراءة - ص ٤٠ و ٤١):</strong>
-                        <p class="text-[11px]">"في اختبار سرعة القراءة حصل الطالب محمد على ٧ من ٢٠ وهذا التقدير ضعيف وينبغي متابعته وتخصيص آخر جزء من الحصة لتحسين أدائه":</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 font-bold text-center">
-                            <div class="p-2.5 rounded-xl bg-cyan-950/50 border border-cyan-500/40 text-cyan-300">القياس (قيمة رقمية كمية): ٧ من ٢٠</div>
-                            <div class="p-2.5 rounded-xl bg-amber-950/50 border border-amber-500/40 text-amber-300">التقييم (وصف لفظي تشخيصي): ضعيف</div>
-                            <div class="p-2.5 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-emerald-300">التقويم (حكم وعلاج وإصلاح): خطة التحسين</div>
-                        </div>
-                    </div>
-
-                    <!-- Interactive Viewer for the 4 Authentic Templates (Pages 52-55) -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-amber-400 block text-sm font-cairo">مستعرض النماذج الأربعة الأصلية لأدوات التقويم (ص ٥٢ - ٥٥) - اضغط لاستعراض الجدول الكامل:</strong>
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="switchToolTab('checklist')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'checklist' ? 'bg-cyan-600 border-cyan-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">١. قائمة الشطب (ص ٥٢)</button>
-                            <button onclick="switchToolTab('rating')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'rating' ? 'bg-emerald-600 border-emerald-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">٢. سلم التقدير (ص ٥٣)</button>
-                            <button onclick="switchToolTab('anecdotal')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'anecdotal' ? 'bg-amber-600 border-amber-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">٣. السجل القصصي (ص ٥٤)</button>
-                            <button onclick="switchToolTab('learninglog')" class="interactive-card px-3 py-1.5 rounded-xl border font-bold ${selectedToolTab === 'learninglog' ? 'bg-purple-600 border-purple-400 text-white' : 'bg-slate-950 border-slate-800 text-slate-400'}">٤. سجل سير التعلم (ص ٥٥)</button>
-                        </div>
-
-                        <div class="anim-fade p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                            ${selectedToolTab === 'checklist' ? `
-                                <div class="space-y-2">
-                                    <strong class="text-cyan-400 block">١. قائمة الرصد / الشطب (Check List) - ص ٥٢:</strong>
-                                    <p class="text-slate-300 text-[11px]">قوائم ثنائية قاطعة: (يا أبيض يا أسود، يا موجود يا غير موجود، لا يوجد فيها تدرج نهائياً) مثل: (نعم / لا) أو (صح / خطأ). الموقف التعليمي: تفحص الطالب لمجموعة من المعادن وتحديد خصائصها الفيزيائية (٨ فقرات):</p>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-slate-300 pt-1">
-                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>١. يصنف المعدن إلى فلز ولافلز حسب لمعانه</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
-                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>٢. يحدد اللون لسطح حديث القطع</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
-                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>٣. يحدد لون مسحوق المعدن بحكه بخزف</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
-                                        <div class="p-2 rounded bg-slate-900 border border-slate-800 flex justify-between"><span>٤. يصنف المعدن حسب قساوته</span><span class="text-cyan-400 font-mono">[نعم / لا]</span></div>
-                                    </div>
-                                </div>
-                            ` : selectedToolTab === 'rating' ? `
-                                <div class="space-y-2">
-                                    <strong class="text-emerald-400 block">٢. سلالم التقدير (Rating Scale) - ص ٥٣:</strong>
-                                    <p class="text-slate-300 text-[11px]">أداة تقويم بسيطة تظهر فيها المهارة بتدرج من عدة مستويات (عددي: ١-٥ أو لفظي: عالية جداً، عالية، متوسطة، منخفضة، منخفضة جداً). مثال الملزمة: مناظرة الصف الثانوي في الجغرافيا حول الزيادة السكانية وتنظيم الأسرة بين مجموعة (أ) ومجموعة (ب).</p>
-                                </div>
-                            ` : selectedToolTab === 'anecdotal' ? `
-                                <div class="space-y-2">
-                                    <strong class="text-amber-400 block">٣. السجل القصصي (Anecdotal Records) - ص ٥٤:</strong>
-                                    <p class="text-slate-300 text-[11px]">وصف قصير موضوعي مدوّن من المعلم يسجل فيه ما يفعله المتعلم والحالة التي تمت عندها الملاحظة. مثال الملزمة: بطاقة ملاحظة الطالب (أحمد) في مادة التربية الوطنية وكتابته تقريراً متميزاً عن "الاستثمار في المملكة العربية السعودية" بالاستعانة بالإنترنت.</p>
-                                </div>
-                            ` : `
-                                <div class="space-y-2">
-                                    <strong class="text-purple-400 block">٤. سجل وصف سير التعلم (Learning Log) - ص ٥٥:</strong>
-                                    <p class="text-slate-300 text-[11px]">سجل منظم يكتب فيه الطالب بنفسه عبر الوقت عبارات وانطباعات حرة حول أمور قرأها أو شاهدها، ويجمعه المعلم دورياً ويعلق عليه. مثال الملزمة: تسجيل انطباعات طالب عن مسرحية مدرسية شاهدها.</p>
-                                </div>
-                            `}
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // STATION 6 (idx === 5): THINKING SKILLS
-            if (idx === 5) {
-                return `
-                <div class="space-y-4 text-xs">
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-indigo-400 block text-sm font-cairo">مختبر مهارات التفكير الإبداعي الست (ص ٥٨ - ٥٩) - اضغط على المهارة لعرض أمثلتها الحرفية:</strong>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                            <button onclick="showInteractiveDetail('thinkDetailBox', '١. الطلاقة وأنواعها الخمسة (ص ٥٨-٥٩)', 'توليد أكبر عدد من الأفكار والبدائل بسرعة وسهولة (الكم أهم من الكيف). أنواعها الـ ٥: ١. لفظية (حيوانات آكلات أعشاب في نصف دقيقة) ٢. فكرية/معاني (استخدامات قرص CD) ٣. طلاقة التداعي (مرادفات كلمة الأسد) ٤. طلاقة الأشكال ٥. طلاقة تعبيرية.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-indigo-500/40 text-indigo-300 font-bold">١. الطلاقة (الكم والغزارة)</button>
-                            <button onclick="showInteractiveDetail('thinkDetailBox', '٢. المرونة (ص ٥٨)', 'توليد أفكار متنوعة وتغيير الوجهة الذهنية (تهتم بالكيف ونوعية الفكرة). مثال الملزمة: ما هي الاستخدامات المتنوعة لمشط الشعر؟')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-emerald-300 font-bold">٢. المرونة (التنوع والكيف)</button>
-                            <button onclick="showInteractiveDetail('thinkDetailBox', '٣. الأصالة (ص ٥٨)', 'التفرد والندرة والجدة في توليد أفكار غير مألوفة وغير مكررة (أكثر المهارات ارتباطاً بالإبداع). مثال الملزمة: اذكر ٣ طرق لفتح الكتاب دون لمسه / استخدامات غريبة لقلم الرصاص.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-bold">٣. الأصالة (الجدة والندرة)</button>
-                            <button onclick="showInteractiveDetail('thinkDetailBox', '٤. الإفاضة / التوسع (ص ٥٩)', 'إضافة تفاصيل جديدة ومتنوعة لفكرة أو شكل لتطويره. مثال الملزمة: ما هي الرموز التي يمكن إضافتها للخريطة لتجعل قراءتها أكثر سهولة؟')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-cyan-500/40 text-cyan-300 font-bold">٤. الإفاضة (إضافة تفاصيل)</button>
-                            <button onclick="showInteractiveDetail('thinkDetailBox', '٥. الحساسية للمشكلات و ٦. التخيل (ص ٥٩)', '• الحساسية للمشكلات: الخطوة الأولى من مهارات التفكير الإبداعي وتعني الوعي بوجود مشكلة.<br>• التخيل: إطلاق العنان للأفكار بلا قيود وهو أعلى مستويات الإبداع وأندرها.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-purple-500/40 text-purple-300 font-bold">٥. الحساسية والتخيل</button>
-                            <button onclick="showInteractiveDetail('thinkDetailBox', 'خطوات حل المشكلات الـ ٧ بالترتيب (ص ٦٠)', '١. الشعور بالمشكلة -> ٢. جمع المعلومات -> ٣. وضع الفروض -> ٤. فحص الفروض -> ٥. اختيار الحل المناسب -> ٦. تطبيق الحل -> ٧. الوصول إلى النتائج.')" class="interactive-card p-3 rounded-xl bg-rose-950/40 border border-rose-500/40 text-rose-300 font-bold">٧ خطوات حل المشكلات</button>
-                        </div>
-                        <div id="thinkDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
-                            اضغط على أي مهارة أعلاه لعرض أمثلة الملزمة الدقيقة (ص ٥٨ - ٦٠).
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // STATION 7 (idx === 6): LEAVES, TEACHER EVALUATION & JOHARI WINDOW
-            if (idx === 6) {
-                return `
-                <div class="space-y-4 text-xs">
-                    <!-- نافذة جوهاري التفاعلية -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <strong class="text-amber-400 text-sm font-cairo">أداة التأمل والتقويم الذاتي التفاعلية: نافذة جوهاري (ص ٦٩) - اضغط على أي منطقة:</strong>
-                            <span class="text-[10px] text-slate-400">اضغط للتفاصيل</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2.5 text-center font-bold">
-                            <button onclick="showInteractiveDetail('johariDetailBox', '١. المنطقة المفتوحة (ص ٦٩)', 'هي المساحة التي تعرفها أنت عن نفسك ويعرفها الآخرون عنك (تواصل واضح وشفاف بين المعلم وزملائه وطلابه).')" class="interactive-card p-3.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-200">
-                                <span class="block text-xs font-bold text-emerald-400">١. المنطقة المفتوحة</span>
-                                <span class="text-[10px] opacity-85">تعرفها أنت ويعرفها الآخرون عنك</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('johariDetailBox', '٢. المنطقة العمياء (ص ٦٩ - سؤال اختبار مكرر)', 'هي المساحة التي لا تعرفها أنت عن نفسك ولكن يعرفها ويلاحظها الآخرون فيك (مثل لزمة لفظية أو نبرة صوت مرتفعة يلاحظها الطلاب والمشرف).')" class="interactive-card p-3.5 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-200">
-                                <span class="block text-xs font-bold text-rose-400">٢. المنطقة العمياء</span>
-                                <span class="text-[10px] opacity-85">لا تعرفها أنت ويعرفها الآخرون عنك</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('johariDetailBox', '٣. المنطقة الخفية / القناع (ص ٦٩)', 'هي الأسرار والسمات التي تعرفها أنت عن نفسك وتخفيها بحيث لا يعرفها الآخرون عنك.')" class="interactive-card p-3.5 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-cyan-200">
-                                <span class="block text-xs font-bold text-cyan-400">٣. المنطقة الخفية (القناع)</span>
-                                <span class="text-[10px] opacity-85">تعرفها أنت ولا يعرفها الآخرون عنك</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('johariDetailBox', '٤. المنطقة المجهولة (ص ٦٩)', 'هي القدرات والسمات الكامنة التي لا تعرفها أنت عن نفسك ولا يعرفها الآخرون عنك بعد.')" class="interactive-card p-3.5 rounded-xl bg-purple-950/60 border border-purple-500/40 text-purple-200">
-                                <span class="block text-xs font-bold text-purple-400">٤. المنطقة المجهولة</span>
-                                <span class="text-[10px] opacity-85">لا تعرفها أنت ولا يعرفها الآخرون عنك</span>
-                            </button>
-                        </div>
-                        <div id="johariDetailBox" class="p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-slate-200">
-                            اضغط على أي مربع في نافذة جوهاري أعلاه، أو راجع أنواع المعلمين الأربعة (التقليدي، المرشد، الميسر، المفوض - ص ٧٠).
-                        </div>
-                    </div>
-
-                    <!-- لائحة الإجازات الرسمية الـ ٩ -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-                        <strong class="text-indigo-400 block text-sm font-cairo">لائحة الإجازات الرسمية الـ ٩ للمعلمين والمعلمات (ص ٦٦):</strong>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300 text-[11px]">
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>١. الاضطرارية:</strong> ٥ أيام بالسنة الميلادية بموافقة قائد المدرسة.</div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٢. المرضية:</strong> سنتان (٦ أشهر براتب، ٦ بنصف، سنة بربع راتب).</div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٣. الوضع:</strong> ٧٠ يوماً براتب كامل، ورعاية مولود حتى ٣ سنوات بربع راتب.</div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٤. المولود للأب:</strong> ٣ أيام براتب كامل.</div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٥. الوفاة والعدة:</strong> ٥ أيام للدرجات ١-٣، وعدة المتوفى زوجها ٤ أشهر و١٠ أيام براتب.</div>
-                            <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><strong>٦. الاستثنائية والاعتيادية:</strong> الاستثنائية سنتان كل ٥ سنوات بلا راتب، والاعتيادية ألا تقل عن ٣٦ يوماً.</div>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // STATION 11 (idx === 10): BLOOM'S INTERACTIVE PYRAMID & BEHAVIORAL OBJECTIVES (PAGES 94-108)
-            if (idx === 10) {
-                const activeBloom = BLOOM_LEVELS.find(b => b.id === selectedBloomId) || BLOOM_LEVELS[5];
-                return `
-                <div class="space-y-4 text-xs">
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-                            <div>
-                                <strong class="text-indigo-400 block text-sm sm:text-base font-cairo">هرم بلوم التفاعلي للأهداف المعرفية الستة (ص ٩٩ - ١٠٦)</strong>
-                                <span class="text-[11px] text-slate-400">اضغط على أي مستوى في هرم بلوم لعرض الأفعال السلوكية والأمثلة الواردة في الملزمة:</span>
-                            </div>
-                            <span class="px-2 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold">٦ مستويات</span>
-                        </div>
-
-                        <div class="flex flex-col items-center space-y-1.5 py-1 select-none">
-                            ${[...BLOOM_LEVELS].reverse().map((lvl, i) => {
-                                const widths = ['w-6/12', 'w-7/12', 'w-8/12', 'w-9/12', 'w-10/12', 'w-full'];
-                                const colors = {
-                                    rose: 'from-rose-700 to-rose-500',
-                                    purple: 'from-purple-700 to-purple-500',
-                                    amber: 'from-amber-700 to-amber-500',
-                                    cyan: 'from-cyan-700 to-cyan-500',
-                                    emerald: 'from-emerald-700 to-emerald-500',
-                                    slate: 'from-slate-700 to-slate-600'
-                                };
-                                return `
-                                <button onclick="selectBloomLevel(${lvl.id})" class="maslow-tier ${widths[i]} p-2.5 rounded-xl bg-gradient-to-r ${colors[lvl.color]} text-white font-bold text-xs shadow border-2 ${selectedBloomId === lvl.id ? 'border-white scale-105 ring-2 ring-indigo-400' : 'border-white/20 opacity-85'}">
-                                    ${lvl.name} — <span class="font-normal text-[10px] opacity-90">${lvl.type}</span>
-                                </button>`;
-                            }).join('')}
-                        </div>
-
-                        <div class="anim-fade p-3.5 rounded-xl bg-slate-950 border-2 border-indigo-500/50 space-y-2">
-                            <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
-                                <strong class="text-white text-sm font-cairo">${activeBloom.name}</strong>
-                                <span class="text-[10px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-bold">${activeBloom.type}</span>
-                            </div>
-                            <p class="text-amber-300 font-bold text-[11px]">الأفعال المفتاحية: ${activeBloom.verbs}</p>
-                            <p class="text-slate-300 text-xs"><strong>أمثلة الملزمة والتجميعات:</strong> ${activeBloom.ex}</p>
-                        </div>
-
-                        <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-200 text-[11px]">
-                            <strong>أفعال غير قابلة للقياس والملاحظة لا تصلح في الهدف السلوكي (ص ٩٦):</strong> (يلم، ينمي، يدرك، يستوعب، يفهم، يعرف، يكسب، يفكر، يقدر، يتذوق، يتأمل). ومعادلة الهدف السلوكي: <span class="text-white font-bold">أن + فعل سلوكي مضارع يقاس + الطالب + المصطلح العلمي + الحد الأدنى للأداء.</span>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // STATION 16 (idx === 15): FULL TRACEABILITY MATRIX & 68 TERMS (PAGES 1-241)
-            if (idx === 15) {
-                return `
-                <div class="space-y-4 text-xs">
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                        <strong class="text-amber-400 block text-sm font-cairo">مصفوفة التتبع والتدقيق الشاملة للملزمة الكاملة (٢٤١ صفحة) - اضغط على أي صف للانتقال للمحطة:</strong>
-                        <p class="text-slate-300 leading-relaxed text-[11px]">تم تدقيق كامل محتوى ملف الـ PDF الأصلي لإعداد الأستاذ مخلد الروقي، وتوثيق جميع موضوعاته الـ ٢٩ والـ ٦٨ مصطلحاً (ص ١٦٦):</p>
-                        
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-right border-collapse text-[11px]">
-                                <thead>
-                                    <tr class="bg-slate-950 text-indigo-400 border-b border-slate-800">
-                                        <th class="p-2">نطاق الصفحات</th>
-                                        <th class="p-2">الدرس / القسم في الملزمة</th>
-                                        <th class="p-2">انتقال سريع</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-800 text-slate-300">
-                                    <tr onclick="playSound('open'); jumpToStation(0)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١ - ١١</td><td class="p-2">المقدمة + الدرس ١: دورة النمو المهني</td><td class="p-2 text-indigo-400 font-bold">محطة ١ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(1)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٢ - ٣٠</td><td class="p-2">الدرس ٢: نظريات التعلم الكبرى وأريكسون</td><td class="p-2 text-indigo-400 font-bold">محطة ٢ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(2)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٣١ - ٣٢</td><td class="p-2">هرم ماسلو التفاعلي ومخروط الخبرة لديل</td><td class="p-2 text-indigo-400 font-bold">محطة ٣ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(3)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٣٣ - ٣٩</td><td class="p-2">الدرس ٣: المنهج المدرسي وأنواعه الـ ١١</td><td class="p-2 text-indigo-400 font-bold">محطة ٤ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(4)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٤٠ - ٥٦</td><td class="p-2">الدرس ٤: التقويم والقياس والنماذج الـ ٤</td><td class="p-2 text-indigo-400 font-bold">محطة ٥ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(5)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٥٧ - ٦٥</td><td class="p-2">الدرس ٥: أنواع التفكير الإبداعي والناقد</td><td class="p-2 text-indigo-400 font-bold">محطة ٦ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(6)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٦٦ - ٧١</td><td class="p-2">الدرس ٦ و ٧: الإجازات وتقويم المعلم وجوهاري</td><td class="p-2 text-indigo-400 font-bold">محطة ٧ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(7)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٧٢ - ٧٩</td><td class="p-2">الدرس ٨: علم نفس النمو وخصائص المراحل</td><td class="p-2 text-indigo-400 font-bold">محطة ٨ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(8)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٨٠ - ٨٩</td><td class="p-2">الدرس ٩: قواعد السلوك والمواظبة والعقد</td><td class="p-2 text-indigo-400 font-bold">محطة ٩ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(9)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٩٠ - ٩٣</td><td class="p-2">الدرس ١٠ و ١١: الندب والإثارة العشوائية</td><td class="p-2 text-indigo-400 font-bold">محطة ١٠ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(10)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ٩٤ - ١٠٨</td><td class="p-2">الدرس ١٢: الأهداف السلوكية وهرم بلوم</td><td class="p-2 text-indigo-400 font-bold">محطة ١١ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(11)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٠٩ - ١٣١</td><td class="p-2">الدرس ١٣: استراتيجيات التدريس الحديثة</td><td class="p-2 text-indigo-400 font-bold">محطة ١٢ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(12)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٣٢ - ١٣٥</td><td class="p-2">الدرس ١٤: البيئة الصفية وإدارة الصف</td><td class="p-2 text-indigo-400 font-bold">محطة ١٣ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(13)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٣٦ - ١٣٩</td><td class="p-2">الدرس ١٥ و ١٦: البحث الإجرائي وتعديل السلوك</td><td class="p-2 text-indigo-400 font-bold">محطة ١٤ ⬅</td></tr>
-                                    <tr onclick="playSound('open'); jumpToStation(14)" class="hover:bg-slate-800/60 cursor-pointer"><td class="p-2 font-mono">ص ١٤٠ - ١٦١</td><td class="p-2">الدروس ١٧ إلى ٢٧: الفروق وصعوبات التعلم والاختبارات</td><td class="p-2 text-indigo-400 font-bold">محطة ١٥ ⬅</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
-            // REMAINING STATIONS (7, 8, 9, 11, 12, 13, 14) WITH INTERACTIVE CARDS
-            const extraCards = {
-                7: [
-                    { t: "الفرق بين النمو والنضج والتعلم (ص ٧٢)", d: "• النمو: تغيرات بسبب التعلم والنضج معاً.<br>• النضج: تغيرات بيولوجية وراثية في أجهزة الجسم لا دخل للبيئة بها.<br>• التعلم: تغيرات في السلوك بفعل التفاعل مع البيئة." },
-                    { t: "البيئة الرحمية وخصائص الروضة والابتدائي (ص ٧٣-٧٦)", d: "• مرحلة الحمل (ما قبل الميلاد): أشد المراحل خطورة وحرجاً.<br>• الروضة (٣-٥): مرحلة السؤال والخيال الحسي.<br>• الابتدائية (٦-١٢): الطفولة الهادئة، تفكير حسي مادي، والصفوف العليا (٩-١٢) أنسب مرحلة للتطبيع الاجتماعي." },
-                    { t: "خصائص المرحلة المتوسطة والثانوية (ص ٧٦-٧٧)", d: "• المتوسطة (١٢-١٤ المراهقة المبكرة): طفرة النمو الجسمي، انفعالات عنيفة متذبذبة، التمرد وصعوبة التوافق مع السلطة.<br>• الثانوية (١٥-١٧ المراهقة الوسطى): النضج الفكري والتفكير المجرد." }
-                ],
-                8: [
-                    { t: "درجات مخالفات المتوسط والثانوي الست (ص ٨٠-٨٥)", d: "• الأولى: الزي والطابور (تنبيه شفوي، وفي المرة ٥ حسم درجة).<br>• الثانية: الفوضى والغش والهروب (حسم درجتين).<br>• الثالثة: المضاربة والتهاون بالصلاة والتوقيع عن ولي الأمر (حسم ٣ درجات).<br>• الرابعة: الإصرار على ترك الصلاة والتدخين وتصوير الطلاب (حسم ١٠ درجات).<br>• الخامسة: السلاح الحاد، إشعال النار، التحرش (حسم ١٥ درجة وشهر حرمان).<br>• السادسة: الاستهزاء بالدين، المخدرات، الابتزاز." },
-                    { t: "حسم المواظبة والغياب والتعاقد السلوكي (ص ٨٧-٨٨)", d: "• غياب يوم عادي بدون عذر: حسم نصف درجة.<br>• الغياب في الأسبوع الذي يسبق الإجازة أو الاختبارات أو أول أسبوع بعد الإجازة: حسم درجة كاملة عن كل يوم.<br>• التأخر الصباحي: حسم ربع درجة بعد المرة الثالثة." }
-                ],
-                9: [
-                    { t: "أنصبة الحصص وضوابط الندب الكلي والجزئي (ص ٩٠-٩١)", d: "• التعليم العام: الممارس ٢٤، المتقدم ٢٢، الخبير ١٨ (التربية الخاصة: ١٨، ١٦، ١٤).<br>• أقصى مدارس للندب غير مدرسته الأصلية: مدرستان (مجموع ٣ مدارس بنصاب ١٨ حصة، أو مدرستان بنصاب ٢٠ حصة).<br>• حافز الندب الجزئي: إذا بلغ نصابه ١٦ حصة فأكثر يعفى من الإشراف والاحتياط والنشاط." },
-                    { t: "طريقة الإثارة العشوائية (ص ٩٢-٩٣)", d: "إحدى طرق التدريس الإبداعي لتحريك الدماغ وإيجاد علاقات وروابط بين أشياء لا توجد بينها علاقة أصلاً (مثل: علاقة التعلم بالبيتزا، أو الوطن بالمخزن). عيبها: تستغرق وقتاً طويلاً." }
-                ],
-                11: [
-                    { t: "الاستراتيجية والطريقة والأسلوب والمدخل (ص ١١٩)", d: "• الاستراتيجية: خطة شاملة منظمة من الإجراءات.<br>• الطريقة: آليات تنفيذ الدرس.<br>• الأسلوب: الأنماط الخاصة بشخصية المعلم.<br>• المدخل: الأسس والمبادئ التي تستند إليها الطريقة." },
-                    { t: "أهم الاستراتيجيات في التجميعات (ص ١١٠-١٣١)", d: "• KWL: ماذا أعرف، ماذا أريد أن أعرف، ماذا تعلمت.<br>• 4H: (Head العقل، Hand اليد، Heart القلب، Heat الحماس) وتستخدم غالباً نهاية الدرس.<br>• شكل V: تربط بين البنائية ونظرية أوزبل.<br>• الصف المقلوب، التدريس التبادلي، والرحلات المعرفية WebQuest." }
-                ],
-                12: [
-                    { t: "إدارة الصف مقابل ضبط الصف (ص ١٣٢-١٣٥)", d: "• إدارة الصف أشمل من ضبط الصف؛ وتعتمد على توفير المناخ الاجتماعي والانفعالي الآمن.<br>• أنجح ممارسة لتعريف الطلاب بالقواعد الصفية: إشراكهم المبكر والفاعل في وضعها وصياغتها.<br>• التعامل مع السلوك غير المرغوب لأول مرة: التجاهل المقصود أو التوجيه الفردي بعد الحصة." }
-                ],
-                13: [
-                    { t: "أساليب تعديل السلوك في التجميعات (ص ١٣٧-١٣٩)", d: "• التصحيح الزائد: إصلاح التالف بأفضل مما كان.<br>• تكلفة الاستجابة: سحب معزز أو دفع غرامة كإحضار لوح زجاج بديل.<br>• الغمر والإغراق: تعريض الطالب لموقف مفزع دون تدرج.<br>• التحصين التدريجي (السحب التدريجي): إزالة الخوف بالتدريج.<br>• الاقتصاد الرمزي: بطاقات أو نجوم تستبدل بمكافآت عينية.<br>• مبدأ بريماك: استخدام سلوك محبب كاللعب لتعزيز سلوك أقل رغبة." }
-                ],
-                14: [
-                    { t: "الفرق بين صعوبات التعلم وبطء التعلم والتأخر الدراسي (ص ١٤٦-١٥٠)", d: "• صعوبات التعلم (الإعاقة الخفية): ذكاء عادي أو مرتفع مع صعوبة نوعية في القراءة (ديسلكسيا) أو الكتابة (ديسجرافيا) أو الحساب (ديسكلكوليا)، ويقدم لهم الدعم في غرفة المصادر.<br>• بطء التعلم: انخفاض في الذكاء وجميع المواد.<br>• التأخر الدراسي: ذكاء عادي وانخفاض في جميع المواد بسبب إهمال أو ظروف أسرية." },
-                    { t: "الفروق الفردية والذكاء والاختبارات (ص ١٤٠-١٦٠)", d: "• الفروق الفردية: اختلافات كمية في الدرجة وليس في النوع، وأوسع مدى لها في السمات الشخصية وأقل مدى في العقلية.<br>• معامل التمييز الجيد للفقرة الاختبارية: ٠.٣٠ فأكثر." }
-                ]
-            };
-
-            const cards = extraCards[idx] || [];
-            return `
-            <div class="space-y-3 text-xs">
-                ${cards.map(c => `
-                    <div onclick="playSound('pop')" class="interactive-card p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1.5">
-                        <strong class="text-indigo-400 block text-sm font-cairo"><i class="fa-solid fa-bookmark ml-1.5"></i>${c.t}</strong>
-                        <p class="text-slate-200 leading-relaxed text-xs">${c.d}</p>
-                    </div>
-                `).join('')}
-            </div>`;
-        }
-
-        // 11. SPECIFIC SUB-TAB CONTENT FOR STATION 2 (LEARNING THEORIES & ERIKSON'S 8 STAGES)
-        function switchSchoolTab(tabName) {
-            activeSchoolTab = tabName;
-            ['behavioral', 'cognitive', 'constructivist', 'social', 'erikson'].forEach(t => {
-                const btn = document.getElementById(`tab_${t}`);
-                if (btn) {
-                    if (t === tabName) {
-                        btn.className = "interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold bg-indigo-600 border-indigo-400 text-white shadow-md";
-                    } else {
-                        btn.className = "interactive-card px-3 py-1.5 rounded-xl border text-xs font-bold bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200";
-                    }
-                }
-            });
-            const body = document.getElementById('schoolTabBody');
-            body.classList.remove('anim-fade');
-            void body.offsetWidth;
-            body.classList.add('anim-fade');
-            body.innerHTML = getSchoolTabContent(tabName);
-        }
-
-        function getSchoolTabContent(tabName) {
-            switch(tabName) {
-                case 'erikson': {
-                    const activeStage = ERIKSON_STAGES.find(s => s.id === selectedEriksonId) || ERIKSON_STAGES[3];
-                    return `
-                    <div class="space-y-3.5 pt-1">
-                        <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-600/50 text-amber-200 leading-relaxed text-[11px]">
-                            <strong class="text-amber-400 block mb-0.5">نظرية النمو النفسي الاجتماعي لإريك أريكسون - ص ٢٣ (اضغط على أي مرحلة من الـ ٨ لعرض أزمتها وتفاصيلها):</strong>
-                            أحد تلاميذ فرويد؛ كان فرويد يرى أن كل خطأ في التعلم بسبب شخص آخر، بينما يرى أريكسون أن كل خطأ بسبب الشخص نفسه وهو المسؤول عنه، وقسم النمو لـ <strong>٨ مراحل</strong> في كل مرحلة أزمة يجب حلها:
-                        </div>
-
-                        <!-- 8 Interactive Stages Grid -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-center text-xs">
-                            ${ERIKSON_STAGES.map(st => `
-                                <button onclick="selectEriksonStage(${st.id})" class="interactive-card p-3 rounded-xl bg-slate-950/90 border-2 ${selectedEriksonId === st.id ? 'border-amber-400 ring-2 ring-amber-400/30 scale-[1.03]' : 'border-slate-800 hover:border-indigo-500/50'} flex flex-col justify-center min-h-[74px]">
-                                    <span class="font-bold text-white text-[11px] leading-tight">${st.name}</span>
-                                    <span class="text-[10px] text-indigo-300 mt-1">(${st.age})</span>
-                                </button>
-                            `).join('')}
-                        </div>
-
-                        <!-- Clickable Stage Detail Box -->
-                        <div class="anim-fade p-3.5 rounded-xl bg-slate-950 border-2 border-amber-500/50 space-y-1.5">
-                            <div class="flex items-center justify-between">
-                                <strong class="text-amber-400 text-xs sm:text-sm font-cairo"><i class="fa-solid fa-magnifying-glass-chart ml-1"></i>${activeStage.name}</strong>
-                                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold">${activeStage.age}</span>
-                            </div>
-                            <p class="text-slate-200 text-xs leading-relaxed">${activeStage.details}</p>
-                        </div>
-                    </div>`;
-                }
-
-                case 'behavioral':
-                    return `
-                    <div class="space-y-3 pt-1">
-                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 leading-relaxed text-[11px]">
-                            <strong class="text-indigo-400 block mb-1">المدرسة السلوكية (الكلاسيكية) - ص ١٢ - ١٧ (اضغط على أي عالم أو مربع لعرض أمثلته التربوية):</strong>
-                            رائدها واطسون. تركز على السلوك الظاهري الملاحظ وتعتبر عقل المتعلم صندوقاً وصفحة بيضاء، وتعتمد على المثير والاستجابة.
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <button onclick="showInteractiveDetail('behavDetailBox', '١. بافلوف - الاشتراط الكلاسيكي (ص ١٣)', '• المثير (الجرس) يأتي قبل الاستجابة (اللعاب).<br>• يحدث (الانطفاء) إذا تكرر قرع الجرس دون تقديم الطعام.<br>• تطبيقاته في المدرسة: هدايا طلاب الصف الأول (مثير) -> حب المدرسة (استجابة)، وتجاهل المعلم للطالب الذي يرفع صوته يؤدي إلى (انطفاء) السلوك الفوضوي.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-indigo-500/40 text-right">
-                                <strong class="text-indigo-400 block text-xs">١. بافلوف (الاشتراط الكلاسيكي)</strong>
-                                <span class="text-[11px] text-slate-400">المثير قبل الاستجابة • الانطفاء بتوقف المثير • هدايا الصف الأول وتجاهل الفوضوي.</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('behavDetailBox', '٢. سكنر - التعلم الإجرائي والتعزيز والعقاب (ص ١٤-١٧)', '• المثير (التعزيز بالطعام) يأتي بعد الاستجابة مباشرة (الضغط على الرافعة).<br>• التعزيز الإيجابي: إضافة درجة لحل الواجب.<br>• التعزيز السلبي: إزالة إنذار سابق وخصم سابق بسبب المشاركة.<br>• العقاب الإيجابي: كتابة الدرس ٣ مرات بسبب التأخر.<br>• العقاب السلبي: حرمان الطالب من حصة البدنية.<br>• التعلم المبرمج (سكنر): خطي ومتشعب.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-right">
-                                <strong class="text-emerald-400 block text-xs">٢. سكنر (التعلم الإجرائي والمبرمج)</strong>
-                                <span class="text-[11px] text-slate-400">المثير بعد الاستجابة • مصفوفة التعزيز والعقاب • البرمجة الخطية والتفريعية.</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('behavDetailBox', '٣. ثورندايك - المحاولة والخطأ وقوانينه الـ ٣ (ص ١٥-١٦)', '• يرى أن التعلم يحدث بالصدفة عبر المحاولة والخطأ.<br>• ١. قانون الأثر: الارتياح يقوي التعلم والضيق يضعفه.<br>• ٢. قانون التدريب (التكرار): يشمل الاستعمال (الممارسة تقوي الارتباط) والإهمال (الترك يضعفه).<br>• ٣. قانون الاستعداد: يصف الأسس الفسيولوجية لقانون الأثر.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-amber-500/40 text-right">
-                                <strong class="text-amber-400 block text-xs">٣. ثورندايك (المحاولة والخطأ)</strong>
-                                <span class="text-[11px] text-slate-400">قانون الأثر • قانون التدريب (الاستعمال والإهمال) • قانون الاستعداد.</span>
-                            </button>
-                        </div>
-                        <div id="behavDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200">
-                            اضغط على بطاقة بافلوف أو سكنر أو ثورندايك أعلاه لعرض كافة الأمثلة التربوية وأسئلة الاختبار الخاصة بها.
-                        </div>
-                    </div>`;
-
-                case 'cognitive':
-                    return `
-                    <div class="space-y-3 pt-1">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <button onclick="showInteractiveDetail('cogDetailBox', '١. جيروم برونر - التعلم بالاكتشاف والمنهج الحلزوني (ص ١٧-١٨)', 'مراحل التمثيل المعرفي الثلاث عند برونر:<br>١. الحركي العملي: باللمس والنشاط الحركي.<br>٢. التمثيل التشكيلي (الصوري / شبه المحسوس): بالصور والنماذج للمرحلة الابتدائية.<br>٣. التمثيل الرمزي (المجرد): بالرموز والتحليل للمرحلة المتوسطة والثانوية.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-cyan-500/40 text-right">
-                                <strong class="text-cyan-400 block text-xs">١. برونر (الاكتشاف والحلزوني)</strong>
-                                <span class="text-[11px] text-slate-400">النمط العملي • الصوري للابتدائي • الرمزي للمتوسط والثانوي.</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('cogDetailBox', '٢. ديفيد أوزبل - التعلم ذو المعنى وخرائط المفاهيم (ص ١٩-٢٠)', '• أنماط التعلم الـ ٤: ١. استقبال قائم على المعنى التام ٢. استقبال قائم على الحفظ ٣. اكتشاف قائم على المعنى التام ٤. اكتشاف قائم على الحفظ.<br>• المنظمات المتقدمة: (المنظم الشارح) للمادة الجديدة غير المألوفة، و(المنظم المقارن) للمادة المألوفة لربطها بالبناء المعرفي.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-purple-500/40 text-right">
-                                <strong class="text-purple-400 block text-xs">٢. أوزبل (التعلم ذو المعنى)</strong>
-                                <span class="text-[11px] text-slate-400">خرائط المفاهيم • الأنماط الأربعة • المنظم الشارح والمقارن.</span>
-                            </button>
-                            <button onclick="showInteractiveDetail('cogDetailBox', '٣. علماء الجشطالت (كوهلر، فرتمر، كوفكا) - الاستبصار (ص ٢٠)', '• الإدراك الكلي للموقف والتعلم من الكل إلى الجزء.<br>• تطبيقاتها: تعليم القراءة والكتابة من الكلمة إلى الحروف مثل كلمة (المهني -> ال - م - هـ - ني)، وفي الرياضيات والنحو تعلم القانون والقاعدة الكلية ثم التطبيق على الأجزاء.')" class="interactive-card p-3 rounded-xl bg-slate-950 border border-emerald-500/40 text-right">
-                                <strong class="text-emerald-400 block text-xs">٣. الجشطالت (الاستبصار)</strong>
-                                <span class="text-[11px] text-slate-400">كوهلر وفرتمر وكوفكا • من الكل للجزء • كلمة (المهني).</span>
-                            </button>
-                        </div>
-                        <div id="cogDetailBox" class="p-3.5 rounded-xl bg-slate-950 border border-cyan-500/40 text-slate-200">
-                            اضغط على أي عالم في المدرسة المعرفية أعلاه لعرض تفاصيل نظريته وأمثلة الملزمة (ص ١٧ - ٢٠).
-                        </div>
-                    </div>`;
-
-                case 'constructivist':
-                    return `
-                    <div class="space-y-3 pt-1">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div class="p-3 rounded-xl bg-slate-950 border border-indigo-500/40 space-y-1">
-                                <strong class="text-indigo-400 block text-xs">مراحل النمو المعرفي الـ ٤ عند جان بياجيه (ص ٢٢):</strong>
-                                <p class="text-[11px] text-slate-300 leading-relaxed">
-                                    ١. <strong>الحس حركي (٠-٢ سنة):</strong> الحواس واللمس والمحاكاة.<br>
-                                    ٢. <strong>ما قبل العمليات (٢-٦ سنوات):</strong> التصنيف ببعد واحد، التمركز حول الذات، عدم إدراك ثبات العدد.<br>
-                                    ٣. <strong>العمليات المحسوسة (٦-١٢ سنة - الابتدائي):</strong> إدراك <strong>الاحتفاظ والمعكوسية والمقلوبية</strong> والتصنيف والترتيب.<br>
-                                    ٤. <strong>العمليات المجردة (١٢+ سنة - المتوسط والثانوي):</strong> التفكير المنطقي والعلمي ووضع الفروض والانتقال من الاستقراء للاستنباط.
-                                </p>
-                            </div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-amber-500/40 space-y-1">
-                                <strong class="text-amber-400 block text-xs">فيجوتسكي وجون ديوي وعوامل بياجيه (ص ٢١-٢٢):</strong>
-                                <p class="text-[11px] text-slate-300 leading-relaxed">
-                                    • <strong>عوامل النمو الـ ٤ عند بياجيه:</strong> ١. الخبرة ٢. التوازن ٣. البيئة ٤. النضج.<br>
-                                    • <strong>فيجوتسكي:</strong> صاحب مصطلح <strong>منطقة النمو الوشيك (ZPD)</strong> وهي المسافة بين ما يفعله الطالب وحده وما يفعله بمساعدة المعلم أو الأقران.<br>
-                                    • <strong>جون ديوي:</strong> رائد ومؤسس <strong>منهج النشاط</strong>.
-                                </p>
-                            </div>
-                        </div>
-                    </div>`;
-
-                case 'social':
-                    return `
-                    <div class="space-y-3 pt-1">
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/40 text-slate-200 leading-relaxed text-xs">
-                            <strong class="text-indigo-400 block mb-1">النظرية الاجتماعية (التعلم بالملاحظة والتقليد والنمذجة) - ص ٢٢ - ٢٣:</strong>
-                            رائدها العالم <strong>ألبرت باندورا</strong> (ومعه ريتشارد والترز وروتر). تجمع بين السلوكية والمعرفية، وتؤكد أن التعلم يبدأ بـ:<br>
-                            <span class="text-amber-300 font-bold">١. الانتباه والملاحظة (أول مرحلة) ⬅ ٢. الاحتفاظ والاسترجاع الذهني ⬅ ٣. الإنتاج الحركي وتقليد السلوك ⬅ ٤. الدافعية والتعزيز.</span>
-                        </div>
-                    </div>`;
-
-                default:
-                    return '';
-            }
-        }
-
-        // 12. RENDER QUIZZES WITH SOUND FEEDBACK
-        function renderQuizSection(stIdx) {
-            const quizzes = STATIONS[stIdx].quizzes;
-            const container = document.getElementById('quizCards');
-
-            container.innerHTML = quizzes.map((q, qIdx) => {
-                const key = `${stIdx}_${qIdx}`;
-                const userChoice = answeredQuestions[key];
-                const isAnswered = userChoice !== undefined;
-
-                return `
-                <div class="p-3.5 sm:p-4 rounded-xl bg-slate-950 border ${isAnswered ? (userChoice === q.c ? 'border-emerald-500/60' : 'border-rose-500/60') : 'border-slate-800'} space-y-2.5 text-xs">
-                    <div class="flex items-center justify-between text-slate-400 font-bold text-[11px]">
-                        <span class="text-amber-400">سؤال تجميعات #${qIdx + 1}</span>
-                        ${isAnswered ? (userChoice === q.c ? '<span class="text-emerald-400 font-bold">إجابة صحيحة ✓</span>' : '<span class="text-rose-400 font-bold">إجابة خاطئة ✗</span>') : ''}
-                    </div>
-                    <p class="font-bold text-white leading-relaxed text-xs sm:text-sm">${q.q}</p>
-                    <div class="space-y-1.5 pt-1">
-                        ${q.opts.map((opt, optIdx) => {
-                            let style = "bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300";
-                            if (isAnswered) {
-                                if (optIdx === q.c) {
-                                    style = "bg-emerald-950/70 border-emerald-500 text-emerald-200 font-bold";
-                                } else if (optIdx === userChoice) {
-                                    style = "bg-rose-950/70 border-rose-500 text-rose-200 line-through";
-                                } else {
-                                    style = "bg-slate-900/40 border-slate-800/40 text-slate-600";
-                                }
-                            }
-                            return `
-                            <button onclick="handleOptionSelect(${stIdx}, ${qIdx}, ${optIdx})" ${isAnswered ? 'disabled' : ''}
-                                class="interactive-card w-full p-2.5 rounded-xl border text-right flex items-center justify-between ${style}">
-                                <span>${['أ', 'ب', 'ج', 'د'][optIdx]} - ${opt}</span>
-                                ${isAnswered && optIdx === q.c ? '<i class="fa-solid fa-check text-emerald-400"></i>' : ''}
-                            </button>`;
-                        }).join('')}
-                    </div>
-                    ${isAnswered ? `
-                    <div class="anim-fade p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-[11px] leading-relaxed">
-                        <strong class="text-indigo-400 block mb-0.5"><i class="fa-solid fa-lightbulb ml-1 text-amber-400"></i>التعليل التربوي الرسمي:</strong>
-                        ${q.exp}
-                    </div>` : ''}
-                </div>`;
-            }).join('');
-
-            updateScoreDisplay(stIdx);
-        }
-
-        function handleOptionSelect(stIdx, qIdx, optIdx) {
-            const correctIdx = STATIONS[stIdx].quizzes[qIdx].c;
-            if (optIdx === correctIdx) {
-                playSound('success');
-            } else {
-                playSound('error');
-            }
-            saveAnswer(stIdx, qIdx, optIdx);
-            renderQuizSection(stIdx);
-        }
-
-        function resetCurrentQuiz() {
-            STATIONS[activeStationIdx].quizzes.forEach((_, qIdx) => {
-                delete answeredQuestions[`${activeStationIdx}_${qIdx}`];
-            });
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(answeredQuestions));
-            } catch (e) {
-                console.warn(e);
-            }
-            renderQuizSection(activeStationIdx);
-        }
-
-        function updateScoreDisplay(stIdx) {
-            const quizzes = STATIONS[stIdx].quizzes;
-            let answered = 0;
-            let correct = 0;
-
-            quizzes.forEach((q, qIdx) => {
-                const key = `${stIdx}_${qIdx}`;
-                if (answeredQuestions[key] !== undefined) {
-                    answered++;
-                    if (answeredQuestions[key] === q.c) correct++;
-                }
-            });
-
-            document.getElementById('quizScoreBadge').textContent = `النتيجة: ${correct} من ${quizzes.length} (أجبت ${answered})`;
-        }
-
-        // 13. DOWNLOAD STANDALONE APPLICATION
-        function downloadSelfFile() {
-            const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-            const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'ملزمة_الرخصة_المهنية_أ_مخلد_الروقي_التفاعلية.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        window.onload = init;
-    </script>
+          </div>
+        </div>
+
+        <!-- Custom Date Range Picker Container (Collapsible) -->
+        <div class="custom-date-bar" id="customDateBar" style="display: none;">
+          <div class="date-inputs-group">
+            <div class="input-item">
+              <label for="startDate" data-i18n="startDate">من تاريخ:</label>
+              <input type="date" id="startDate" class="form-date" />
+            </div>
+            <div class="input-item">
+              <label for="endDate" data-i18n="endDate">إلى تاريخ:</label>
+              <input type="date" id="endDate" class="form-date" />
+            </div>
+            <button id="applyDateBtn" class="btn-primary" data-i18n="applyFilter">تطبيق النطاق</button>
+          </div>
+          <div class="date-note" data-i18n="dateRangeNotice">
+            * السجلات التاريخية الرسمية تعتمد على نشرات البنك المركزي المصري اليومية الصادرة في أيام العمل المصرفية (الأحد - الخميس).
+          </div>
+        </div>
+
+        <!-- Price Summary Metrics Strip -->
+        <div class="chart-stats-strip">
+          <div class="stat-box">
+            <span class="stat-label" data-i18n="statCurrent">السعر الحالي (بيع)</span>
+            <span class="stat-value" id="statCurrentVal">--.-- ج.م</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label" data-i18n="statHigh">أعلى سعر بالفترة</span>
+            <span class="stat-value text-success" id="statHighVal">--.-- ج.م</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label" data-i18n="statLow">أدنى سعر بالفترة</span>
+            <span class="stat-value text-danger" id="statLowVal">--.-- ج.م</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label" data-i18n="statChange">التغير الصافي</span>
+            <span class="stat-value" id="statChangeVal">--.--%</span>
+          </div>
+        </div>
+
+        <!-- Chart Canvas Container -->
+        <div class="chart-container-inner">
+          <canvas id="fxChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Currency Converter & Calculator Section -->
+    <section class="converter-section">
+      <div class="converter-card">
+        <div class="converter-header">
+          <div class="calc-icon-box">🧮</div>
+          <div>
+            <h3 class="converter-title" data-i18n="converterTitle">حاسبة وتحويل العملات الفورية</h3>
+            <p class="converter-sub" data-i18n="converterSub">احسب المبلغ بدقة طبقا لأسعار الشراء والبيع الفعلية للبنك المختار</p>
+          </div>
+        </div>
+
+        <div class="converter-body">
+          <div class="converter-row">
+            <!-- Amount Input -->
+            <div class="form-group flex-2">
+              <label for="calcAmount" data-i18n="amountLabel">المبلغ المراد تحويله:</label>
+              <div class="input-with-badge">
+                <input type="number" id="calcAmount" class="form-input" value="1000" min="1" step="any" />
+              </div>
+            </div>
+
+            <!-- From Currency -->
+            <div class="form-group flex-2">
+              <label for="calcFromCurrency" data-i18n="fromLabel">من عملة:</label>
+              <select id="calcFromCurrency" class="form-select">
+                <option value="USD">🇺🇸 USD - دولار أمريكي</option>
+                <option value="EUR">🇪🇺 EUR - يورو أوروبي</option>
+                <option value="SAR">🇸🇦 SAR - ريال سعودي</option>
+                <option value="AED">🇦🇪 AED - درهم إماراتي</option>
+                <option value="GBP">🇬🇧 GBP - جنيه إسترليني</option>
+                <option value="KWD">🇰🇼 KWD - دينار كويتي</option>
+                <option value="QAR">🇶🇦 QAR - ريال قطري</option>
+                <option value="CHF">🇨🇭 CHF - فرنك سويسري</option>
+                <option value="CAD">🇨🇦 CAD - دولار كندي</option>
+                <option value="JPY">🇯🇵 JPY - ين ياباني (100)</option>
+                <option value="EGP">🇪🇬 EGP - الجنيه المصري</option>
+              </select>
+            </div>
+
+            <!-- Swap Button -->
+            <div class="form-group swap-col">
+              <button id="swapCurrenciesBtn" class="btn-swap" title="عكس العملات" aria-label="Swap currencies">
+                ⇄
+              </button>
+            </div>
+
+            <!-- To Currency -->
+            <div class="form-group flex-2">
+              <label for="calcToCurrency" data-i18n="toLabel">إلى عملة:</label>
+              <select id="calcToCurrency" class="form-select">
+                <option value="EGP" selected>🇪🇬 EGP - الجنيه المصري</option>
+                <option value="USD">🇺🇸 USD - دولار أمريكي</option>
+                <option value="EUR">🇪🇺 EUR - يورو أوروبي</option>
+                <option value="SAR">🇸🇦 SAR - ريال سعودي</option>
+                <option value="AED">🇦🇪 AED - درهم إماراتي</option>
+                <option value="GBP">🇬🇧 GBP - جنيه إسترليني</option>
+                <option value="KWD">🇰🇼 KWD - دينار كويتي</option>
+                <option value="QAR">🇶🇦 QAR - ريال قطري</option>
+                <option value="CHF">🇨🇭 CHF - فرنك سويسري</option>
+                <option value="CAD">🇨🇦 CAD - دولار كندي</option>
+                <option value="JPY">🇯🇵 JPY - ين ياباني (100)</option>
+              </select>
+            </div>
+
+            <!-- Transaction Type (Buy/Sell) -->
+            <div class="form-group flex-2">
+              <label for="calcMode" data-i18n="calcModeLabel">نوع المعاملة:</label>
+              <select id="calcMode" class="form-select">
+                <option value="sell_to_bank" data-i18n="modeSellToBank">أنا أبيع للبنك (سعر شراء البنك)</option>
+                <option value="buy_from_bank" data-i18n="modeBuyFromBank">أنا أشتري من البنك (سعر بيع البنك)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Conversion Result Display Box -->
+          <div class="converter-result-box">
+            <div class="result-formula">
+              <span id="formulaText">1,000 USD =</span>
+            </div>
+            <div class="result-total">
+              <span class="total-number" id="resultTotal">56,067.50</span>
+              <span class="total-unit" id="resultUnit">جنيه مصري</span>
+            </div>
+            <div class="result-breakdown" id="resultBreakdown">
+              سعر الصرف المعتمد: 1 USD = 56.0675 EGP (البنك المركزي المصري)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Source Verification & Disclosure Section -->
+    <section class="disclosure-section">
+      <div class="disclosure-card">
+        <div class="disclosure-header">
+          <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4M12 8h.01"></path>
+          </svg>
+          <h4 class="disclosure-title" data-i18n="disclosureTitle">إفصاح الشفافية ومصادر البيانات المصرفية</h4>
+        </div>
+        <div class="disclosure-grid">
+          <div class="disclosure-col">
+            <h5 data-i18n="disCbeTitle">البنك المركزي المصري (CBE)</h5>
+            <p data-i18n="disCbeText">
+              المصدر: النشرة الإحصائية الرسمية اليومية للبنك المركزي المصري. تنشر الأسعار الرسمية في ختام جلسات التسوية بين البنوك (Interbank) للأغراض الإحصائية والمحاسبية الرسمية.
+            </p>
+            <a href="https://www.cbe.org.eg" target="_blank" rel="noopener noreferrer" class="external-link">cbe.org.eg ↗</a>
+          </div>
+          <div class="disclosure-col">
+            <h5 data-i18n="disNbeTitle">البنك الأهلي المصري (NBE)</h5>
+            <p data-i18n="disNbeText">
+              المصدر: منظومة أسعار الصرف لقطاع الخزانة بالبنك الأهلي المصري. يتم تحديث الأسعار لحظياً خلال ساعات العمل مع تغيرات التداول العالمية والمحلية للتحويلات والبنكنوت.
+            </p>
+            <a href="https://www.nbe.com.eg" target="_blank" rel="noopener noreferrer" class="external-link">nbe.com.eg ↗</a>
+          </div>
+          <div class="disclosure-col">
+            <h5 data-i18n="disBmTitle">بنك مصر (Banque Misr)</h5>
+            <p data-i18n="disBmText">
+              المصدر: أسعار العملات الرسمية المنشورة عبر فروع وقنوات بنك مصر الرسمية. تغطي العملات الرئيسية والعربية وتخضع للشروط والأحكام المصرفية.
+            </p>
+            <a href="https://www.banquemisr.com" target="_blank" rel="noopener noreferrer" class="external-link">banquemisr.com ↗</a>
+          </div>
+        </div>
+        <div class="disclosure-footer">
+          <p data-i18n="disclaimerPolicy">
+            ⚖️ <strong>تنويه قانوني ومصرفي:</strong> الأسعار المعروضة هي للأغراض الإرشادية والمعلوماتية العامة. قد تختلف الأسعار الفعلية للتنفيذ في الفروع أو البطاقات الائتمانية بناءً على رسوم التدبير والعمولات المصرفية المحددة لكل بنك.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="brand-title">مؤشر الجنيه المصري | Egypt FX Live</div>
+        <p class="brand-desc" data-i18n="footerDesc">
+          المنصة الوطنية المفتوحة لمتابعة أسعار صرف العملات الأجنبية في مصر من البنوك الرسمية.
+        </p>
+        <div class="lahlouh-footer-badge">
+          <img src="logo.jpg" alt="" class="lahlouh-footer-icon">
+          <span data-i18n="lahlouhFooterNote">تجميع ومطابقة الأسعار بدعم من تطبيق «اللحلوح»</span>
+        </div>
+      </div>
+
+      <div class="footer-credit-badge">
+        <div class="credit-box">
+          <span class="credit-role" data-i18n="devCreditRole">تصميم وتطوير هندسي</span>
+          <strong class="credit-name">محمود الجوهري | Mahmoud El-Gohary</strong>
+          <span class="credit-tech">Modern High-Performance Financial UI/UX Engine</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <button id="scrollToTopBtn" class="btn-top" title="العودة للأعلى" aria-label="Scroll to top">
+          ↑ <span data-i18n="scrollTop">للأعلى</span>
+        </button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container bottom-row">
+        <span>© <span id="currentYear">2026</span> - جميع الحقوق محفوظة لجمهورية مصر العربية ومصادر البنوك الرسمية</span>
+        <span>Developer Credit: <strong>Mahmoud El-Gohary</strong></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
 </body>
 </html>
+
